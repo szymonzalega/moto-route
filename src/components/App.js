@@ -7,6 +7,7 @@ import Dashboard from "./Dashboard";
 import Login from "./Login";
 import PrivateRoute from "./PrivateRoute";
 import ForgotPassword from "./ForgotPassword";
+import HomePage from "./HomePage";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <AuthProvider>
           <Switch>
             {/* exact is important */}
+            <Route exact path="/" component={HomePage} />
             <PrivateRoute path="/index" component={Dashboard} />
 
             <Container
