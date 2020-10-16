@@ -7,7 +7,6 @@ import Dashboard from "./Dashboard";
 import Login from "./Login";
 import PrivateRoute from "./PrivateRoute";
 import ForgotPassword from "./ForgotPassword";
-import UpdateProfile from "./UpdateProfile";
 
 function App() {
   return (
@@ -16,17 +15,13 @@ function App() {
         <AuthProvider>
           <Switch>
             {/* exact is important */}
-            <PrivateRoute exact path="/" component={Dashboard} />
+            <PrivateRoute path="/index" component={Dashboard} />
 
             <Container
               className="d-flex align-items-center justify-content-center"
               style={{ minHeight: "100vh" }}
             >
               <div className="w-100" style={{ maxWidth: "400px" }}>
-                {/* <PrivateRoute
-                  path="/update-profile"
-                  component={UpdateProfile}
-                /> */}
                 <Route path="/signup" component={Signup} />
                 <Route path="/login" component={Login} />
                 <Route path="/forgot-password" component={ForgotPassword} />

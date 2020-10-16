@@ -5,6 +5,7 @@ import { useHistory, Route, Switch } from "react-router-dom";
 import Header from "./Header";
 import RoutePage from "./RoutePage";
 import UserProfile from "./UserProfile";
+import UpdateProfile from "./UpdateProfile";
 
 export default function Dashboard() {
   const [error, setError] = useState("");
@@ -26,8 +27,9 @@ export default function Dashboard() {
     <>
       <Header />
       <Switch>
-        <Route path="/route" component={RoutePage} />
-        <Route path="/user-profile" component={UserProfile} />
+        <Route path="/index/route" component={RoutePage} />
+        <Route exact path="/index/user-profile" component={UserProfile} />
+        <Route path="/index/user-profile/update-profile" component={UpdateProfile} />
       </Switch>
 
       {error && <Alert variant="danger">{error}</Alert>}

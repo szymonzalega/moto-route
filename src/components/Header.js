@@ -4,9 +4,9 @@ import {Link } from 'react-router-dom'
 export default function Header() {
     return (
         <nav>
-            <Link to="/" exact>Dashboard</Link>{" | "}
-            <Link to="/route" >Route</Link>{" | "}
-            <Link to="/user-profile" >Profile</Link>
+            <Link to="/index">Dashboard</Link>{" | "}
+            <Link to="/index/route" >Route</Link>{" | "}
+            <Link to="/index/user-profile" >Profile</Link>
         </nav>
     )
 }
