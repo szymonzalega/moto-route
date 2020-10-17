@@ -1,1 +1,2 @@
 export const LOAD_ROUTES_SUCCESS = "LOAD_ROUTES_SUCCESS";
+export const USER_LOGOUT = "USER_LOGOUT";

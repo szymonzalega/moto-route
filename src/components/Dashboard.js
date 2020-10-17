@@ -1,21 +1,25 @@
 import React, { useState } from "react";
-import {  Button, Alert } from "react-bootstrap";
+import { Button, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { useHistory, Route, Switch } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import Header from "./Header";
 import RoutePage from "./RoutePage";
 import UserProfile from "./UserProfile";
 import UpdateProfile from "./UpdateProfile";
+import * as userActions from "../redux/actions/userActions";
 
 export default function Dashboard() {
   const [error, setError] = useState("");
   const { logout } = useAuth();
   const history = useHistory();
+  const dispatch = useDispatch();
 
   async function handleLogout() {
     setError("");
 
     try {
+      dispatch(userActions.userLogout());
       await logout();
       history.push("/login");
     } catch {
@@ -29,7 +33,10 @@ export default function Dashboard() {
       <Switch>
         <Route path="/index/route" component={RoutePage} />
         <Route exact path="/index/user-profile" component={UserProfile} />
-        <Route path="/index/user-profile/update-profile" component={UpdateProfile} />
+        <Route
+          path="/index/user-profile/update-profile"
+          component={UpdateProfile}
+        />
       </Switch>
 
       {error && <Alert variant="danger">{error}</Alert>}
