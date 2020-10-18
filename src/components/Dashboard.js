@@ -4,10 +4,10 @@ import { useAuth } from "../contexts/AuthContext";
 import { useHistory, Route, Switch } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import Header from "./Header";
-import RoutePage from "./RoutePage";
+import RoutePage from "./routes/RoutePage";
 import UserProfile from "./UserProfile";
 import UpdateProfile from "./UpdateProfile";
-import ManageRoute from "./ManageRoute";
+import ManageRoute from "./routes/ManageRoute";
 import * as userActions from "../redux/actions/userActions";
 
 export default function Dashboard() {

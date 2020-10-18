@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import RouteForm from "./routes/RouteForm";
-import * as routeActions from "../redux/actions/routeActions";
+import RouteForm from "./RouteForm";
+import * as routeActions from "../../redux/actions/routeActions";
 import { useDispatch } from "react-redux";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../../contexts/AuthContext";
 
 export default function ManageRoute() {
   const [route, setRoute] = useState({});

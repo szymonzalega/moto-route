@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import * as routeActions from "../redux/actions/routeActions";
-import { useAuth } from "../contexts/AuthContext";
+import * as routeActions from "../../redux/actions/routeActions";
+import { useAuth } from "../../contexts/AuthContext";
 import RouteList from "./RouteList";
 import { Redirect } from "react-router-dom";
 
