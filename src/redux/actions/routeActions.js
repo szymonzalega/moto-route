@@ -1,7 +1,6 @@
 import * as types from "./actionTypes";
 import { db } from "../../firebase";
 
-
 export function loadUserRoutesSuccess(routes) {
   return {
     type: types.LOAD_ROUTES_SUCCESS,
@@ -10,10 +9,10 @@ export function loadUserRoutesSuccess(routes) {
 }
 
 export function createRouteSuccess(route) {
-    return {
-        type: types.CREATE_ROUTE_SUCCESS,
-        route
-    }
+  return {
+    type: types.CREATE_ROUTE_SUCCESS,
+    route,
+  };
 }
 
 export function loadUserRoutes(userId) {
@@ -30,10 +29,11 @@ export function loadUserRoutes(userId) {
   };
 }
 
-export function saveRoute(route) {
-    return async function(dispatch) {
-        const routesRef = await db.collection("routes").add(route)
-        console.log(`doc ID! : ${routesRef.id}`)
-        dispatch(createRouteSuccess(route))
-    }
+export function saveRoute(route, userId) {
+  return async function (dispatch) {
+    const routesRef = await db.collection("routes").add({...route, userId});
+    console.log(`doc ID! : ${routesRef.id}`);
+    dispatch(createRouteSuccess(route));
+  };
 }
+

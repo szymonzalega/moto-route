@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import RouteForm from "./routes/RouteForm";
 import * as routeActions from "../redux/actions/routeActions";
-import {useDispatch} from "react-redux"
+import { useDispatch } from "react-redux";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function ManageRoute() {
   const [route, setRoute] = useState({});
   const [saving, setSaving] = useState(false);
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
-
+  const { currentUser } = useAuth();
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -21,10 +22,8 @@ export default function ManageRoute() {
   function handleSave(event) {
     event.preventDefault();
 
-    setSaving(true)
-    dispatch(routeActions.saveRoute(route))
-
-
+    setSaving(true);
+    dispatch(routeActions.saveRoute(route, currentUser.uid));
 
     console.log(route);
   }
