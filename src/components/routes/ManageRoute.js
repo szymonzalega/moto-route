@@ -1,15 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import RouteForm from "./RouteForm";
 import * as routeActions from "../../redux/actions/routeActions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useAuth } from "../../contexts/AuthContext";
+import { useHistory } from "react-router-dom";
 
-export default function ManageRoute() {
-  const [route, setRoute] = useState({});
+export default function ManageRoute(props) {
+  const [route, setRoute] = useState({ ...props.route });
   const [saving, setSaving] = useState(false);
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
   const { currentUser } = useAuth();
+  const state = useSelector((state) => state);
+  const history = useHistory();
+
+  useEffect(() => {
+    if (state.routes.length === 0) {
+      routeActions.loadUserRoutes(currentUser.uid);
+    } else {
+      const routeId = props.match.params.id;
+      const route = getRouteById(state.routes, routeId);
+      setRoute(route);
+    }
+  }, [state, props]);
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -19,13 +32,27 @@ export default function ManageRoute() {
     }));
   }
 
-  function handleSave(event) {
+  async function handleSave(event) {
     event.preventDefault();
 
     setSaving(true);
-    dispatch(routeActions.saveRoute(route, currentUser.uid));
+    try {
+      await dispatch(routeActions.saveRoute(route, currentUser.uid));
+      console.log("Utworzono nowy");
+      history.push("/index/routes");
+    } catch (e) {
+      setSaving(false);
+    }
+  }
 
-    console.log(route);
+  function getRouteById(routesList, id) {
+    const emptyRoute = {
+      name: null,
+      length: null,
+    };
+    return id !== undefined
+      ? routesList.find((route) => route.id === id)
+      : emptyRoute;
   }
 
   return (

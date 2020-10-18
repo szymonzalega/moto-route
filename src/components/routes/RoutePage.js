@@ -12,9 +12,15 @@ export default function RoutePage() {
   const [redirectToAddNewRoute, setRedirectToAddNewRoute] = useState(false);
 
   useEffect(() => {
-    if (state && state.routes && state.routes.length === 0) {
-      dispatch(routeActions.loadUserRoutes(currentUser.uid));
-    }
+    return async () => {
+      try {
+        if (state && state.routes && state.routes.length === 0) {
+          await dispatch(routeActions.loadUserRoutes(currentUser.uid));
+        }
+      } catch (e) {
+        console.error(`Loading routes failed ${e}`);
+      }
+    };
   }, [dispatch, currentUser]);
 
   function handleDeleteRoute(route) {

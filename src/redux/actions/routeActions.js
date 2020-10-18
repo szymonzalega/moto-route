@@ -15,25 +15,46 @@ export function createRouteSuccess(route) {
   };
 }
 
+export function updateRouteSuccess(route) {
+  return {
+    type: types.UPDATE_ROUTE_SUCCESS,
+    route,
+  };
+}
+
 export function loadUserRoutes(userId) {
   return async function (dispatch) {
     let routes = [];
-    const routesRef = await db
-      .collection("routes")
-      .where("userId", "==", userId)
-      .get();
-    routesRef.forEach((doc) => {
-      routes.push({ ...doc.data(), id: doc.id });
-    });
-    dispatch(loadUserRoutesSuccess(routes));
+    try {
+      const routesRef = await db
+        .collection("routes")
+        .where("userId", "==", userId)
+        .get();
+      routesRef.forEach((doc) => {
+        routes.push({ ...doc.data(), id: doc.id });
+      });
+      dispatch(loadUserRoutesSuccess(routes));
+    } catch (e) {
+      console.error(e);
+      throw e;
+    }
   };
 }
 
 export function saveRoute(route, userId) {
   return async function (dispatch) {
-    const routesRef = await db.collection("routes").add({...route, userId});
-    console.log(`doc ID! : ${routesRef.id}`);
-    dispatch(createRouteSuccess(route));
+    try {
+      route = { ...route, userId };
+      if (route.id !== undefined) {
+        await db.collection("routes").doc(route.id).set(route);
+        dispatch(updateRouteSuccess(route));
+      } else {
+        const routesRef = await db.collection("routes").add(route);
+        dispatch(createRouteSuccess({ ...route, id: routesRef.id }));
+      }
+    } catch (e) {
+      console.error(e);
+      throw e;
+    }
   };
 }
-

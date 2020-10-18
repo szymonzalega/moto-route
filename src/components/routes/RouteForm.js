@@ -1,15 +1,15 @@
-import React from 'react'
-import TextInput from "../common/TextInput"
+import React from "react";
+import TextInput from "../common/TextInput";
 
 export default function RouteForm({
-    route,
-    onSave,
-    onChange,
-    saving = false,
-    errors = {},
-  }) {
-    return (
-        <form onSubmit={onSave}>
+  route,
+  onSave,
+  onChange,
+  saving = false,
+  errors = {},
+}) {
+  return (
+    <form onSubmit={onSave}>
       <h2>{route.id ? "Edit" : "Add"} route</h2>
       {errors.onSave && (
         <div className="alert alert-danger" role="alert">
@@ -36,5 +36,5 @@ export default function RouteForm({
         {saving ? "Saving..." : "Save"}
       </button>
     </form>
-    )
+  );
 }
