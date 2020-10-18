@@ -16,7 +16,7 @@ export default function RouteList({ routes, onDeleteClick }) {
           return (
             <tr key={route.id}>
               <td>
-                <Link to={"/index/routes/" + route.id}>{route.name}</Link>
+                <Link to={"/index/route/" + route.id}>{route.name}</Link>
               </td>
               <td>{route.length}</td>
               <td>

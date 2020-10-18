@@ -7,6 +7,7 @@ import Header from "./Header";
 import RoutePage from "./RoutePage";
 import UserProfile from "./UserProfile";
 import UpdateProfile from "./UpdateProfile";
+import ManageRoute from "./ManageRoute";
 import * as userActions from "../redux/actions/userActions";
 
 export default function Dashboard() {
@@ -32,6 +33,8 @@ export default function Dashboard() {
       <Header />
       <Switch>
         <Route path="/index/routes" component={RoutePage} />
+        <Route path="/index/route/:id" component={ManageRoute} />
+        <Route path="/index/route" component={ManageRoute} />
         <Route exact path="/index/user-profile" component={UserProfile} />
         <Route
           path="/index/user-profile/update-profile"
