@@ -31,7 +31,7 @@ export default function Dashboard() {
     <>
       <Header />
       <Switch>
-        <Route path="/index/route" component={RoutePage} />
+        <Route path="/index/routes" component={RoutePage} />
         <Route exact path="/index/user-profile" component={UserProfile} />
         <Route
           path="/index/user-profile/update-profile"
