@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import RouteForm from "./routes/RouteForm";
+import * as routeActions from "../redux/actions/routeActions";
+import {useDispatch} from "react-redux"
 
 export default function ManageRoute() {
   const [route, setRoute] = useState({});
   const [saving, setSaving] = useState(false);
   const [errors, setErrors] = useState({});
+  const dispatch = useDispatch();
+
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -16,6 +20,11 @@ export default function ManageRoute() {
 
   function handleSave(event) {
     event.preventDefault();
+
+    setSaving(true)
+    dispatch(routeActions.saveRoute(route))
+
+
 
     console.log(route);
   }

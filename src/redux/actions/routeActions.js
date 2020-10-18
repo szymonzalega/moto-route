@@ -9,6 +9,13 @@ export function loadUserRoutesSuccess(routes) {
   };
 }
 
+export function createRouteSuccess(route) {
+    return {
+        type: types.CREATE_ROUTE_SUCCESS,
+        route
+    }
+}
+
 export function loadUserRoutes(userId) {
   return async function (dispatch) {
     let routes = [];
@@ -21,4 +28,12 @@ export function loadUserRoutes(userId) {
     });
     dispatch(loadUserRoutesSuccess(routes));
   };
+}
+
+export function saveRoute(route) {
+    return async function(dispatch) {
+        const routesRef = await db.collection("routes").add(route)
+        console.log(`doc ID! : ${routesRef.id}`)
+        dispatch(createRouteSuccess(route))
+    }
 }
