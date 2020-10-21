@@ -6,7 +6,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 
 export default function ManageRoute(props) {
-  const [route, setRoute] = useState({ ...props.route });
+  const [route, setRoute] = useState({name: "", length: ""});
   const [saving, setSaving] = useState(false);
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();

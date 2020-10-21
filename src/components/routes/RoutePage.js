@@ -4,12 +4,15 @@ import * as routeActions from "../../redux/actions/routeActions";
 import { useAuth } from "../../contexts/AuthContext";
 import RouteList from "./RouteList";
 import { Redirect } from "react-router-dom";
+import { routeService } from "../../service/routeService";
+import { useHistory } from "react-router-dom";
 
 export default function RoutePage() {
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
   const { currentUser } = useAuth();
   const [redirectToAddNewRoute, setRedirectToAddNewRoute] = useState(false);
+  const history = useHistory();
 
   useEffect(() => {
     return async () => {
@@ -27,9 +30,13 @@ export default function RoutePage() {
     console.log(`ROUTE id: ${route.id} deleted`);
   }
 
+  function redirectToNewRoute() {
+    history.push("/index/addRoute");
+  }
+
   return (
     <>
-      {redirectToAddNewRoute && <Redirect to="/index/route" />}
+      {/* {redirectToAddNewRoute && <Redirect to="/index/route" />} */}
       <h2>Routes</h2>
 
       <button
@@ -38,6 +45,8 @@ export default function RoutePage() {
       >
         Add new route
       </button>
+
+      <button onClick={redirectToNewRoute}>Stwórz nową trasę</button>
 
       <RouteList
         routes={state.routes}
