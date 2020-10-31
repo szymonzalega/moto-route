@@ -1,0 +1,37 @@
+  .routeNav {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    justify-content: space-between;
+  }
+
+  .routeNav__left {
+      display: flex;
+      flex-direction: row;
+  }
+  
+  .left__icon {
+    margin-right: 10px;
+  }
+  .left__title {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+  }
+  .title__name {
+      font-size: 1.1em;
+      font-weight: 500;
+  }
+  .title__author {
+      font-size: 0.9em;
+      font-weight: 400;
+      margin-top: -5px;
+  }
+ 
+  .MuiPaper-root {
+    background-color: #e5e5e5 !important;
+  }
+
+  .routeNav__options {
+
+  }

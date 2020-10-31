@@ -1,0 +1,51 @@
+.route {
+  display: flex;
+  flex-direction: column;
+  width: 700px;
+  background-color: #e5e5e5;
+  border-radius: 10px;
+}
+
+.route__nav {
+  display: flex;
+  flex-direction: row;
+  margin: 10px;
+  justify-content: space-between;
+}
+
+.nav__icon {
+  margin-right: 10px;
+}
+.nav__title {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.title__name {
+    font-size: 1.1em;
+    font-weight: 500;
+}
+.title__author {
+    font-size: 0.9em;
+    font-weight: 400;
+}
+.nav__options {
+}
+
+.route__name {
+  font-size: 1.1em;
+  font-weight: 500;
+  margin: 10px;
+}
+
+.route__map {
+  width: 100%;
+  height: 400px;
+  background-color: gold;
+}
+
+.route__details {
+}
+
+.route__details-row {
+}

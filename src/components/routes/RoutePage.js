@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import "./RoutePage.css";
+
 import { useSelector, useDispatch } from "react-redux";
 import * as routeActions from "../../redux/actions/routeActions";
 import { useAuth } from "../../contexts/AuthContext";
@@ -37,27 +39,26 @@ export default function RoutePage() {
   return (
     <>
       {/* {redirectToAddNewRoute && <Redirect to="/index/route" />} */}
-      <h2>Routes</h2>
+      {/* <h2>Routes</h2> */}
 
-      <button
-        className="btn btn-primary"
-        onClick={() => setRedirectToAddNewRoute(true)}
-      >
-        Add new route
-      </button>
+      <div className="routePage">
+        <div className="routePage__buttonRow">
+          <button
+            className="btn btn-primary"
+            onClick={() => setRedirectToAddNewRoute(true)}
+          >
+            Add new route
+          </button>
 
-      <button onClick={redirectToNewRoute}>Stwórz nową trasę</button>
-
-      <RouteList
-        routes={state.routes}
-        onDeleteClick={handleDeleteRoute}
-      ></RouteList>
-
-      {/* <ul>
-        {state.routes.map((route) => (
-          <li>{route.name}</li>
-        ))}
-      </ul> */}
+          <button onClick={redirectToNewRoute}>Stwórz nową trasę</button>
+        </div>
+        <div className="routePage__list">
+          <RouteList
+            routes={state.routes}
+            onDeleteClick={handleDeleteRoute}
+          ></RouteList>
+        </div>
+      </div>
     </>
   );
 }

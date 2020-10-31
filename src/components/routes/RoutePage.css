@@ -1,0 +1,13 @@
+.routePage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.routePage__buttonRow {
+    margin: 20px 0;
+}
+.routePage__list {
+    display: flex;
+    flex-direction: column;
+    width: 700px;
+}

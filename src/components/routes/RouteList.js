@@ -1,36 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import "./RouteList.css";
+import RouteElement from "./RouteElement";
 
 export default function RouteList({ routes, onDeleteClick }) {
   return (
-    <table className="table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Length</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        {routes.map((route) => {
-          return (
-            <tr key={route.id}>
-              <td>
-                <Link to={"/index/route/" + route.id}>{route.name}</Link>
-              </td>
-              <td>{route.length}</td>
-              <td>
-                <button
-                  className="btn btn-outline-danger"
-                  onClick={() => onDeleteClick(route)}
-                >
-                  Delete
-                </button>
-              </td>
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
+    <>
+      {routes.map((route) => {
+        return <RouteElement route={route} key={route.id} />;
+      })}
+    </>
   );
 }
