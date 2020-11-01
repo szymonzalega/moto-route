@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux';
 import routes from './routeReducer';
+import sidebar from './sidebarReducer';
 import * as types from "../actions/actionTypes";
 
 const appReducer = combineReducers({
     routes,
+    sidebar
     // apiCallsInProgress
 })
 

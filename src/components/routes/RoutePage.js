@@ -8,8 +8,10 @@ import RouteList from "./RouteList";
 import { Redirect } from "react-router-dom";
 import { routeService } from "../../service/routeService";
 import { useHistory } from "react-router-dom";
+import Sidebar from "./Sidebar";
 
 export default function RoutePage() {
+  const [sidebarVisible, setSidebarVisible] = useState(false);
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
   const { currentUser } = useAuth();
@@ -28,6 +30,11 @@ export default function RoutePage() {
     };
   }, [dispatch, currentUser]);
 
+  useEffect(() => {
+    console.log(state.sidebar);
+    setSidebarVisible(state.sidebar.isOpen);
+  }, [state]);
+
   function handleDeleteRoute(route) {
     console.log(`ROUTE id: ${route.id} deleted`);
   }
@@ -42,17 +49,19 @@ export default function RoutePage() {
       {/* <h2>Routes</h2> */}
 
       <div className="routePage">
-        <div className="routePage__buttonRow">
-          <button
-            className="btn btn-primary"
-            onClick={() => setRedirectToAddNewRoute(true)}
-          >
-            Add new route
-          </button>
+        <div class="routePage__sidebar">{sidebarVisible && <Sidebar />}</div>
 
-          <button onClick={redirectToNewRoute}>Stwórz nową trasę</button>
-        </div>
         <div className="routePage__list">
+          <div className="routePage__buttonRow">
+            <button
+              className="btn btn-primary"
+              onClick={() => setRedirectToAddNewRoute(true)}
+            >
+              Add new route
+            </button>
+
+            <button onClick={redirectToNewRoute}>Stwórz nową trasę</button>
+          </div>
           <RouteList
             routes={state.routes}
             onDeleteClick={handleDeleteRoute}

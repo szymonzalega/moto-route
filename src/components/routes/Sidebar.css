@@ -1,0 +1,19 @@
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    height: calc(100vh - 80px);
+    background-color: #ffffff;
+    position: sticky;
+    top: 80px;
+    box-shadow: 5px 0px 8px -9px rgba(0,0,0,0.75);
+    border-right: 1px solid #c2c2c2;
+    margin-right: 50px;
+}
+
+.sidebar__nav {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    padding: 10px;
+}
