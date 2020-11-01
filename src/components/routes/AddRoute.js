@@ -37,7 +37,7 @@ export default function AddRoute() {
       url: url.current.value,
     };
     try {
-      await dispatch(saveRoute(newRoute, currentUser.uid));
+      await dispatch(saveRoute(newRoute, currentUser));
       console.log("Utworzono nowy");
       history.push("/index/routes");
     } catch (e) {

@@ -41,10 +41,10 @@ export function loadUserRoutes(userId) {
   };
 }
 
-export function saveRoute(route, userId) {
+export function saveRoute(route, { uid, email }) {
   return async function (dispatch) {
     try {
-      route = { ...route, userId };
+      route = { ...route, userId: uid, userEmail: email };
       if (route.id !== undefined) {
         await db.collection("routes").doc(route.id).set(route);
         dispatch(updateRouteSuccess(route));

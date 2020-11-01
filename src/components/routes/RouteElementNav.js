@@ -6,10 +6,10 @@ import MenuItem from "@material-ui/core/MenuItem";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import IconButton from "@material-ui/core/IconButton";
 
-export default function RouteElementNav({route}) {
+export default function RouteElementNav({ route }) {
   const [anchorEl, setAnchorEl] = useState(null);
 
-  const {name, userId } = route;
+  const { name, userEmail } = route;
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -27,7 +27,7 @@ export default function RouteElementNav({route}) {
         </div>
         <div className="left__title">
           <span className="title__name">{name}</span>
-          <span className="title__author">{userId}</span>
+          <span className="title__author">{userEmail}</span>
         </div>
       </div>
 
