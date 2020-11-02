@@ -19,7 +19,7 @@ export default function RoutePage() {
   const history = useHistory();
 
   useEffect(() => {
-    return async () => {
+    (async function anyName() {
       try {
         if (state && state.routes && state.routes.length === 0) {
           await dispatch(routeActions.loadUserRoutes(currentUser.uid));
@@ -27,11 +27,10 @@ export default function RoutePage() {
       } catch (e) {
         console.error(`Loading routes failed ${e}`);
       }
-    };
-  }, [dispatch, currentUser]);
+    })();
+  }, [currentUser, dispatch, state])
 
   useEffect(() => {
-    console.log(state.sidebar);
     setSidebarVisible(state.sidebar.isOpen);
   }, [state]);
 
@@ -49,18 +48,23 @@ export default function RoutePage() {
       {/* <h2>Routes</h2> */}
 
       <div className="routePage">
-        <div class="routePage__sidebar">{sidebarVisible && <Sidebar />}</div>
+        <div className="routePage__sidebar">{sidebarVisible && <Sidebar />}</div>
 
         <div className="routePage__list">
           <div className="routePage__buttonRow">
-            <button
+            {/* <button
               className="btn btn-primary"
               onClick={() => setRedirectToAddNewRoute(true)}
             >
               Add new route
+            </button> */}
+            
+            <button
+              className="btn btn-primary"
+              onClick={redirectToNewRoute}
+            >
+              Add new route
             </button>
-
-            <button onClick={redirectToNewRoute}>Stwórz nową trasę</button>
           </div>
           <RouteList
             routes={state.routes}

@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import {Form, Button } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import { saveRoute } from "../../redux/actions/routeActions";
 import { useAuth } from "../../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
@@ -13,6 +13,7 @@ export default function AddRoute() {
   const dispatch = useDispatch();
 
   const name = useRef();
+  const description = useRef();
   const length = useRef();
   const level = useRef();
   const routeType = useRef();
@@ -31,6 +32,7 @@ export default function AddRoute() {
     );
     const newRoute = {
       name: name.current.value,
+      description: description.current.value,
       length: length.current.value,
       level: level.current.value,
       routeType: routeType.current.value,
@@ -55,6 +57,12 @@ export default function AddRoute() {
             To pole jest wymagane
           </Form.Control.Feedback>
         </Form.Group>
+        
+        <Form.Group id="description">
+          <Form.Label>Opis trasy</Form.Label>
+          <Form.Control as="textarea" rows={3} ref={description} required></Form.Control>
+        </Form.Group>
+        
         <Form.Group id="length">
           <Form.Label>Długość</Form.Label>
           <Form.Control type="number" ref={length} required></Form.Control>
