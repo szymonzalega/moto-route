@@ -48,7 +48,7 @@ export default function RoutePage() {
       {/* <h2>Routes</h2> */}
 
       <div className="routePage">
-        <div className="routePage__sidebar">{sidebarVisible && <Sidebar />}</div>
+        <Sidebar />
 
         <div className="routePage__list">
           <div className="routePage__buttonRow">
