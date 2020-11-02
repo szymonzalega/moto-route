@@ -9,9 +9,9 @@ import { Redirect } from "react-router-dom";
 import { routeService } from "../../service/routeService";
 import { useHistory } from "react-router-dom";
 import Sidebar from "./Sidebar";
+import { openSidebar } from "../../redux/actions/sidebarActions";
 
 export default function RoutePage() {
-  const [sidebarVisible, setSidebarVisible] = useState(false);
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
   const { currentUser } = useAuth();
@@ -30,16 +30,17 @@ export default function RoutePage() {
     })();
   }, [currentUser, dispatch, state])
 
-  useEffect(() => {
-    setSidebarVisible(state.sidebar.isOpen);
-  }, [state]);
+  const showRouteDetails = (routeId) => {
+    const sidebar = {
+      isOpen: true,
+      mode: "create",
+      routeId
+    }
+    dispatch(openSidebar(sidebar));
+  }
 
   function handleDeleteRoute(route) {
     console.log(`ROUTE id: ${route.id} deleted`);
-  }
-
-  function redirectToNewRoute() {
-    history.push("/index/addRoute");
   }
 
   return (
@@ -61,7 +62,7 @@ export default function RoutePage() {
             
             <button
               className="btn btn-primary"
-              onClick={redirectToNewRoute}
+              onClick={showRouteDetails}
             >
               Add new route
             </button>

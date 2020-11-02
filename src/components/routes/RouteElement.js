@@ -15,6 +15,7 @@ export default function RouteElement({ route }) {
   const showRouteDetails = (routeId) => {
     const sidebar = {
       isOpen: true,
+      mode: "details",
       routeId
     }
     dispatch(openSidebar(sidebar));

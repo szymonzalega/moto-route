@@ -7,10 +7,11 @@ import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import IconButton from "@material-ui/core/IconButton";
 import * as sidebarActions from "../../redux/actions/sidebarActions";
 import RouteElementMap from "./RouteElementMap";
+import AddRoute from "./AddRoute";
 
 export default function Sidebar() {
   const [route, setRoute] = useState({});
-  const [sidebarVisible, setSidebarVisible] = useState(false);
+  const [sidebar, setSidebar] = useState({});
 
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
@@ -20,7 +21,7 @@ export default function Sidebar() {
       let route = state.routes.filter((route) => route.id === routeId);
       return route[0];
     };
-    setSidebarVisible(state.sidebar.isOpen);
+    setSidebar(state.sidebar);
     setRoute(getRouteDetails(state.sidebar.routeId));
   }, [state]);
 
@@ -37,8 +38,8 @@ export default function Sidebar() {
   };
 
   return (
-    <div className={`sidebar ${sidebarVisible && "sidebar--visible"}`}>
-      {sidebarVisible && (
+    <div className={`sidebar ${sidebar.isOpen && "sidebar--visible"}`}>
+      {sidebar.isOpen && sidebar.mode === "details" ? (
         <div>
           <div className="sidebar__nav">
             <div className="nav__title">{route && route.name}</div>
@@ -122,6 +123,8 @@ export default function Sidebar() {
             </div>
           </div>
         </div>
+      ) : (
+        <AddRoute />
       )}
     </div>
   );
