@@ -3,43 +3,45 @@ import "./SidebarNav.css";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import EditIcon from "@material-ui/icons/Edit";
-import * as sidebarActions from "../../redux/actions/sidebarActions";
-import { useDispatch } from "react-redux";
+import useSidebarState from "./useSidebarState";
 
-export default function SidebarNav({ title, isEditMode }) {
-  const dispatch = useDispatch();
+export default function SidebarNav({ title, description, isEditMode }) {
+  const [openSidebar, closeSidebar] = useSidebarState();
 
-  const editRoute = () => {
+  const editRouteHandle = () => {
     console.log("");
   };
 
-  const closeSidebar = () => {
-    dispatch(sidebarActions.closeSidebar());
+  const closeSidebarHandle = () => {
+    closeSidebar();
   };
 
   return (
     <div className="sidebarNav">
-      <div className="sidebarNav__title">{title}</div>
-      <div className="sidebarNav__buttonRow">
-        {isEditMode && (
+      <div className="sidebarNav__header">
+        <div className="header__title">{title}</div>
+        <div className="header__buttonRow">
+          {!isEditMode && (
+            <IconButton
+              aria-label="more"
+              aria-controls="simple-menu"
+              aria-haspopup="true"
+              onClick={editRouteHandle}
+            >
+              <EditIcon />
+            </IconButton>
+          )}
           <IconButton
             aria-label="more"
             aria-controls="simple-menu"
             aria-haspopup="true"
-            onClick={editRoute}
+            onClick={closeSidebarHandle}
           >
-            <EditIcon />
+            <CloseIcon />
           </IconButton>
-        )}
-        <IconButton
-          aria-label="more"
-          aria-controls="simple-menu"
-          aria-haspopup="true"
-          onClick={closeSidebar}
-        >
-          <CloseIcon />
-        </IconButton>
+        </div>
       </div>
+      {description && <div className="sidebarNav__description">{description}</div>}
     </div>
   );
 }

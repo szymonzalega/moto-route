@@ -1,0 +1,8 @@
+.sidebarAddEditMode__preloader {
+    display: flex;
+    justify-content: center;
+}
+
+.sidebarAddEditMode__preloader > .MuiCircularProgress-colorPrimary {
+    color: #2e81f4;
+  }

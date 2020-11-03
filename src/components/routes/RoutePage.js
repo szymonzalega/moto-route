@@ -10,6 +10,7 @@ import { routeService } from "../../service/routeService";
 import { useHistory } from "react-router-dom";
 import Sidebar from "../sidebar/Sidebar";
 import { openSidebar } from "../../redux/actions/sidebarActions";
+import useSidebarState from "../sidebar/useSidebarState";
 
 export default function RoutePage() {
   const state = useSelector((state) => state);
@@ -17,6 +18,8 @@ export default function RoutePage() {
   const { currentUser } = useAuth();
   const [redirectToAddNewRoute, setRedirectToAddNewRoute] = useState(false);
   const history = useHistory();
+  const [openSidebar] = useSidebarState();
+
 
   useEffect(() => {
     (async function anyName() {
@@ -36,7 +39,7 @@ export default function RoutePage() {
       mode: "create",
       routeId
     }
-    dispatch(openSidebar(sidebar));
+    openSidebar(sidebar);
   }
 
   function handleDeleteRoute(route) {

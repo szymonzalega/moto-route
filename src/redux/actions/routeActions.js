@@ -51,6 +51,7 @@ export function saveRoute(route, { uid, email }) {
       } else {
         const routesRef = await db.collection("routes").add(route);
         dispatch(createRouteSuccess({ ...route, id: routesRef.id }));
+        return routesRef.id;
       }
     } catch (e) {
       console.error(e);

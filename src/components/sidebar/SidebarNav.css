@@ -1,17 +1,42 @@
 .sidebarNav {
   display: flex;
   width: 100%;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  position: relative;
+  margin-bottom: 30px;
 }
 
-.sidebarNav__title {
+.sidebarNav:after {
+  content: "";
+  position: absolute;
+  left: -20px;
+  bottom: 0;
+  height: 1px;
+  width: calc(100% + 40px);
+  border-bottom: 1px solid #e7e7e7;
+}
+
+.sidebarNav__header {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.header__title {
   font-size: 1.1em;
   font-weight: 500;
 }
 
-.sidebarNav__buttonRow {
+.header__buttonRow {
   display: flex;
   flex-direction: row;
   margin-right: -10px;
+}
+
+.sidebarNav__description {
+  display: flex;
+  margin-bottom: 30px;
 }

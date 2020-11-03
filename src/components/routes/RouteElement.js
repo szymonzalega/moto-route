@@ -3,23 +3,19 @@ import "./RouteElement.css";
 import RouteElementNav from "./RouteElementNav";
 import RouteElementInfo from "./RouteElementInfo";
 import RouteElementMap from "./RouteElementMap";
-import { useDispatch } from "react-redux";
-import { openSidebar } from "../../redux/actions/sidebarActions";
-
-
+import useSidebarState from "../sidebar/useSidebarState";
 
 export default function RouteElement({ route }) {
-
-  const dispatch = useDispatch();
+  const [openSidebar] = useSidebarState();
 
   const showRouteDetails = (routeId) => {
     const sidebar = {
       isOpen: true,
       mode: "details",
-      routeId
-    }
-    dispatch(openSidebar(sidebar));
-  }
+      routeId,
+    };
+    openSidebar(sidebar);
+  };
 
   return (
     <>

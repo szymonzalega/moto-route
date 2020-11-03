@@ -7,8 +7,8 @@ import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import IconButton from "@material-ui/core/IconButton";
 import * as sidebarActions from "../../redux/actions/sidebarActions";
 import RouteElementMap from "../routes/RouteElementMap";
-import AddRoute from "../routes/AddRoute";
-import SidebarNav from "./SidebarNav"
+import SidebarAddEditMode from "./SidebarAddEditMode";
+import SidebarNav from "./SidebarNav";
 
 export default function Sidebar() {
   const [route, setRoute] = useState({});
@@ -38,31 +38,11 @@ export default function Sidebar() {
     <div className={`sidebar ${sidebar.isOpen && "sidebar--visible"}`}>
       {sidebar.isOpen && sidebar.mode === "details" ? (
         <div>
-          {/* <div className="sidebar__nav">
-            <div className="nav__title">{route && route.name}</div>
-            <div className="nav__buttonRow">
-              <IconButton
-                aria-label="more"
-                aria-controls="simple-menu"
-                aria-haspopup="true"
-                onClick={editRoute}
-              >
-                <EditIcon />
-              </IconButton>
-              <IconButton
-                aria-label="more"
-                aria-controls="simple-menu"
-                aria-haspopup="true"
-                onClick={closeSidebar}
-              >
-                <CloseIcon />
-              </IconButton>
-            </div>
-          </div> */}
-          <SidebarNav title={route.name} isEditMode={true}/>
-          {route && route.description && (
-            <div className="sidebar__description">{route.description}</div>
-          )}
+          <SidebarNav
+            title={route.name}
+            description={route.description}
+            isEditMode={sidebar.mode !== "details"}
+          />
           <div className="sidebar__detailsRow">
             <span className="detailsRow__label">Level:&nbsp;</span>
             <span className="detailsRow__value">{route.level}</span>
@@ -122,7 +102,13 @@ export default function Sidebar() {
           </div>
         </div>
       ) : (
-        <AddRoute />
+        <>
+          <SidebarNav
+            title="Create new route"
+            isEditMode={sidebar.mode !== "details"}
+          />
+          <SidebarAddEditMode />
+        </>
       )}
     </div>
   );
