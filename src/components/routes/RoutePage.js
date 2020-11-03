@@ -8,7 +8,7 @@ import RouteList from "./RouteList";
 import { Redirect } from "react-router-dom";
 import { routeService } from "../../service/routeService";
 import { useHistory } from "react-router-dom";
-import Sidebar from "./Sidebar";
+import Sidebar from "../sidebar/Sidebar";
 import { openSidebar } from "../../redux/actions/sidebarActions";
 
 export default function RoutePage() {

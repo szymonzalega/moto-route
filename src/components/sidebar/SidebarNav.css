@@ -1,0 +1,17 @@
+.sidebarNav {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sidebarNav__title {
+  font-size: 1.1em;
+  font-weight: 500;
+}
+
+.sidebarNav__buttonRow {
+  display: flex;
+  flex-direction: row;
+  margin-right: -10px;
+}

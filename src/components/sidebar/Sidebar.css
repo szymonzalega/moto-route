@@ -22,23 +22,6 @@
   transform: translateX(0);
 }
 
-.sidebar__nav {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.nav__title {
-  font-size: 1.1em;
-  font-weight: 500;
-}
-
-.nav__buttonRow {
-  display: flex;
-  flex-direction: row;
-  margin-right: -10px;
-}
 
 .sidebar__description {
   display: flex;

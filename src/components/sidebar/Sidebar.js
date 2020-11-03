@@ -6,8 +6,9 @@ import EditIcon from "@material-ui/icons/Edit";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import IconButton from "@material-ui/core/IconButton";
 import * as sidebarActions from "../../redux/actions/sidebarActions";
-import RouteElementMap from "./RouteElementMap";
-import AddRoute from "./AddRoute";
+import RouteElementMap from "../routes/RouteElementMap";
+import AddRoute from "../routes/AddRoute";
+import SidebarNav from "./SidebarNav"
 
 export default function Sidebar() {
   const [route, setRoute] = useState({});
@@ -25,10 +26,6 @@ export default function Sidebar() {
     setRoute(getRouteDetails(state.sidebar.routeId));
   }, [state]);
 
-  const closeSidebar = () => {
-    dispatch(sidebarActions.closeSidebar());
-  };
-
   const editRoute = () => {
     console.log(`Edit route: ${route.id}`);
   };
@@ -41,7 +38,7 @@ export default function Sidebar() {
     <div className={`sidebar ${sidebar.isOpen && "sidebar--visible"}`}>
       {sidebar.isOpen && sidebar.mode === "details" ? (
         <div>
-          <div className="sidebar__nav">
+          {/* <div className="sidebar__nav">
             <div className="nav__title">{route && route.name}</div>
             <div className="nav__buttonRow">
               <IconButton
@@ -61,7 +58,8 @@ export default function Sidebar() {
                 <CloseIcon />
               </IconButton>
             </div>
-          </div>
+          </div> */}
+          <SidebarNav title={route.name} isEditMode={true}/>
           {route && route.description && (
             <div className="sidebar__description">{route.description}</div>
           )}
