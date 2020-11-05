@@ -21,6 +21,7 @@ export default function SidebarAddEditMode() {
   const level = useRef();
   const routeType = useRef();
   const url = useRef();
+  const photos = useRef();
 
   function openSidebarHandler(routeId) {
     const sidebar = {
@@ -40,6 +41,8 @@ export default function SidebarAddEditMode() {
     }
     setValidated(true);
 
+    console.log(photos.current.files);
+
     const newRoute = {
       name: name.current.value,
       description: description.current.value,
@@ -47,7 +50,9 @@ export default function SidebarAddEditMode() {
       level: level.current.value,
       routeType: routeType.current.value,
       url: url.current.value,
+      photos: photos.current.files
     };
+
     try {
       setLoading(true);
       let newRouteId = await dispatch(saveRoute(newRoute, currentUser));
@@ -123,6 +128,15 @@ export default function SidebarAddEditMode() {
             <Form.Control.Feedback type="invalid">
               To pole jest wymagane
             </Form.Control.Feedback>
+          </Form.Group>
+          
+          <Form.Group id="photos">
+            <Form.Label>Photos</Form.Label>
+            {/* <Form.Control ref={url} required></Form.Control> */}
+            <Form.File id="exampleFormControlFile1" label="Example file input" ref={photos} multiple />
+            {/* <Form.Control.Feedback type="invalid">
+              To pole jest wymagane
+            </Form.Control.Feedback> */}
           </Form.Group>
 
           <Button className="w-100" type="submit">

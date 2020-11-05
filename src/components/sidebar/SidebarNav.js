@@ -5,11 +5,16 @@ import CloseIcon from "@material-ui/icons/Close";
 import EditIcon from "@material-ui/icons/Edit";
 import useSidebarState from "./useSidebarState";
 
-export default function SidebarNav({ title, description, isEditMode }) {
+export default function SidebarNav({ routeId, title, description, isEditMode }) {
   const [openSidebar, closeSidebar] = useSidebarState();
 
   const editRouteHandle = () => {
-    console.log("");
+    const sidebar = {
+      isOpen: true,
+      mode: "edit",
+      routeId,
+    };
+    openSidebar(sidebar);
   };
 
   const closeSidebarHandle = () => {

@@ -1,0 +1,9 @@
+.sidebar__detailsRow {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+}
+
+.detailsRow__value {
+  font-weight: 500;
+}

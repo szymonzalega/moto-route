@@ -1,5 +1,5 @@
 import * as types from "./actionTypes";
-import { db } from "../../firebase";
+import { db, storage } from "../../firebase";
 
 export function loadUserRoutesSuccess(routes) {
   return {
@@ -41,6 +41,34 @@ export function loadUserRoutes(userId) {
   };
 }
 
+async function savePhotos(photos) {
+  let uploadPhotoPromiseList = [];
+  let uploadedPhotoUrlPromiseList = [];
+  //TODO remove try catch block and catching the errors from promise, what if not all promise resolve correct?
+  try {
+    return new Promise((resolve, reject) => {
+      for (let photo of photos) {
+        let fileName = photo.name;
+        uploadPhotoPromiseList.push(storage.child(fileName).put(photo));
+      }
+
+      Promise.all(uploadPhotoPromiseList)
+        .then((uploadedPhotosRef) => {
+          for (let ref of uploadedPhotosRef) {
+            uploadedPhotoUrlPromiseList.push(ref.ref.getDownloadURL());
+          }
+          return Promise.all(uploadedPhotoUrlPromiseList);
+        })
+        .then((uploadedPhotosUrl) => {
+          console.log(uploadedPhotosUrl);
+          resolve(uploadedPhotosUrl);
+        });
+    });
+  } catch (e) {
+    console.error(e);
+  }
+}
+
 export function saveRoute(route, { uid, email }) {
   return async function (dispatch) {
     try {
@@ -49,6 +77,11 @@ export function saveRoute(route, { uid, email }) {
         await db.collection("routes").doc(route.id).set(route);
         dispatch(updateRouteSuccess(route));
       } else {
+        if (route.photos.length > 0) {
+          let photosUrl = await savePhotos(route.photos);
+          route.photos = photosUrl;
+        }
+
         const routesRef = await db.collection("routes").add(route);
         dispatch(createRouteSuccess({ ...route, id: routesRef.id }));
         return routesRef.id;
