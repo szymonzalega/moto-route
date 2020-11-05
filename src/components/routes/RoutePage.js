@@ -33,11 +33,11 @@ export default function RoutePage() {
     })();
   }, [currentUser, dispatch, state])
 
-  const showRouteDetails = (routeId) => {
+  const createNewRoute = () => {
     const sidebar = {
       isOpen: true,
       mode: "create",
-      routeId
+      routeId: null
     }
     openSidebar(sidebar);
   }
@@ -65,7 +65,7 @@ export default function RoutePage() {
             
             <button
               className="btn btn-primary"
-              onClick={showRouteDetails}
+              onClick={createNewRoute}
             >
               Add new route
             </button>

@@ -21,7 +21,7 @@ export default function SidebarPhotoSection({ photos }) {
       {getFewPhotos(photos, 4).map((photo) => (
         <div
           style={{
-            backgroundImage: `url(${photo})`,
+            backgroundImage: `url(https://firebasestorage.googleapis.com/v0/b/moto-route-dev.appspot.com/o/koszyk_vw.JPG?alt=media&token=8baab126-b6d9-4e89-bff3-b6bb6fd39446)`,
           }}
           className="photoSection__photo"
         ></div>

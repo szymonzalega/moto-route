@@ -44,43 +44,41 @@ export function loadUserRoutes(userId) {
 async function savePhotos(photos) {
   let uploadPhotoPromiseList = [];
   let uploadedPhotoUrlPromiseList = [];
-  //TODO remove try catch block and catching the errors from promise, what if not all promise resolve correct?
-  try {
-    return new Promise((resolve, reject) => {
-      for (let photo of photos) {
-        let fileName = photo.name;
-        uploadPhotoPromiseList.push(storage.child(fileName).put(photo));
-      }
+  return new Promise((resolve, reject) => {
+    for (let photo of photos) {
+      let fileName = photo.name;
+      uploadPhotoPromiseList.push(storage.child(fileName).put(photo));
+    }
 
-      Promise.all(uploadPhotoPromiseList)
-        .then((uploadedPhotosRef) => {
-          for (let ref of uploadedPhotosRef) {
-            uploadedPhotoUrlPromiseList.push(ref.ref.getDownloadURL());
-          }
-          return Promise.all(uploadedPhotoUrlPromiseList);
-        })
-        .then((uploadedPhotosUrl) => {
-          console.log(uploadedPhotosUrl);
-          resolve(uploadedPhotosUrl);
-        });
-    });
-  } catch (e) {
-    console.error(e);
-  }
+    Promise.all(uploadPhotoPromiseList)
+      .then((uploadedPhotosRef) => {
+        for (let ref of uploadedPhotosRef) {
+          uploadedPhotoUrlPromiseList.push(ref.ref.getDownloadURL());
+        }
+        return Promise.all(uploadedPhotoUrlPromiseList);
+      })
+      .then((uploadedPhotosUrl) => {
+        console.log(uploadedPhotosUrl);
+        resolve(uploadedPhotosUrl);
+      })
+      .catch((e) => {
+        reject(e);
+      });
+  });
 }
 
 export function saveRoute(route, { uid, email }) {
   return async function (dispatch) {
     try {
-      route = { ...route, userId: uid, userEmail: email };
       if (route.id !== undefined) {
         await db.collection("routes").doc(route.id).set(route);
         dispatch(updateRouteSuccess(route));
+        return route.id
       } else {
-        if (route.photos.length > 0) {
-          let photosUrl = await savePhotos(route.photos);
-          route.photos = photosUrl;
-        }
+        route = { ...route, userId: uid, userEmail: email };
+
+        // if (route.photos.length > 0)
+        //   route.photos = await savePhotos(route.photos);
 
         const routesRef = await db.collection("routes").add(route);
         dispatch(createRouteSuccess({ ...route, id: routesRef.id }));
