@@ -39,7 +39,7 @@ export default function Sidebar() {
       <SidebarDetailsRow label="Type" value={route.routeType} />
 
       <RouteElementMap url={route.url} />
-      {/* <SidebarPhotoSection photos={route.photos} /> */}
+      <SidebarPhotoSection photos={route.photos} />
     </>
   );
 
@@ -55,7 +55,7 @@ export default function Sidebar() {
 
   return (
     <div className={`sidebar ${sidebar.isOpen && "sidebar--visible"}`}>
-      {sidebar.isOpen && (
+      {sidebar.isOpen && route.id && (
         <>
           {sidebar.mode === "details" && detailsView}
           {sidebar.mode !== "details" && addEditMode}

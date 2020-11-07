@@ -3,8 +3,20 @@
   display: flex;
   flex-direction: row;
   margin-top: 30px;
-  height: 132px;
+  /* height: 132px; */
   padding-top: 5px;
+}
+
+.photoSection__emptyGallery {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.photoSection__photos {
+  display: flex;
+  height: 132px;
 }
 
 .photoSection__photo {
