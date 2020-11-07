@@ -39,7 +39,7 @@ export default function Sidebar() {
       <SidebarDetailsRow label="Type" value={route.routeType} />
 
       <RouteElementMap url={route.url} />
-      <SidebarPhotoSection photos={route.photos} />
+      <SidebarPhotoSection routeId={route.id} photos={route.photos} />
     </>
   );
 

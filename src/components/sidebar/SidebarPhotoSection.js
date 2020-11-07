@@ -3,11 +3,15 @@ import "./SidebarPhotoSection.css";
 import IconButton from "@material-ui/core/IconButton";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import Tooltip from "@material-ui/core/Tooltip";
+import { useHistory  } from "react-router-dom";
 
-export default function SidebarPhotoSection({ photos }) {
+
+export default function SidebarPhotoSection({ routeId, photos }) {
   const [galleryPreview, setGalleryPreview] = useState([]);
+  const history = useHistory();
+
   const openGallery = () => {
-    // console.log(`Open gallery: ${route.id}`);
+    history.push(`/index/gallery/${routeId}`);
   };
 
   useEffect(() => {
@@ -31,10 +35,10 @@ export default function SidebarPhotoSection({ photos }) {
       ) : (
         <div className="photoSection__photos">
           {galleryPreview.map((photo, index) => (
-            <img alt={index} src={photo} className="photoSection__photo" />
+            <img key={photo} alt={index} src={photo} className="photoSection__photo" />
           ))}
           <div className="photoSection__button">
-            <Tooltip title="Go to gallery">
+            {/* <Tooltip title="Go to gallery"> */}
               <IconButton
                 aria-label="more"
                 aria-controls="simple-menu"
@@ -43,7 +47,7 @@ export default function SidebarPhotoSection({ photos }) {
               >
                 <NavigateNextIcon />
               </IconButton>
-            </Tooltip>
+            {/* </Tooltip> */}
           </div>
         </div>
       )}

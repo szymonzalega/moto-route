@@ -7,7 +7,7 @@ import HomeIcon from "@material-ui/icons/Home";
 import TerrainIcon from "@material-ui/icons/Terrain";
 import PersonIcon from "@material-ui/icons/Person";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import { useHistory, useLocation  } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 export default function Header() {
   const history = useHistory();
@@ -15,9 +15,11 @@ export default function Header() {
   const dispatch = useDispatch();
   const { logout } = useAuth();
   const [error, setError] = useState("");
-  const [activeView, setActiveView] = useState(() => getCurrentPath(location.pathname));
+  const [activeView, setActiveView] = useState(() =>
+    getCurrentPath(location.pathname)
+  );
 
-  function getCurrentPath(path){
+  function getCurrentPath(path) {
     const currentPath = path.split("/")[2];
     return currentPath ? currentPath : "dashboard";
   }
@@ -65,6 +67,7 @@ export default function Header() {
         {items.map((item) => {
           return (
             <div
+              key={item.id}
               className={`header__element ${
                 activeView === item.id ? "header__element--active" : ""
               }`}

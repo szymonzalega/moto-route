@@ -48,7 +48,7 @@ export function loadUserRoutes(userId) {
   };
 }
 
-async function savePhotos(photos) {
+async function savePhotosInFirebaseStorage(photos) {
   let uploadPhotoPromiseList = [];
   let uploadedPhotoUrlPromiseList = [];
   return new Promise((resolve, reject) => {
@@ -74,15 +74,30 @@ async function savePhotos(photos) {
   });
 }
 
-export function saveRoute(route, { uid, email }) {
+export function savePhotos(route, photosToSave) {
+  return async function (dispatch) {
+    try {
+      const photosUrlArray = await savePhotosInFirebaseStorage(photosToSave);
+      const routeToSave = {
+        ...route,
+        photos: [...route.photos, ...photosUrlArray],
+      };
+      dispatch(saveRoute(routeToSave));
+    } catch (e) {
+      console.error(e);
+    }
+  };
+}
+
+export function saveRoute(route, user) {
   return async function (dispatch) {
     try {
       if (route.id !== undefined) {
         await db.collection("routes").doc(route.id).set(route);
         dispatch(updateRouteSuccess(route));
-        return route.id
+        return route.id;
       } else {
-        route = { ...route, userId: uid, userEmail: email };
+        route = { ...route, userId: user.uid, userEmail: user.email };
 
         // if (route.photos.length > 0)
         //   route.photos = await savePhotos(route.photos);
@@ -102,10 +117,10 @@ export function deleteRoute(route) {
   return async function (dispatch) {
     try {
       await db.collection("routes").doc(route.id).delete();
-      dispatch(deleteRouteSuccess(route))
+      dispatch(deleteRouteSuccess(route));
     } catch (e) {
       console.error(e);
       throw e;
     }
-  }
+  };
 }
