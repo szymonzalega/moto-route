@@ -22,6 +22,13 @@ export function updateRouteSuccess(route) {
   };
 }
 
+export function deleteRouteSuccess(route) {
+  return {
+    type: types.DELETE_ROUTE_SUCCESS,
+    route,
+  };
+}
+
 export function loadUserRoutes(userId) {
   return async function (dispatch) {
     let routes = [];
@@ -89,4 +96,16 @@ export function saveRoute(route, { uid, email }) {
       throw e;
     }
   };
+}
+
+export function deleteRoute(route) {
+  return async function (dispatch) {
+    try {
+      await db.collection("routes").doc(route.id).delete();
+      dispatch(deleteRouteSuccess(route))
+    } catch (e) {
+      console.error(e);
+      throw e;
+    }
+  }
 }

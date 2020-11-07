@@ -1,21 +1,39 @@
 import React, { useState } from "react";
 import "./RouteElementNav.css";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteRoute } from "../../redux/actions/routeActions";
 import ExploreIcon from "@material-ui/icons/Explore";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import IconButton from "@material-ui/core/IconButton";
+import useSidebarState from "../sidebar/useSidebarState";
+
 
 export default function RouteElementNav({ route }) {
   const [anchorEl, setAnchorEl] = useState(null);
+  const dispatch = useDispatch();
+  const sidebar = useSelector(({sidebar}) => sidebar);
+  const [openSidebar, closeSidebar] = useSidebarState();
+
 
   const { name, userEmail } = route;
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+  const handleClick = (e) => {
+    e.stopPropagation();
+    setAnchorEl(e.currentTarget);
   };
 
   const handleClose = () => {
+    setAnchorEl(null);
+  };
+  
+  const handleDeleteRoute = (e) => {
+    e.stopPropagation();
+    if (sidebar.isOpen && sidebar.routeId === route.id) {
+      closeSidebar()
+    }
+    dispatch(deleteRoute(route));
     setAnchorEl(null);
   };
 
@@ -51,7 +69,7 @@ export default function RouteElementNav({ route }) {
             anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
             transformOrigin={{ vertical: "top", horizontal: "right" }}
           >
-            <MenuItem onClick={handleClose}>Delete</MenuItem>
+            <MenuItem onClick={handleDeleteRoute}>Delete</MenuItem>
           </Menu>
         </div>
       </div>

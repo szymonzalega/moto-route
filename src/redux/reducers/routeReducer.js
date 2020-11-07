@@ -11,6 +11,8 @@ export default function routeReducers(state = initialState.routes, action) {
       return state.map((route) =>
         route.id === action.route.id ? action.route : route
       );
+    case types.DELETE_ROUTE_SUCCESS:
+      return state.filter((route) => route.id !== action.route.id);
     default:
       return state;
   }

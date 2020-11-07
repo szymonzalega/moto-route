@@ -6,7 +6,7 @@ export default function sidebarReducers(state = initialState.sidebar, action) {
     case types.SIDEBAR_OPEN:
       return action.sidebar;
     case types.SIDEBAR_CLOSE:
-      return {isOpen: false};
+      return {isOpen: false, mode: null, routeId: null};
     default:
       return state;
   }

@@ -66,7 +66,7 @@ export default function SidebarAddEditMode({ routeId }) {
 
     if (route.id) {
       routeToSave.id = route.id;
-      routeToSave.photos = route.photos;
+      // routeToSave.photos = route.photos;
     }
 
     try {
