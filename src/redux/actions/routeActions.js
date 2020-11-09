@@ -74,19 +74,42 @@ async function savePhotosInFirebaseStorage(photos) {
   });
 }
 
-export function savePhotos(route, photosToSave) {
-  return async function (dispatch) {
+export function savePhotos(routeId, photosToSave) {
+  return new Promise(async (resolve, reject) => {
     try {
       const photosUrlArray = await savePhotosInFirebaseStorage(photosToSave);
-      const routeToSave = {
-        ...route,
-        photos: [...route.photos, ...photosUrlArray],
-      };
-      dispatch(saveRoute(routeToSave));
+      let savingPhotosPromise = [];
+      for (let photoUrl of photosUrlArray) {
+        savingPhotosPromise.push(db.collection("routesGallery").add({routeId, photoUrl}));
+      }
+      Promise.all(savingPhotosPromise).then(result => {
+        resolve(result);
+      }).catch(e => {
+        reject(e);
+        throw new Error(e);
+      })
     } catch (e) {
       console.error(e);
     }
-  };
+  })
+}
+
+export async function getPhotosByRouteId(routeId, limit) {
+    try {
+      const photos = [];
+      const photosRef = await db
+        .collection("routesGallery")
+        .where("routeId", "==", routeId)
+        .limit(limit)
+        .get();
+        photosRef.forEach((doc) => {
+          photos.push({ ...doc.data()});
+        });
+        return photos;
+    } catch (e) {
+      console.error(e);
+      throw new Error(e);
+    }
 }
 
 export function saveRoute(route, user) {

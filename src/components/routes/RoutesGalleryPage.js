@@ -1,12 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { Form, Button } from "react-bootstrap";
-import { savePhotos } from "../../redux/actions/routeActions";
+import {
+  savePhotos,
+  getPhotosByRouteId,
+} from "../../redux/actions/routeActions";
 
 export default function RoutesGalleryPage(props) {
   const [route, setRoute] = useState({});
+  const [photos, setPhotos] = useState([]);
   const [validated, setValidated] = useState(false);
-  const dispatch = useDispatch();
   const routes = useSelector((state) => state.routes);
   const photosRef = useRef();
 
@@ -15,6 +18,15 @@ export default function RoutesGalleryPage(props) {
     const currentRoute = routes.filter((route) => route.id === currentRouteId);
     setRoute(currentRoute[0]);
   }, [routes, route, props.match.params.id]);
+
+  useEffect(() => {
+    async function getPhotos() {
+      if (route && route.id) {
+        setPhotos(await getPhotosByRouteId(route.id, 10));
+      }
+    }
+    getPhotos();
+  }, [route]);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -26,9 +38,13 @@ export default function RoutesGalleryPage(props) {
     setValidated(true);
 
     try {
-      //   setLoading(true);
-      dispatch(savePhotos(route, photosRef.current.files));
-      //   redirectToRoute(newRouteId);
+        // setLoading(true);
+      let savePhotosResult = await savePhotos(
+        route.id,
+        photosRef.current.files
+      );
+      console.log(savePhotosResult);
+      setPhotos(await getPhotosByRouteId(route.id, 10));
       //   setLoading(false);
     } catch (e) {
       //   setLoading(false);
@@ -39,10 +55,15 @@ export default function RoutesGalleryPage(props) {
   return (
     <div>
       Routes Gallery {props.match.params.id}
-      {route && <div>{route.name}</div>}
-      {route && route.photos &&
-        route.photos.map((photo, index) => (
-          <img key={photo} style={{ width: "200px", height: "200px" }} alt={index} src={photo} />
+      name: {route && <div>{route.name}</div>}
+      {photos &&
+        photos.map((photo, index) => (
+          <img
+            key={photo.photoUrl}
+            style={{ width: "200px", height: "200px" }}
+            alt={index}
+            src={photo.photoUrl}
+          />
         ))}
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <Form.Group id="photos">
@@ -58,8 +79,8 @@ export default function RoutesGalleryPage(props) {
             </Form.Control.Feedback> */}
         </Form.Group>
         <Button className="w-100" type="submit">
-            Add photos
-          </Button>
+          Add photos
+        </Button>
       </Form>
     </div>
   );
