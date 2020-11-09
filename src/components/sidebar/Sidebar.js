@@ -39,7 +39,7 @@ export default function Sidebar() {
       <SidebarDetailsRow label="Type" value={route.routeType} />
 
       <RouteElementMap url={route.url} />
-      <SidebarPhotoSection routeId={route.id} photos={route.photos} />
+      <SidebarPhotoSection routeId={route.id} />
     </>
   );
 
@@ -49,13 +49,14 @@ export default function Sidebar() {
         title={sidebar.mode === "create" ? `Create new route` : `Edit route`}
         isEditMode={sidebar.mode !== "details"}
       />
+      {console.log("addeditmode")}
       {route && <SidebarAddEditMode routeId={route.id} />}
     </>
   );
 
   return (
     <div className={`sidebar ${sidebar.isOpen && "sidebar--visible"}`}>
-      {sidebar.isOpen && route.id && (
+      {sidebar.isOpen && (
         <>
           {sidebar.mode === "details" && detailsView}
           {sidebar.mode !== "details" && addEditMode}

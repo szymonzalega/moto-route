@@ -10,6 +10,7 @@ export default function RoutesGalleryPage(props) {
   const [route, setRoute] = useState({});
   const [photos, setPhotos] = useState([]);
   const [validated, setValidated] = useState(false);
+  const [selectedPhoto, setSelectedPhoto] = useState("");
   const routes = useSelector((state) => state.routes);
   const photosRef = useRef();
 
@@ -20,13 +21,16 @@ export default function RoutesGalleryPage(props) {
   }, [routes, route, props.match.params.id]);
 
   useEffect(() => {
-    async function getPhotos() {
+    (async () => {
       if (route && route.id) {
         setPhotos(await getPhotosByRouteId(route.id, 10));
       }
-    }
-    getPhotos();
+    })();
   }, [route]);
+
+  function selectPhoto(photoUrl) {
+    setSelectedPhoto(photoUrl);
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -38,7 +42,7 @@ export default function RoutesGalleryPage(props) {
     setValidated(true);
 
     try {
-        // setLoading(true);
+      // setLoading(true);
       let savePhotosResult = await savePhotos(
         route.id,
         photosRef.current.files
@@ -56,15 +60,27 @@ export default function RoutesGalleryPage(props) {
     <div>
       Routes Gallery {props.match.params.id}
       name: {route && <div>{route.name}</div>}
-      {photos &&
-        photos.map((photo, index) => (
+      {selectedPhoto && (
+        <div>
           <img
-            key={photo.photoUrl}
-            style={{ width: "200px", height: "200px" }}
-            alt={index}
-            src={photo.photoUrl}
+            style={{ width: "600px", height: "600px" }}
+            alt={selectedPhoto}
+            src={selectedPhoto}
           />
-        ))}
+        </div>
+      )}
+      <div>
+        {photos &&
+          photos.map(({ photoUrl }, index) => (
+            <img
+              key={photoUrl}
+              style={{ width: "200px", height: "200px" }}
+              alt={index}
+              src={photoUrl}
+              onClick={() => selectPhoto(photoUrl)}
+            />
+          ))}
+      </div>
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <Form.Group id="photos">
           <Form.Label>Photos</Form.Label>

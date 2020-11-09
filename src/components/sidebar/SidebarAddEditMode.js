@@ -61,12 +61,10 @@ export default function SidebarAddEditMode({ routeId }) {
       level: level.current.value,
       routeType: routeType.current.value,
       url: url.current.value,
-      photos: []
     };
 
     if (route.id) {
       routeToSave.id = route.id;
-      // routeToSave.photos = route.photos;
     }
 
     try {
@@ -103,9 +101,9 @@ export default function SidebarAddEditMode({ routeId }) {
           <Form.Group id="description">
             <Form.Label>Description</Form.Label>
             <Form.Control
-              as="textarea"
-              rows={3}
               ref={description}
+              // as="textarea"
+              // rows={3}
               defaultValue={route.description}
               required
             ></Form.Control>
