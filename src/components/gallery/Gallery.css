@@ -1,0 +1,40 @@
+.gallery {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: calc(100vh - 80px);
+    background-color: #f1f1f1;
+}
+
+.gallery__bigPhoto {
+    flex: 1 1;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    padding: 50px;
+    align-items: center;
+}
+
+.gallery__photoList {
+    position: relative;
+    display: flex;
+    height: auto;
+    width: 100%;
+}
+
+.photoList__photo {
+    margin-right: 10px;
+}
+
+.photoList__photo:last-child {
+    margin-right: 0;
+}
+
+.bigPhoto__photo {
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}

@@ -5,6 +5,7 @@ import {
   savePhotos,
   getPhotosByRouteId,
 } from "../../redux/actions/routeActions";
+import Gallery from "../gallery/Gallery";
 
 export default function RoutesGalleryPage(props) {
   const [route, setRoute] = useState({});
@@ -58,30 +59,8 @@ export default function RoutesGalleryPage(props) {
 
   return (
     <div>
-      Routes Gallery {props.match.params.id}
-      name: {route && <div>{route.name}</div>}
-      {selectedPhoto && (
-        <div>
-          <img
-            style={{ width: "600px", height: "600px" }}
-            alt={selectedPhoto}
-            src={selectedPhoto}
-          />
-        </div>
-      )}
-      <div>
-        {photos &&
-          photos.map(({ photoUrl }, index) => (
-            <img
-              key={photoUrl}
-              style={{ width: "200px", height: "200px" }}
-              alt={index}
-              src={photoUrl}
-              onClick={() => selectPhoto(photoUrl)}
-            />
-          ))}
-      </div>
-      <Form noValidate validated={validated} onSubmit={handleSubmit}>
+      {photos && <Gallery photos={photos} />}
+      {/* {<Form noValidate validated={validated} onSubmit={handleSubmit}>
         <Form.Group id="photos">
           <Form.Label>Photos</Form.Label>
           <Form.File
@@ -90,14 +69,53 @@ export default function RoutesGalleryPage(props) {
             ref={photosRef}
             multiple
           />
-          {/* <Form.Control.Feedback type="invalid">
-              To pole jest wymagane
-            </Form.Control.Feedback> */}
         </Form.Group>
         <Button className="w-100" type="submit">
           Add photos
         </Button>
-      </Form>
+      </Form>} */}
     </div>
+    // <div>
+    //   Routes Gallery {props.match.params.id}
+    //   name: {route && <div>{route.name}</div>}
+    //   {selectedPhoto && (
+    //     <div>
+    //       <img
+    //         style={{ width: "600px", height: "600px" }}
+    //         alt={selectedPhoto}
+    //         src={selectedPhoto}
+    //       />
+    //     </div>
+    //   )}
+    //   <div>
+    //     {photos &&
+    //       photos.map(({ photoUrl }, index) => (
+    //         <img
+    //           key={photoUrl}
+    //           style={{ width: "200px", height: "200px" }}
+    //           alt={index}
+    //           src={photoUrl}
+    //           onClick={() => selectPhoto(photoUrl)}
+    //         />
+    //       ))}
+    //   </div>
+    //   <Form noValidate validated={validated} onSubmit={handleSubmit}>
+    //     <Form.Group id="photos">
+    //       <Form.Label>Photos</Form.Label>
+    //       <Form.File
+    //         id="exampleFormControlFile1"
+    //         label="Example file input"
+    //         ref={photosRef}
+    //         multiple
+    //       />
+    //       {/* <Form.Control.Feedback type="invalid">
+    //           To pole jest wymagane
+    //         </Form.Control.Feedback> */}
+    //     </Form.Group>
+    //     <Button className="w-100" type="submit">
+    //       Add photos
+    //     </Button>
+    //   </Form>
+    // </div>
   );
 }
