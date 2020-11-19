@@ -6,9 +6,10 @@ import {
   getPhotosByRouteId,
 } from "../../redux/actions/routeActions";
 import Gallery from "../gallery/Gallery";
+import Sidebar from "../sidebar/Sidebar";
 
 export default function RoutesGalleryPage(props) {
-  const [route, setRoute] = useState({});
+  const [routeId, setRouteId] = useState("");
   const [photos, setPhotos] = useState([]);
   const [validated, setValidated] = useState(false);
   const [selectedPhoto, setSelectedPhoto] = useState("");
@@ -17,17 +18,14 @@ export default function RoutesGalleryPage(props) {
 
   useEffect(() => {
     const currentRouteId = props.match.params.id;
-    const currentRoute = routes.filter((route) => route.id === currentRouteId);
-    setRoute(currentRoute[0]);
-  }, [routes, route, props.match.params.id]);
-
-  useEffect(() => {
+    setRouteId(currentRouteId);
+    
     (async () => {
-      if (route && route.id) {
-        setPhotos(await getPhotosByRouteId(route.id, 10));
-      }
-    })();
-  }, [route]);
+        if (routeId) {
+          setPhotos(await getPhotosByRouteId(routeId, 10));
+        }
+      })();
+  }, [props.match.params.id, routeId]);
 
   function selectPhoto(photoUrl) {
     setSelectedPhoto(photoUrl);
@@ -45,11 +43,11 @@ export default function RoutesGalleryPage(props) {
     try {
       // setLoading(true);
       let savePhotosResult = await savePhotos(
-        route.id,
+        routeId,
         photosRef.current.files
       );
       console.log(savePhotosResult);
-      setPhotos(await getPhotosByRouteId(route.id, 10));
+      setPhotos(await getPhotosByRouteId(routeId, 10));
       //   setLoading(false);
     } catch (e) {
       //   setLoading(false);
@@ -59,6 +57,7 @@ export default function RoutesGalleryPage(props) {
 
   return (
     <div>
+        <Sidebar />
       {photos && <Gallery photos={photos} />}
       {/* {<Form noValidate validated={validated} onSubmit={handleSubmit}>
         <Form.Group id="photos">
