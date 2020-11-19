@@ -1,9 +1,9 @@
 import * as types from "./actionTypes";
 
-export function selectPhoto(gallery) {
+export function selectPhoto(photo) {
   return {
     type: types.SELECT_PHOTO,
-    gallery,
+    photo,
   };
 }
 

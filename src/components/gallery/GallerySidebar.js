@@ -1,11 +1,15 @@
 import React, {useState, useEffect} from "react";
 import "./GallerySidebar.css";
+import { useDispatch } from "react-redux";
+import {selectPhoto} from "../../redux/actions/galleryActions"
 
 
 export default function GallerySidebar(props) {
 
     const sidebarSize = useSidebarSize();
     const [imgWidth, setImgWidth] = useState(0);
+    const dispatch = useDispatch();
+
 
     useEffect(() => {
         (function calculatePhotoWidth() {
@@ -19,7 +23,7 @@ export default function GallerySidebar(props) {
 
 
 function selectImage(photoUrl){
-
+    dispatch(selectPhoto(photoUrl));
 }
 
 
