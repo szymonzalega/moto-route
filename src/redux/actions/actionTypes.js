@@ -7,6 +7,7 @@ export const USER_LOGOUT = "USER_LOGOUT";
 export const SIDEBAR_OPEN = "SIDEBAR_OPEN";
 export const SIDEBAR_CLOSE = "SIDEBAR_CLOSE";
 
+export const LOAD_PHOTOS = "LOAD_PHOTOS";
 export const SELECT_PHOTO = "SELECT_PHOTO";
-export const GET_NEXT_PHOTO = "GET_NEXT_PHOTO";
-export const GET_PREV_PHOTO = "GET_PREV_PHOTO";
+export const SET_NEXT_PHOTO = "SET_NEXT_PHOTO";
+export const SET_PREV_PHOTO = "SET_PREV_PHOTO";

@@ -1,5 +1,12 @@
 import * as types from "./actionTypes";
 
+export function loadPhotos(photos) {
+  return {
+    type: types.LOAD_PHOTOS,
+    photos,
+  };
+}
+
 export function selectPhoto(photo) {
   return {
     type: types.SELECT_PHOTO,
@@ -7,14 +14,16 @@ export function selectPhoto(photo) {
   };
 }
 
-export function getNextPhoto() {
+export function setNextPhoto(photo) {
   return {
-    type: types.GET_NEXT_PHOTO
+    type: types.SET_NEXT_PHOTO,
+    photo,
   };
 }
 
-export function getPrevPhoto() {
+export function setPrevPhoto(photo) {
   return {
-    type: types.GET_PREV_PHOTO
+    type: types.SET_PREV_PHOTO,
+    photo
   };
 }

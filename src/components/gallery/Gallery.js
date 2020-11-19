@@ -4,6 +4,7 @@ import IconButton from "@material-ui/core/IconButton";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import useSidebarState from "../sidebar/useSidebarState";
+import { useSelector } from "react-redux";
 
 export default function Gallery({ photos }) {
   const [selectedImg, setSelectedImg] = useState(null);
@@ -11,7 +12,7 @@ export default function Gallery({ photos }) {
   const [imgWidth, setImgWidth] = useState(0);
   const windowSize = useWindowSize();
   const [openSidebar, closeSidebar] = useSidebarState();
-
+  const gallery = useSelector(({gallery}) => gallery);
 
   useEffect(() => {
     (function calculatePhotoWidth() {
@@ -23,6 +24,9 @@ export default function Gallery({ photos }) {
     })();
   }, [windowSize]);
 
+  useEffect(() => {
+    setSelectedImg(gallery.selectedPhoto)
+  }, [gallery])
 
   function selectImage(photoUrl) {
     setSelectedImg(photoUrl);
@@ -39,66 +43,48 @@ export default function Gallery({ photos }) {
     }
   }, []);
 
-  function showNextPhoto() {}
+  function showNextPhoto() {
+    setSelectedImg(gallery.nextPhoto);
+  }
 
-  function showPrevPhoto() {}
+  function showPrevPhoto() {
+    setSelectedImg(gallery.prevPhoto);
+  }
 
-  let url = "https://firebasestorage.googleapis.com/v0/b/moto-route-dev.appspot.com/o/historia_kredytu.JPG?alt=media&token=86fc1ea1-cf41-439f-ab22-15a32c074c8d"
+  let url =
+    "https://firebasestorage.googleapis.com/v0/b/moto-route-dev.appspot.com/o/historia_kredytu.JPG?alt=media&token=86fc1ea1-cf41-439f-ab22-15a32c074c8d";
 
   return (
     <div className="gallery">
       <div className="gallery__bigPhoto">
         {selectedImg && (
           <>
-            <IconButton
-              aria-label="more"
-              aria-controls="simple-menu"
-              aria-haspopup="true"
-              onClick={showPrevPhoto}
-            >
-              <NavigateBeforeIcon style={{ fontSize: 50 }} />
-            </IconButton>
+            {gallery.prevPhoto && (
+              <IconButton
+                aria-label="more"
+                aria-controls="simple-menu"
+                aria-haspopup="true"
+                onClick={showPrevPhoto}
+              >
+                <NavigateBeforeIcon style={{ fontSize: 50 }} />
+              </IconButton>
+            )}
             <div
               className="bigPhoto__photo"
               style={{ backgroundImage: `url(${selectedImg})` }}
             ></div>
-            <IconButton
-              aria-label="more"
-              aria-controls="simple-menu"
-              aria-haspopup="true"
-              onClick={showNextPhoto}
-            >
-              <NavigateNextIcon style={{ fontSize: 50 }} />
-            </IconButton>
+            {gallery.nextPhoto && (
+              <IconButton
+                aria-label="more"
+                aria-controls="simple-menu"
+                aria-haspopup="true"
+                onClick={showNextPhoto}
+              >
+                <NavigateNextIcon style={{ fontSize: 50 }} />
+              </IconButton>
+            )}
           </>
         )}
-      </div>
-      <div className="gallery__photoList">
-        {/* {photos.map(({ photoUrl }) => (
-          <div
-            onClick={() => selectImage(photoUrl)}
-            className="photoList__photo"
-            style={{
-              backgroundImage: `url(${photoUrl})`,
-              width: `${imgWidth}px`,
-              height: `${imgWidth}px`,
-            }}
-            alt={photoUrl}
-            src={photoUrl}
-          />
-        ))} */}
-        
-          <div
-            onClick={() => selectImage(url)}
-            className="photoList__photo"
-            style={{
-              backgroundImage: `url(${url})`,
-              width: `${imgWidth}px`,
-              height: `${imgWidth}px`,
-            }}
-            alt={url}
-            src={url}
-          />
       </div>
     </div>
   );
