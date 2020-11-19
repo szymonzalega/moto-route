@@ -1,11 +1,10 @@
 import React, { useRef, useState, useEffect } from "react";
 import "./SidebarAddEditMode.css";
 import { Form, Button } from "react-bootstrap";
-import { saveRoute } from "../../redux/actions/routeActions";
-import { useAuth } from "../../contexts/AuthContext";
-import { useDispatch } from "react-redux";
-import useSidebarState from "./useSidebarState";
-import { useSelector } from "react-redux";
+import { saveRoute } from "../../../../redux/actions/routeActions";
+import { useAuth } from "../../../../contexts/AuthContext";
+import { useDispatch, useSelector } from "react-redux";
+import useSidebarState from "../../../sidebar/useSidebarState";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 export default function SidebarAddEditMode({ routeId }) {
