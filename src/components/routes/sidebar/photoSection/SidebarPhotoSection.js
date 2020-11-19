@@ -4,7 +4,7 @@ import IconButton from "@material-ui/core/IconButton";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import Tooltip from "@material-ui/core/Tooltip";
 import { useHistory } from "react-router-dom";
-import { getPhotosByRouteId } from "../../redux/actions/routeActions";
+import { getPhotosByRouteId } from "../../../../redux/actions/routeActions";
 
 export default function SidebarPhotoSection({ routeId }) {
   const [galleryPreview, setGalleryPreview] = useState([]);

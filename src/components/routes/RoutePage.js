@@ -11,6 +11,9 @@ import { useHistory } from "react-router-dom";
 import Sidebar from "../sidebar/Sidebar";
 import { openSidebar } from "../../redux/actions/sidebarActions";
 import useSidebarState from "../sidebar/useSidebarState";
+import RouteSidebar from "./sidebar/RouteSidebar";
+
+
 
 export default function RoutePage() {
   const state = useSelector((state) => state);
@@ -19,7 +22,6 @@ export default function RoutePage() {
   const [redirectToAddNewRoute, setRedirectToAddNewRoute] = useState(false);
   const history = useHistory();
   const [openSidebar] = useSidebarState();
-
 
   useEffect(() => {
     (async function anyName() {
@@ -52,7 +54,9 @@ export default function RoutePage() {
       {/* <h2>Routes</h2> */}
 
       <div className="routePage">
-        <Sidebar />
+        <Sidebar>
+          <RouteSidebar />
+        </Sidebar>
 
         <div className="routePage__list">
           <div className="routePage__buttonRow">

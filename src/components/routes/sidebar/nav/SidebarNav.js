@@ -3,7 +3,7 @@ import "./SidebarNav.css";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import EditIcon from "@material-ui/icons/Edit";
-import useSidebarState from "./useSidebarState";
+import useSidebarState from "../../../sidebar/useSidebarState"
 
 export default function SidebarNav({ routeId, title, description, isEditMode }) {
   const [openSidebar, closeSidebar] = useSidebarState();
