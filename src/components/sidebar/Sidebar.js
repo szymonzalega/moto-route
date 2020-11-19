@@ -6,7 +6,7 @@ export default function Sidebar(props) {
   const sidebar = useSelector((state) => state.sidebar);
 
   return (
-    <div className={`sidebar ${sidebar.isOpen && "sidebar--visible"}`}>
+    <div id="sidebar" className={`sidebar ${sidebar.isOpen && "sidebar--visible"}`}>
       {sidebar.isOpen && (
         <div>{props.children}</div>
       )}

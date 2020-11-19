@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import "./RouteGalleryPage.css";
 import { useSelector } from "react-redux";
 import { Form, Button } from "react-bootstrap";
 import {
@@ -7,6 +8,9 @@ import {
 } from "../../redux/actions/routeActions";
 import Gallery from "../gallery/Gallery";
 import Sidebar from "../sidebar/Sidebar";
+import useSidebarState from "../sidebar/useSidebarState";
+import GallerySidebar from "../gallery/GallerySidebar";
+
 
 export default function RoutesGalleryPage(props) {
   const [routeId, setRouteId] = useState("");
@@ -15,6 +19,8 @@ export default function RoutesGalleryPage(props) {
   const [selectedPhoto, setSelectedPhoto] = useState("");
   const routes = useSelector((state) => state.routes);
   const photosRef = useRef();
+const [openSidebar, closeSidebar] = useSidebarState();
+
 
   useEffect(() => {
     const currentRouteId = props.match.params.id;
@@ -26,6 +32,14 @@ export default function RoutesGalleryPage(props) {
         }
       })();
   }, [props.match.params.id, routeId]);
+
+  useEffect(() => {
+    const sidebar = {
+      isOpen: true,
+      mode: "gallery"
+    };
+    openSidebar(sidebar);
+  }, [])
 
   function selectPhoto(photoUrl) {
     setSelectedPhoto(photoUrl);
@@ -56,8 +70,10 @@ export default function RoutesGalleryPage(props) {
   }
 
   return (
-    <div>
-        <Sidebar />
+    <div className="routeGalleryPage">
+        <Sidebar>
+          <GallerySidebar photos={photos} />
+        </Sidebar>
       {photos && <Gallery photos={photos} />}
       {/* {<Form noValidate validated={validated} onSubmit={handleSubmit}>
         <Form.Group id="photos">

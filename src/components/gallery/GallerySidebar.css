@@ -1,0 +1,11 @@
+.gallerySidebar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.gallerySidebar__photo {
+    height: auto;
+    width: 100%;
+}

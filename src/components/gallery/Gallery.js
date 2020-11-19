@@ -3,12 +3,15 @@ import "./Gallery.css";
 import IconButton from "@material-ui/core/IconButton";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
+import useSidebarState from "../sidebar/useSidebarState";
 
 export default function Gallery({ photos }) {
   const [selectedImg, setSelectedImg] = useState(null);
   const [photoList, setPhotoList] = useState([]);
   const [imgWidth, setImgWidth] = useState(0);
   const windowSize = useWindowSize();
+  const [openSidebar, closeSidebar] = useSidebarState();
+
 
   useEffect(() => {
     (function calculatePhotoWidth() {
@@ -19,6 +22,7 @@ export default function Gallery({ photos }) {
       setImgWidth(imgWidth);
     })();
   }, [windowSize]);
+
 
   function selectImage(photoUrl) {
     setSelectedImg(photoUrl);
@@ -38,6 +42,8 @@ export default function Gallery({ photos }) {
   function showNextPhoto() {}
 
   function showPrevPhoto() {}
+
+  let url = "https://firebasestorage.googleapis.com/v0/b/moto-route-dev.appspot.com/o/historia_kredytu.JPG?alt=media&token=86fc1ea1-cf41-439f-ab22-15a32c074c8d"
 
   return (
     <div className="gallery">
@@ -68,7 +74,7 @@ export default function Gallery({ photos }) {
         )}
       </div>
       <div className="gallery__photoList">
-        {photos.map(({ photoUrl }) => (
+        {/* {photos.map(({ photoUrl }) => (
           <div
             onClick={() => selectImage(photoUrl)}
             className="photoList__photo"
@@ -80,7 +86,19 @@ export default function Gallery({ photos }) {
             alt={photoUrl}
             src={photoUrl}
           />
-        ))}
+        ))} */}
+        
+          <div
+            onClick={() => selectImage(url)}
+            className="photoList__photo"
+            style={{
+              backgroundImage: `url(${url})`,
+              width: `${imgWidth}px`,
+              height: `${imgWidth}px`,
+            }}
+            alt={url}
+            src={url}
+          />
       </div>
     </div>
   );
