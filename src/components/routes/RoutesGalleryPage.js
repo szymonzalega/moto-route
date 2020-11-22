@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./RouteGalleryPage.css";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Form, Button } from "react-bootstrap";
 import {
   savePhotos,
   getPhotosByRouteId,
 } from "../../redux/actions/routeActions";
+import {loadRoutePhotos} from "../../redux/actions/galleryActions"
 import Gallery from "../gallery/Gallery";
 import Sidebar from "../sidebar/Sidebar";
 import useSidebarState from "../sidebar/useSidebarState";
@@ -14,25 +15,46 @@ import GallerySidebar from "../gallery/GallerySidebar";
 
 export default function RoutesGalleryPage(props) {
   const [routeId, setRouteId] = useState("");
-  const [photos, setPhotos] = useState([]);
+  // const [photos, setPhotos] = useState([]);
   const [validated, setValidated] = useState(false);
   const [selectedPhoto, setSelectedPhoto] = useState("");
+  const dispatch = useDispatch();
   const routes = useSelector((state) => state.routes);
+  const gallery = useSelector((state) => state.gallery);
+
   const photosRef = useRef();
 const [openSidebar, closeSidebar] = useSidebarState();
 
 
+  // useEffect(() => {
+  //   const currentRouteId = props.match.params.id;
+  //   setRouteId(currentRouteId);
+    
+  //   (async () => {
+  //       if (routeId) {
+  //         setPhotos(await getPhotosByRouteId(routeId, 10));
+  //       }
+  //     })();
+  // }, [props.match.params.id, routeId]);
+
   useEffect(() => {
     const currentRouteId = props.match.params.id;
     setRouteId(currentRouteId);
-    
-    (async () => {
-        if (routeId) {
-          setPhotos(await getPhotosByRouteId(routeId, 10));
-        }
-      })();
-  }, [props.match.params.id, routeId]);
 
+    (async () => {
+      try {
+        // if (gallery && gallery.photos && gallery.photos.length === 0 && routeId) {
+        //   await dispatch(loadRoutePhotos(routeId));
+        // }
+        if(routeId) {
+          await dispatch(loadRoutePhotos(routeId));
+        }
+      } catch (e) {
+        console.error(`Loading routes failed ${e}`);
+      }
+    })();
+  }, [dispatch, routeId, props.match.params.id])
+  
   useEffect(() => {
     const sidebar = {
       isOpen: true,
@@ -45,36 +67,36 @@ const [openSidebar, closeSidebar] = useSidebarState();
     setSelectedPhoto(photoUrl);
   }
 
-  async function handleSubmit(e) {
-    e.preventDefault();
-    const form = e.currentTarget;
-    if (form.checkValidity() === false) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-    setValidated(true);
+  // async function handleSubmit(e) {
+  //   e.preventDefault();
+  //   const form = e.currentTarget;
+  //   if (form.checkValidity() === false) {
+  //     e.preventDefault();
+  //     e.stopPropagation();
+  //   }
+  //   setValidated(true);
 
-    try {
-      // setLoading(true);
-      let savePhotosResult = await savePhotos(
-        routeId,
-        photosRef.current.files
-      );
-      console.log(savePhotosResult);
-      setPhotos(await getPhotosByRouteId(routeId, 10));
-      //   setLoading(false);
-    } catch (e) {
-      //   setLoading(false);
-      console.error(`Failed to add new photos, ${e} `);
-    }
-  }
+  //   try {
+  //     // setLoading(true);
+  //     let savePhotosResult = await savePhotos(
+  //       routeId,
+  //       photosRef.current.files
+  //     );
+  //     console.log(savePhotosResult);
+  //     setPhotos(await getPhotosByRouteId(routeId, 10));
+  //     //   setLoading(false);
+  //   } catch (e) {
+  //     //   setLoading(false);
+  //     console.error(`Failed to add new photos, ${e} `);
+  //   }
+  // }
 
   return (
     <div className="routeGalleryPage">
         <Sidebar>
-          <GallerySidebar photos={photos} />
+          <GallerySidebar />
         </Sidebar>
-      {photos && <Gallery photos={photos} />}
+      {gallery.photos && <Gallery />}
       {/* {<Form noValidate validated={validated} onSubmit={handleSubmit}>
         <Form.Group id="photos">
           <Form.Label>Photos</Form.Label>

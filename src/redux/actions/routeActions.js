@@ -103,7 +103,7 @@ export async function getPhotosByRouteId(routeId, limit) {
         .limit(limit)
         .get();
         photosRef.forEach((doc) => {
-          photos.push({ ...doc.data()});
+          photos.push({ ...doc.data(), id: doc.id });
         });
         return photos;
     } catch (e) {

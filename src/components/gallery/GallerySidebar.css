@@ -8,4 +8,7 @@
 .gallerySidebar__photo {
     height: auto;
     width: 100%;
+    border: 3px solid transparent;
+    margin-top: 10px;
+    box-sizing: border-box;
 }

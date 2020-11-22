@@ -1,62 +1,66 @@
 import React, { useState, useEffect } from "react";
 import "./GallerySidebar.css";
-import { useDispatch } from "react-redux";
-import {
-  selectPhoto,
-  setNextPhoto,
-  setPrevPhoto,
-} from "../../redux/actions/galleryActions";
+import { useDispatch, useSelector } from "react-redux";
+import { selectPhoto } from "../../redux/actions/galleryActions";
 
-export default function GallerySidebar(props) {
+export default function GallerySidebar() {
   const sidebarSize = useSidebarSize();
   const [imgWidth, setImgWidth] = useState(0);
+  const [selectedImage, setSelectedImage] = useState("");
   const dispatch = useDispatch();
+  const gallery = useSelector(({ gallery }) => gallery);
 
   useEffect(() => {
     (function calculatePhotoWidth() {
       const IMG_AMOUNT = 2;
-      const IMG_GAP = 10;
+      const IMG_GAP = 22;
       let imgWidth =
         (sidebarSize.width - IMG_GAP * (IMG_AMOUNT - 1)) / IMG_AMOUNT;
       setImgWidth(imgWidth);
     })();
   }, [sidebarSize]);
 
-  function selectImage(photoUrl, photoIndexInList) {
-    dispatch(selectPhoto(photoUrl));
-    dispatch(setNextPhoto(getNextPhoto(photoIndexInList)));
-    dispatch(setPrevPhoto(getPrevPhoto(photoIndexInList)));
-  }
-
-  function getPrevPhoto(photoIndexInList) {
-    if (photoIndexInList !== 0) {
-      return props.photos[photoIndexInList - 1].photoUrl;
+  useEffect(() => {
+    if (gallery && gallery.photos && !gallery.selectedPhoto) {
+      selectImage(gallery.photos[0], 0);
     }
-    return null;
-  }
+  }, [gallery.photos]);
 
-  function getNextPhoto(photoIndexInList) {
-    if (photoIndexInList !== props.photos.length - 1) {
-      return props.photos[photoIndexInList + 1].photoUrl;
+  useEffect(() => {
+    if (gallery && gallery.photos) {
+      setSelectedImage(gallery.selectedPhoto);
     }
-    return null;
+  }, [gallery.selectedPhoto]);
+
+  function selectImage(photo, index) {
+    const photoObj = { ...photo, index };
+    setSelectedImage(photoObj);
+    dispatch(selectPhoto(photoObj));
   }
 
   return (
     <div className="gallerySidebar">
-      {props.photos.map(({ photoUrl }, index) => (
-        <div
-          onClick={() => selectImage(photoUrl, index)}
-          className="gallerySidebar__photo"
-          style={{
-            backgroundImage: `url(${photoUrl})`,
-            width: `${imgWidth}px`,
-            height: `${imgWidth}px`,
-          }}
-          alt={photoUrl}
-          src={photoUrl}
-        />
-      ))}
+      {gallery &&
+        gallery.photos &&
+        gallery.photos.map((photo, index) => (
+          <div
+            key={photo.id}
+            onClick={() => selectImage(photo, index)}
+            className="gallerySidebar__photo"
+            style={{
+              backgroundImage: `url(${photo.photoUrl})`,
+              width: `${imgWidth}px`,
+              height: `${imgWidth}px`,
+              border: `${
+                selectedImage.id === photo.id
+                  ? "3px solid black"
+                  : "3px solid transparent"
+              }`,
+            }}
+            alt={photo.photoUrl}
+            src={photo.photoUrl}
+          />
+        ))}
     </div>
   );
 }

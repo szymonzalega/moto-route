@@ -24,7 +24,7 @@ export default function RoutePage() {
   const [openSidebar] = useSidebarState();
 
   useEffect(() => {
-    (async function anyName() {
+    (async () => {
       try {
         if (state && state.routes && state.routes.length === 0) {
           await dispatch(routeActions.loadUserRoutes(currentUser.uid));
