@@ -46,7 +46,6 @@ export default function RouteSidebar() {
         title={sidebar.mode === "create" ? `Create new route` : `Edit route`}
         isEditMode={sidebar.mode !== "details"}
       />
-      {console.log("addeditmode")}
       {route && <SidebarAddEditMode routeId={route.id} />}
     </>
   );
@@ -54,7 +53,7 @@ export default function RouteSidebar() {
   return (
     <>
       {sidebar.mode === "details" && detailsView}
-      {sidebar.mode !== "details" && addEditMode}
+      {(sidebar.mode === "create" || sidebar.mode === "edit" ) && addEditMode}
     </>
   );
 }

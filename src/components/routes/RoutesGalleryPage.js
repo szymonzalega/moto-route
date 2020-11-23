@@ -7,7 +7,7 @@ import {
   getPhotosByRouteId,
 } from "../../redux/actions/routeActions";
 import {loadRoutePhotos} from "../../redux/actions/galleryActions"
-import Gallery from "../gallery/Gallery";
+import PhotoPreview from "../gallery/PhotoPreview";
 import Sidebar from "../sidebar/Sidebar";
 import useSidebarState from "../sidebar/useSidebarState";
 import GallerySidebar from "../gallery/GallerySidebar";
@@ -22,7 +22,7 @@ export default function RoutesGalleryPage(props) {
   const routes = useSelector((state) => state.routes);
   const gallery = useSelector((state) => state.gallery);
 
-  const photosRef = useRef();
+  // const photosRef = useRef();
 const [openSidebar, closeSidebar] = useSidebarState();
 
 
@@ -58,45 +58,55 @@ const [openSidebar, closeSidebar] = useSidebarState();
   useEffect(() => {
     const sidebar = {
       isOpen: true,
-      mode: "gallery"
+      mode: "gallery",
+      routeId
     };
     openSidebar(sidebar);
-  }, [])
+    //onDestroy
+    return () => {
+      const sidebar = {
+        isOpen: true,
+        mode: "details",
+        routeId
+      };
+      openSidebar(sidebar);
+    }
+  }, [routeId])
 
   function selectPhoto(photoUrl) {
     setSelectedPhoto(photoUrl);
   }
 
-  // async function handleSubmit(e) {
-  //   e.preventDefault();
-  //   const form = e.currentTarget;
-  //   if (form.checkValidity() === false) {
-  //     e.preventDefault();
-  //     e.stopPropagation();
-  //   }
-  //   setValidated(true);
+  async function handleSubmit(e, photosRef) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    if (form.checkValidity() === false) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    setValidated(true);
 
-  //   try {
-  //     // setLoading(true);
-  //     let savePhotosResult = await savePhotos(
-  //       routeId,
-  //       photosRef.current.files
-  //     );
-  //     console.log(savePhotosResult);
-  //     setPhotos(await getPhotosByRouteId(routeId, 10));
-  //     //   setLoading(false);
-  //   } catch (e) {
-  //     //   setLoading(false);
-  //     console.error(`Failed to add new photos, ${e} `);
-  //   }
-  // }
+    try {
+      // setLoading(true);
+      let savePhotosResult = await savePhotos(
+        routeId,
+        photosRef.current.files
+      );
+      console.log(savePhotosResult);
+      await dispatch(loadRoutePhotos(routeId));
+      //   setLoading(false);
+    } catch (e) {
+      //   setLoading(false);
+      console.error(`Failed to add new photos, ${e} `);
+    }
+  }
 
   return (
     <div className="routeGalleryPage">
         <Sidebar>
-          <GallerySidebar />
+          <GallerySidebar onSubmit={handleSubmit}/>
         </Sidebar>
-      {gallery.photos && <Gallery />}
+      {gallery.photos && <PhotoPreview />}
       {/* {<Form noValidate validated={validated} onSubmit={handleSubmit}>
         <Form.Group id="photos">
           <Form.Label>Photos</Form.Label>
@@ -136,23 +146,23 @@ const [openSidebar, closeSidebar] = useSidebarState();
     //         />
     //       ))}
     //   </div>
-    //   <Form noValidate validated={validated} onSubmit={handleSubmit}>
-    //     <Form.Group id="photos">
-    //       <Form.Label>Photos</Form.Label>
-    //       <Form.File
-    //         id="exampleFormControlFile1"
-    //         label="Example file input"
-    //         ref={photosRef}
-    //         multiple
-    //       />
-    //       {/* <Form.Control.Feedback type="invalid">
-    //           To pole jest wymagane
-    //         </Form.Control.Feedback> */}
-    //     </Form.Group>
-    //     <Button className="w-100" type="submit">
-    //       Add photos
-    //     </Button>
-    //   </Form>
+      // <Form noValidate validated={validated} onSubmit={handleSubmit}>
+      //   <Form.Group id="photos">
+      //     <Form.Label>Photos</Form.Label>
+      //     <Form.File
+      //       id="exampleFormControlFile1"
+      //       label="Example file input"
+      //       ref={photosRef}
+      //       multiple
+      //     />
+      //     {/* <Form.Control.Feedback type="invalid">
+      //         To pole jest wymagane
+      //       </Form.Control.Feedback> */}
+      //   </Form.Group>
+      //   <Button className="w-100" type="submit">
+      //     Add photos
+      //   </Button>
+      // </Form>
     // </div>
   );
 }

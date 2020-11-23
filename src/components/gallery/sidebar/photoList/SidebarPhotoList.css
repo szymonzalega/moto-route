@@ -1,0 +1,14 @@
+.sidebarPhotoList {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.sidebarPhotoList__photo {
+    height: auto;
+    width: 100%;
+    border: 3px solid transparent;
+    margin-top: 10px;
+    box-sizing: border-box;
+}

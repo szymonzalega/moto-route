@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import "./Gallery.css";
+import "./PhotoPreview.css";
 import IconButton from "@material-ui/core/IconButton";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import { useDispatch, useSelector } from "react-redux";
 import { selectPhoto } from "../../redux/actions/galleryActions";
 
-export default function Gallery({ photos }) {
+export default function PhotoPreview({ photos }) {
   const [selectedImg, setSelectedImg] = useState(null);
   const gallery = useSelector(({ gallery }) => gallery);
   const dispatch = useDispatch();
