@@ -1,14 +1,25 @@
 .sidebarPhotoList {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-wrap: wrap;
+  display: grid;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
 }
 
 .sidebarPhotoList__photo {
-    height: auto;
-    width: 100%;
-    border: 3px solid transparent;
-    margin-top: 10px;
-    box-sizing: border-box;
+  border: 3px solid rgba(46,129,244,0);
+  margin-top: 10px;
+  box-sizing: border-box;
+  min-height: 110px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-color: #e2e2e2;
+  transition: all 100ms ease-in;
+}
+
+.sidebarPhotoList__photo--selected {
+  transform: scale(1.04);
+  border-color: rgba(46,129,244,1);
 }

@@ -2,53 +2,79 @@ import React, { useState, useRef } from "react";
 import "./SidebarUploadPhoto.css";
 import { Form, Button } from "react-bootstrap";
 import InsertDriveFileIcon from "@material-ui/icons/InsertDriveFile";
+import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 
 export default function SidebarUploadPhoto({ onSubmit }) {
-  const [validated, setValidated] = useState(false);
-  const [photoToUpload, setPhotoToUpload] = useState([])
+  const [photoToUpload, setPhotoToUpload] = useState([]);
   const photosRef = useRef();
 
   const onImageChange = (e) => {
-    // let reader = new FileReader();
-    // reader.onload = e => {
-    //   setPhotoToUpload([...ph]);
-    // }
-    // reader.readAsDataURL(e.target.files);
+    const uploadedFiles = [...e.target.files];
+    setPhotoToUpload([...photoToUpload, ...uploadedFiles]);
+  };
+
+  const isUploadedPhoto = photoToUpload.length > 0;
+
+  const removePhotoToUpload = (index) => {
+    const tempPhotoArr = [...photoToUpload];
+    tempPhotoArr.splice(index, 1);
+    setPhotoToUpload(tempPhotoArr);
+  }
+
+  const onSubmitHandler = (e) => {
+    onSubmit(e, photoToUpload);
+    setPhotoToUpload([]);
   }
 
   return (
     <>
-    <Form
-      noValidate
-      validated={validated}
-      onSubmit={(e) => onSubmit(e, photosRef)}
-    >
-      <Form.Group id="photos">
-        {/* <Form.File ref={photosRef} multiple> */}
-        <label
-          for="file-upload"
-          type="file"
-          multiple
-          className="sidebarUploadPhoto__uploadButton"
-        >
-          <InsertDriveFileIcon />
-          Upload new photo
-        </label>
-        <input id="file-upload" type="file" multiple ref={photosRef} onChange={onImageChange}/>
-        {/* </Form.File> */}
-        {/* <Form.Control.Feedback type="invalid">
-          To pole jest wymagane
-        </Form.Control.Feedback> */}
-      </Form.Group>
+      <Form
+        noValidate
+        onSubmit={(e) => onSubmitHandler(e)}
+      >
+        <Form.Group id="photos">
+          <label
+            for="file-upload"
+            type="file"
+            multiple
+            className="sidebarUploadPhoto__uploadButton"
+          >
+            <InsertDriveFileIcon />
+            Upload new photo
+          </label>
+          <input
+            id="file-upload"
+            type="file"
+            multiple
+            ref={photosRef}
+            onChange={onImageChange}
+          />
+        </Form.Group>
 
-      <Button className="w-100" type="submit">
-        Add photos
-      </Button>
-    </Form>
+        {isUploadedPhoto && (
+          <>
+            <div className="sidebarUploadPhoto__uploadedPhotoRow">
+              {photoToUpload.map((file, index) => (
+                <div
+                  key={file.name}
+                  className="sidebarUploadPhoto__uploadedPhoto"
+                  style={{ backgroundImage: `url(${URL.createObjectURL(file)})` }}
+                >
+                  <div className="uploadedPhoto__remove" onClick={() => removePhotoToUpload(index)}>
+                    <HighlightOffIcon
+                      style={{ fontSize: 23 }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
 
-
-      <img alt="sdsd" src={photoToUpload[0]} />
-      </>
-
+            <Button className="w-100" type="submit">
+              Upload photos
+            </Button>
+          </>
+        )}
+      </Form>
+    </>
   );
 }

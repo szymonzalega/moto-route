@@ -43,3 +43,7 @@
 .gallery__bigPhoto .MuiSvgIcon-root {
   color: #a0a0a0;
 }
+
+.gallery__emptyInfo {
+  color: #ffffff
+}

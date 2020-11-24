@@ -15,24 +15,16 @@ export function selectPhoto(photo) {
   };
 }
 
-export function setNextPhoto(photo) {
+export function resetGalleryState() {
   return {
-    type: types.SET_NEXT_PHOTO,
-    photo,
-  };
-}
-
-export function setPrevPhoto(photo) {
-  return {
-    type: types.SET_PREV_PHOTO,
-    photo
+    type: types.RESET_GALLERY_STATE
   };
 }
 
 export function loadRoutePhotos(routeId) {
     return async function (dispatch) {
       try {
-        const photos = await getPhotosByRouteId(routeId, 10);
+        const photos = await getPhotosByRouteId(routeId, 20);
         dispatch(loadPhotos(photos));
       } catch (e) {
         console.error(e);

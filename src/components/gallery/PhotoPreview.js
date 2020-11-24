@@ -6,15 +6,15 @@ import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import { useDispatch, useSelector } from "react-redux";
 import { selectPhoto } from "../../redux/actions/galleryActions";
 
-export default function PhotoPreview({ photos }) {
+export default function PhotoPreview() {
   const [selectedImg, setSelectedImg] = useState(null);
   const gallery = useSelector(({ gallery }) => gallery);
   const dispatch = useDispatch();
 
   const photoNavigation = {
     NEXT: 1,
-    PREV: -1
-  }
+    PREV: -1,
+  };
 
   useEffect(() => {
     if (gallery.selectedPhoto) {
@@ -22,23 +22,29 @@ export default function PhotoPreview({ photos }) {
     }
   }, [gallery]);
 
-  function selectOtherPhoto(direction){
+  function selectOtherPhoto(direction) {
     const currentSelectedPhotoIndex = gallery.selectedPhoto.index;
     const nextPhoto = gallery.photos[currentSelectedPhotoIndex + direction];
-    const photoObj = { ...nextPhoto, index: currentSelectedPhotoIndex + direction };
+    const photoObj = {
+      ...nextPhoto,
+      index: currentSelectedPhotoIndex + direction,
+    };
     dispatch(selectPhoto(photoObj));
   }
 
-  const isFirstPhoto = () => gallery.selectedPhoto.index === 0;
-  const isLastPhoto = () =>
+  const isFirstPhoto =
+    gallery && gallery.selectedPhoto && gallery.selectedPhoto.index === 0;
+  const isLastPhoto =
+    gallery &&
+    gallery.selectedPhoto &&
     gallery.selectedPhoto.index === gallery.photos.length - 1;
 
   return (
     <div className="gallery">
       <div className="gallery__bigPhoto">
-        {selectedImg && (
+        {selectedImg ? (
           <>
-            {!isFirstPhoto() && (
+            {!isFirstPhoto && (
               <IconButton
                 aria-label="more"
                 aria-controls="simple-menu"
@@ -48,13 +54,13 @@ export default function PhotoPreview({ photos }) {
                 <NavigateBeforeIcon style={{ fontSize: 50 }} />
               </IconButton>
             )}
-            {selectedImg && (
-              <div
-                className="bigPhoto__photo"
-                style={{ backgroundImage: `url(${selectedImg.photoUrl})` }}
-              ></div>
-            )}
-            {!isLastPhoto() && (
+
+            <div
+              className="bigPhoto__photo"
+              style={{ backgroundImage: `url(${selectedImg.photoUrl})` }}
+            ></div>
+
+            {!isLastPhoto && (
               <IconButton
                 aria-label="more"
                 aria-controls="simple-menu"
@@ -65,6 +71,10 @@ export default function PhotoPreview({ photos }) {
               </IconButton>
             )}
           </>
+        ) : (
+          <span className="gallery__emptyInfo">
+            Gallery is empty. Upload new photos :)
+          </span>
         )}
       </div>
     </div>

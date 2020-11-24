@@ -80,7 +80,7 @@ export function savePhotos(routeId, photosToSave) {
       const photosUrlArray = await savePhotosInFirebaseStorage(photosToSave);
       let savingPhotosPromise = [];
       for (let photoUrl of photosUrlArray) {
-        savingPhotosPromise.push(db.collection("routesGallery").add({routeId, photoUrl}));
+        savingPhotosPromise.push(db.collection("routesGallery").add({routeId, photoUrl, createdDate: new Date()}));
       }
       Promise.all(savingPhotosPromise).then(result => {
         resolve(result);
@@ -100,6 +100,7 @@ export async function getPhotosByRouteId(routeId, limit) {
       const photosRef = await db
         .collection("routesGallery")
         .where("routeId", "==", routeId)
+        .orderBy("createdDate", "asc")
         .limit(limit)
         .get();
         photosRef.forEach((doc) => {

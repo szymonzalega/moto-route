@@ -23,20 +23,24 @@ export default function RouteSidebar() {
 
   const detailsView = (
     <>
-      <SidebarNav
-        routeId={route.id}
-        title={route.name}
-        description={route.description}
-        isEditMode={sidebar.mode !== "details"}
-      />
+      {route && (
+        <>
+          <SidebarNav
+            routeId={route.id}
+            title={route.name}
+            description={route.description}
+            isEditMode={sidebar.mode !== "details"}
+          />
 
-      <SidebarDetailsRow label="Level" value={route.level} />
-      <SidebarDetailsRow label="Author" value={route.userEmail} />
-      <SidebarDetailsRow label="Length" value={`${route.length}km`} />
-      <SidebarDetailsRow label="Type" value={route.routeType} />
+          <SidebarDetailsRow label="Level" value={route.level} />
+          <SidebarDetailsRow label="Author" value={route.userEmail} />
+          <SidebarDetailsRow label="Length" value={`${route.length}km`} />
+          <SidebarDetailsRow label="Type" value={route.routeType} />
 
-      <RouteElementMap url={route.url} />
-      <SidebarPhotoSection routeId={route.id} />
+          <RouteElementMap url={route.url} />
+          <SidebarPhotoSection routeId={route.id} />
+        </>
+      )}
     </>
   );
 
@@ -53,7 +57,7 @@ export default function RouteSidebar() {
   return (
     <>
       {sidebar.mode === "details" && detailsView}
-      {(sidebar.mode === "create" || sidebar.mode === "edit" ) && addEditMode}
+      {(sidebar.mode === "create" || sidebar.mode === "edit") && addEditMode}
     </>
   );
 }

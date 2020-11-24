@@ -1,24 +1,78 @@
 input[type="file"] {
-    display: none;
+  display: none;
 }
 
 .sidebarUploadPhoto__uploadButton {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    border: 2px solid #a0a0a0;
-    color: #a0a0a0;
-    border-radius: .25rem;
-    background-color: transparent;
-    padding: 16px;
-    justify-content: center;
-    align-items: center;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 100ms;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  border: 2px solid #a0a0a0;
+  color: #a0a0a0;
+  border-radius: 0.25rem;
+  background-color: transparent;
+  padding: 16px;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 100ms;
 }
 
 .sidebarUploadPhoto__uploadButton:hover {
-    border-color: #2e81f4;
-    color: #2e81f4
+  border-color: #2e81f4;
+  color: #2e81f4;
+}
+
+.sidebarUploadPhoto__uploadedPhotoRow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.sidebarUploadPhoto__uploadedPhoto {
+  height: 110px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: initial;
+  background-color: #a0a0a0;
+  height: 5rem;
+  position: relative;
+}
+
+.sidebarUploadPhoto__uploadedPhoto::before {
+  opacity: 0;
+  content: "";
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  background-color: rgba(256, 256, 256, 0.3);
+}
+
+.sidebarUploadPhoto__uploadedPhoto:hover .uploadedPhoto__remove {
+  opacity: 1;
+}
+.sidebarUploadPhoto__uploadedPhoto:hover::before {
+  opacity: 1;
+}
+
+.uploadedPhoto__remove {
+  opacity: 0;
+  position: absolute;
+  top: -8px;
+  right: -6px;
+  border-radius: 100%;
+  transition: opacity 100ms ease-in-out !important;
+  cursor: pointer;
+}
+
+.uploadedPhoto__remove > .MuiSvgIcon-root {
+  background-color: #ffffff;
+  border-radius: 100%;
+}
+
+.uploadedPhoto__remove:hover > .MuiSvgIcon-root {
+  color: #2e81f4;
 }
