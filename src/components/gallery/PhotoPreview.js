@@ -44,32 +44,30 @@ export default function PhotoPreview() {
       <div className="gallery__bigPhoto">
         {selectedImg ? (
           <>
-            {!isFirstPhoto && (
-              <IconButton
-                aria-label="more"
-                aria-controls="simple-menu"
-                aria-haspopup="true"
-                onClick={() => selectOtherPhoto(photoNavigation.PREV)}
-              >
-                <NavigateBeforeIcon style={{ fontSize: 50 }} />
-              </IconButton>
-            )}
+            <IconButton
+              style={{ visibility: `${isFirstPhoto ? "hidden" : "visible"}` }}
+              aria-label="more"
+              aria-controls="simple-menu"
+              aria-haspopup="true"
+              onClick={() => selectOtherPhoto(photoNavigation.PREV)}
+            >
+              <NavigateBeforeIcon style={{ fontSize: 50 }} />
+            </IconButton>
 
             <div
               className="bigPhoto__photo"
               style={{ backgroundImage: `url(${selectedImg.photoUrl})` }}
             ></div>
 
-            {!isLastPhoto && (
-              <IconButton
-                aria-label="more"
-                aria-controls="simple-menu"
-                aria-haspopup="true"
-                onClick={() => selectOtherPhoto(photoNavigation.NEXT)}
-              >
-                <NavigateNextIcon style={{ fontSize: 50 }} />
-              </IconButton>
-            )}
+            <IconButton
+              style={{ visibility: `${isLastPhoto ? "hidden" : "visible"}` }}
+              aria-label="more"
+              aria-controls="simple-menu"
+              aria-haspopup="true"
+              onClick={() => selectOtherPhoto(photoNavigation.NEXT)}
+            >
+              <NavigateNextIcon style={{ fontSize: 50 }} />
+            </IconButton>
           </>
         ) : (
           <span className="gallery__emptyInfo">
