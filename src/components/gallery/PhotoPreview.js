@@ -4,11 +4,11 @@ import IconButton from "@material-ui/core/IconButton";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import { useDispatch, useSelector } from "react-redux";
-import { selectPhoto } from "../../redux/actions/galleryActions";
+// import { selectPhoto } from "../../redux/actions/galleryActions";
+import { selectPhoto } from "../../redux/actions/routeGalleryActions";
 
 export default function PhotoPreview() {
-  const [selectedImg, setSelectedImg] = useState(null);
-  const gallery = useSelector(({ gallery }) => gallery);
+  const selectedPhoto = useSelector(state => state.routeGallery.selectedPhoto);
   const dispatch = useDispatch();
 
   const photoNavigation = {
@@ -16,33 +16,17 @@ export default function PhotoPreview() {
     PREV: -1,
   };
 
-  useEffect(() => {
-    if (gallery.selectedPhoto) {
-      setSelectedImg(gallery.selectedPhoto);
-    }
-  }, [gallery]);
-
   function selectOtherPhoto(direction) {
-    const currentSelectedPhotoIndex = gallery.selectedPhoto.index;
-    const nextPhoto = gallery.photos[currentSelectedPhotoIndex + direction];
-    const photoObj = {
-      ...nextPhoto,
-      index: currentSelectedPhotoIndex + direction,
-    };
-    dispatch(selectPhoto(photoObj));
+    dispatch(selectPhoto(null, direction))
   }
 
-  const isFirstPhoto =
-    gallery && gallery.selectedPhoto && gallery.selectedPhoto.index === 0;
-  const isLastPhoto =
-    gallery &&
-    gallery.selectedPhoto &&
-    gallery.selectedPhoto.index === gallery.photos.length - 1;
+  const isFirstPhoto = selectedPhoto.isFirst;
+  const isLastPhoto = selectedPhoto.isLast;
 
   return (
     <div className="gallery">
       <div className="gallery__bigPhoto">
-        {selectedImg ? (
+        {selectedPhoto ? (
           <>
             <IconButton
               style={{ visibility: `${isFirstPhoto ? "hidden" : "visible"}` }}
@@ -56,7 +40,7 @@ export default function PhotoPreview() {
 
             <div
               className="bigPhoto__photo"
-              style={{ backgroundImage: `url(${selectedImg.photoUrl})` }}
+              style={{ backgroundImage: `url(${selectedPhoto.photoUrl})` }}
             ></div>
 
             <IconButton

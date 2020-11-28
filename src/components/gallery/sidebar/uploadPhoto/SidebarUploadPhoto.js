@@ -34,7 +34,7 @@ export default function SidebarUploadPhoto({ onSubmit }) {
       >
         <Form.Group id="photos">
           <label
-            for="file-upload"
+            htmlFor="file-upload"
             type="file"
             multiple
             className="sidebarUploadPhoto__uploadButton"

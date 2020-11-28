@@ -78,39 +78,66 @@ export function savePhotos(routeId, photosToSave) {
   return new Promise(async (resolve, reject) => {
     try {
       const photosUrlArray = await savePhotosInFirebaseStorage(photosToSave);
-      let savingPhotosPromise = [];
+      const savingPhotosPromise = [];
+      const getUploadedPhotosData = [];
       for (let photoUrl of photosUrlArray) {
-        savingPhotosPromise.push(db.collection("routesGallery").add({routeId, photoUrl, createdDate: new Date()}));
+        savingPhotosPromise.push(
+          db
+            .collection("routesGallery")
+            .add({ routeId, photoUrl, createdDate: new Date() })
+        );
       }
-      Promise.all(savingPhotosPromise).then(result => {
-        resolve(result);
-      }).catch(e => {
-        reject(e);
-        throw new Error(e);
-      })
+      await Promise.all(savingPhotosPromise)
+        .then((result) => {
+          for (let uploadedPhoto of result) {
+            getUploadedPhotosData.push(getPhotoById(uploadedPhoto.id));
+          }
+        })
+        .catch((e) => {
+          reject(e);
+          throw new Error(e);
+        });
+
+      Promise.all(getUploadedPhotosData)
+        .then((uploadedPhotoData) => {
+          resolve(uploadedPhotoData);
+        })
+        .catch((e) => {
+          throw new Error(e);
+        });
     } catch (e) {
       console.error(e);
     }
-  })
+  });
+}
+
+export async function getPhotoById(id) {
+  try {
+    const photo = await db.collection("routesGallery").doc(id).get();
+    return { ...photo.data(), id };
+  } catch (e) {
+    console.error(e);
+    throw new Error(e);
+  }
 }
 
 export async function getPhotosByRouteId(routeId, limit) {
-    try {
-      const photos = [];
-      const photosRef = await db
-        .collection("routesGallery")
-        .where("routeId", "==", routeId)
-        .orderBy("createdDate", "asc")
-        .limit(limit)
-        .get();
-        photosRef.forEach((doc) => {
-          photos.push({ ...doc.data(), id: doc.id });
-        });
-        return photos;
-    } catch (e) {
-      console.error(e);
-      throw new Error(e);
-    }
+  try {
+    const photos = [];
+    const photosRef = await db
+      .collection("routesGallery")
+      .where("routeId", "==", routeId)
+      .orderBy("createdDate", "asc")
+      .limit(limit)
+      .get();
+    photosRef.forEach((doc) => {
+      photos.push({ ...doc.data(), id: doc.id });
+    });
+    return photos;
+  } catch (e) {
+    console.error(e);
+    throw new Error(e);
+  }
 }
 
 export function saveRoute(route, user) {

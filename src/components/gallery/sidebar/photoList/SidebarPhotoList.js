@@ -1,52 +1,43 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import "./SidebarPhotoList.css";
 import { useDispatch, useSelector } from "react-redux";
-import { selectPhoto } from "../../../../redux/actions/galleryActions";
+import { selectPhoto } from "../../../../redux/actions/routeGalleryActions";
 
 export default function SidebarPhotoList() {
-  const [selectedImage, setSelectedImage] = useState("");
   const dispatch = useDispatch();
-  const gallery = useSelector(({ gallery }) => gallery);
+  const photos = useSelector((state) => state.routeGallery.photos);
+  const selectedPhoto = useSelector(
+    (state) => state.routeGallery.selectedPhoto
+  );
 
   useEffect(() => {
-    const hasPhotos = gallery && gallery.photos && gallery.photos.length > 0;
-    const isSelectedPhoto = gallery.selectedPhoto;
+    const hasPhotos = photos && photos.length > 0;
+    const isSelectedPhoto = selectedPhoto.id;
     if (hasPhotos && !isSelectedPhoto) {
-      selectImage(gallery.photos[0], 0);
+      selectImage(photos[0]);
     }
-  }, [gallery.photos]);
+  }, [photos]);
 
-  useEffect(() => {
-    if (gallery && gallery.photos) {
-      setSelectedImage(gallery.selectedPhoto);
-    }
-  }, [gallery.selectedPhoto]);
-
-  function selectImage(photo, index) {
-    const photoObj = { ...photo, index };
-    setSelectedImage(photoObj);
-    dispatch(selectPhoto(photoObj));
-  }
+  const selectImage = (photo) => {
+    dispatch(selectPhoto(photo));
+  };
 
   return (
     <div className="sidebarPhotoList">
-      {gallery &&
-        gallery.photos &&
-        gallery.photos.map((photo, index) => (
-          <div
-            key={photo.id}
-            onClick={() => selectImage(photo, index)}
-            className={`sidebarPhotoList__photo ${
-              selectedImage.id === photo.id &&
-              "sidebarPhotoList__photo--selected"
-            }`}
-            style={{
-              backgroundImage: `url(${photo.photoUrl})`,
-            }}
-            alt={photo.photoUrl}
-            src={photo.photoUrl}
-          />
-        ))}
+      {photos.map((photo) => (
+        <div
+          key={photo.id}
+          onClick={() => selectImage(photo)}
+          className={`sidebarPhotoList__photo ${
+            selectedPhoto.id === photo.id && "sidebarPhotoList__photo--selected"
+          }`}
+          style={{
+            backgroundImage: `url(${photo.photoUrl})`,
+          }}
+          alt={photo.photoUrl}
+          src={photo.photoUrl}
+        />
+      ))}
     </div>
   );
 }

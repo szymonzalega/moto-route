@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from "react";
 import "./RouteGalleryPage.css";
 import { useSelector, useDispatch } from "react-redux";
-import { savePhotos } from "../../redux/actions/routeActions";
-import { loadRoutePhotos, resetGalleryState } from "../../redux/actions/galleryActions";
+import { savePhotos, getPhotosByRouteId } from "../../redux/actions/routeActions";
+import { resetGalleryState } from "../../redux/actions/galleryActions";
 import PhotoPreview from "../gallery/PhotoPreview";
 import Sidebar from "../sidebar/Sidebar";
 import useSidebarState from "../sidebar/useSidebarState";
 import GallerySidebar from "../gallery/GallerySidebar";
+import { fetchPhotos, uploadPhotos } from "../../redux/actions/routeGalleryActions";
 
 export default function RoutesGalleryPage(props) {
-  const [routeId, setRouteId] = useState("");
   const dispatch = useDispatch();
-  const gallery = useSelector((state) => state.gallery);
+  const [routeId, setRouteId] = useState("");
+  const photos = useSelector(state => state.routeGallery.photos);
+  const fetchStatus = useSelector(state => state.routeGallery.status);
+  const error = useSelector(state => state.routeGallery.error);
 
   const [openSidebar, closeSidebar] = useSidebarState();
 
@@ -19,15 +22,9 @@ export default function RoutesGalleryPage(props) {
     const currentRouteId = props.match.params.id;
     setRouteId(currentRouteId);
 
-    (async () => {
-      try {
-        if (routeId) {
-          await dispatch(loadRoutePhotos(routeId));
-        }
-      } catch (e) {
-        console.error(`Loading routes failed ${e}`);
-      }
-    })();
+    if(fetchStatus === 'idle') {
+      dispatch(fetchPhotos(getPhotosByRouteId, currentRouteId, 5))
+    }
   }, [dispatch, routeId, props.match.params.id]);
 
   useEffect(() => {
@@ -37,6 +34,7 @@ export default function RoutesGalleryPage(props) {
       routeId,
     };
     openSidebar(sidebar);
+
     //onDestroy
     return () => {
       const sidebar = {
@@ -49,6 +47,16 @@ export default function RoutesGalleryPage(props) {
     };
   }, [routeId]);
 
+  let content;
+
+  if (fetchStatus === 'pending') {
+    content = <div>Loading...</div>
+  } else if (fetchStatus === 'succeeded') {
+    content = <GallerySidebar onSubmit={handleSubmit} />
+  } else if (fetchStatus === 'failed') {
+    content = <div>Error</div>
+  }
+
   async function handleSubmit(e, photoToUpload) {
     e.preventDefault();
     const form = e.currentTarget;
@@ -58,13 +66,9 @@ export default function RoutesGalleryPage(props) {
     }
 
     try {
-      // setLoading(true);
-      let savePhotosResult = await savePhotos(routeId, photoToUpload);
-      console.log(savePhotosResult);
-      await dispatch(loadRoutePhotos(routeId));
-      //   setLoading(false);
+      //todo obsluga bledow i obsluga ladowania
+      await dispatch(uploadPhotos(savePhotos, routeId, photoToUpload));
     } catch (e) {
-      //   setLoading(false);
       console.error(`Failed to add new photos, ${e} `);
     }
   }
@@ -72,10 +76,9 @@ export default function RoutesGalleryPage(props) {
   return (
     <div className="routeGalleryPage">
       <Sidebar>
-        <GallerySidebar onSubmit={handleSubmit} />
+        {content}
       </Sidebar>
-      {/* {gallery.photos && <PhotoPreview />} */}
-      <PhotoPreview />
+      {photos && <PhotoPreview />}
     </div>
   );
 }
