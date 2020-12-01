@@ -3,7 +3,7 @@ import "./SidebarPhotoList.css";
 import { useDispatch, useSelector } from "react-redux";
 import { selectPhoto } from "../../../../redux/actions/routeGalleryActions";
 
-export default function SidebarPhotoList() {
+export default function SidebarPhotoList({getMorePhotos}) {
   const dispatch = useDispatch();
   const photos = useSelector((state) => state.routeGallery.photos);
   const selectedPhoto = useSelector(
@@ -38,6 +38,7 @@ export default function SidebarPhotoList() {
           src={photo.photoUrl}
         />
       ))}
+      <button onClick={getMorePhotos}>Load more</button>
     </div>
   );
 }

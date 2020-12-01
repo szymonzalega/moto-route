@@ -17,7 +17,8 @@ export default function SidebarPhotoSection({ routeId }) {
   useEffect(() => {
     (async () => {
       if (routeId) {
-        setGalleryPreview(await getPhotosByRouteId(routeId, 4));
+        const {photos} = await getPhotosByRouteId(routeId, 4);
+        setGalleryPreview(photos);
       }
     })();
   }, [routeId]);

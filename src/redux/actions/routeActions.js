@@ -102,7 +102,9 @@ export function savePhotos(routeId, photosToSave) {
 
       Promise.all(getUploadedPhotosData)
         .then((uploadedPhotoData) => {
-          resolve(uploadedPhotoData);
+          resolve(
+            uploadedPhotoData.map(({ photo, id }) => ({ ...photo.data(), id }))
+          );
         })
         .catch((e) => {
           throw new Error(e);
@@ -116,7 +118,7 @@ export function savePhotos(routeId, photosToSave) {
 export async function getPhotoById(id) {
   try {
     const photo = await db.collection("routesGallery").doc(id).get();
-    return { ...photo.data(), id };
+    return { photo, id };
   } catch (e) {
     console.error(e);
     throw new Error(e);
@@ -133,12 +135,35 @@ export async function getPhotosByRouteId(routeId, limit) {
       .limit(limit)
       .get();
 
+    photosRef.forEach((doc) => {
+      photos.push({ ...doc.data(), id: doc.id });
+    });
+
     const lastVisible = photosRef.docs[photosRef.docs.length - 1];
-    // const lastVisible = {a:"a"}
+
+    return { photos, lastVisible };
+  } catch (e) {
+    console.error(e);
+    throw new Error(e);
+  }
+}
+
+export async function getMorePhotosByRouteId(routeId, limit, lastVisible2) {
+  try {
+    const photos = [];
+    const photosRef = await db
+      .collection("routesGallery")
+      .where("routeId", "==", routeId)
+      .orderBy("createdDate", "asc")
+      .startAfter(lastVisible2)
+      .limit(limit)
+      .get();
 
     photosRef.forEach((doc) => {
       photos.push({ ...doc.data(), id: doc.id });
     });
+
+    const lastVisible = photosRef.docs[photosRef.docs.length - 1];
 
     return { photos, lastVisible };
   } catch (e) {
