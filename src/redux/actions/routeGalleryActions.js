@@ -27,10 +27,23 @@ export const setSelectedPhoto = (photo) => {
   };
 };
 
-export const uploadNewPhotos = (photos) => {
+export const uploadNewPhotosStarted = () => {
   return {
-    type: types.ROUTE_GALLERY_UPLOAD_NEW_PHOTOS,
+    type: types.ROUTE_GALLERY__UPLOAD_NEW_PHOTOS_STARTED
+  };
+};
+
+export const uploadNewPhotosSucceeded = (photos) => {
+  return {
+    type: types.ROUTE_GALLERY__UPLOAD_NEW_PHOTOS_SUCCEEDED,
     photos,
+  };
+};
+
+export const uploadNewPhotosFailed = (error) => {
+  return {
+    type: types.ROUTE_GALLERY__UPLOAD_NEW_PHOTOS_FAILED,
+    error,
   };
 };
 
@@ -92,10 +105,12 @@ export const selectPhoto = (selectedPhoto, direction) => (
 export const uploadPhotos = (funcToUploadPhotos, ...args) => async (
   dispatch
 ) => {
+    dispatch(uploadNewPhotosStarted())
   try {
     const result = await funcToUploadPhotos(...args);
-    dispatch(uploadNewPhotos(result))
+    dispatch(uploadNewPhotosSucceeded(result));
   } catch (err) {
     console.error(err);
+    dispatch(uploadNewPhotosFailed(err.toString()));
   }
 };

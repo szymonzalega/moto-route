@@ -2,10 +2,14 @@ import React, { useState, useRef } from "react";
 import "./SidebarUploadPhoto.css";
 import { Form, Button } from "react-bootstrap";
 import InsertDriveFileIcon from "@material-ui/icons/InsertDriveFile";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
+import { useSelector } from "react-redux";
 
 export default function SidebarUploadPhoto({ onSubmit }) {
   const [photoToUpload, setPhotoToUpload] = useState([]);
+  const uploadStatus = useSelector((state) => state.routeGallery.uploadStatus);
+  const error = useSelector((state) => state.routeGallery.error);
   const photosRef = useRef();
 
   const onImageChange = (e) => {
@@ -14,24 +18,41 @@ export default function SidebarUploadPhoto({ onSubmit }) {
   };
 
   const isUploadedPhoto = photoToUpload.length > 0;
+  const isUploadSectionShowing =
+    photoToUpload.length > 0 ||
+    uploadStatus === "pending" ||
+    uploadStatus === "failed";
 
   const removePhotoToUpload = (index) => {
     const tempPhotoArr = [...photoToUpload];
     tempPhotoArr.splice(index, 1);
     setPhotoToUpload(tempPhotoArr);
-  }
+  };
 
   const onSubmitHandler = (e) => {
     onSubmit(e, photoToUpload);
     setPhotoToUpload([]);
+  };
+
+  let uploadSectionInfoContent;
+
+  if (uploadStatus === "pending") {
+    uploadSectionInfoContent = (
+      <div className="sidebarUploadPhoto__uploadedInfoSection">
+        <CircularProgress />
+      </div>
+    );
+  } else if (uploadStatus === "failed") {
+    uploadSectionInfoContent = (
+      <div className="sidebarUploadPhoto__uploadedInfoSection sidebarUploadPhoto__uploadedInfoSection--error">
+        Error while uploading photos
+      </div>
+    );
   }
 
   return (
     <>
-      <Form
-        noValidate
-        onSubmit={(e) => onSubmitHandler(e)}
-      >
+      <Form noValidate onSubmit={(e) => onSubmitHandler(e)}>
         <Form.Group id="photos">
           <label
             htmlFor="file-upload"
@@ -47,23 +68,28 @@ export default function SidebarUploadPhoto({ onSubmit }) {
             type="file"
             multiple
             ref={photosRef}
+            disabled={uploadStatus === "pending"}
             onChange={onImageChange}
           />
         </Form.Group>
 
-        {isUploadedPhoto && (
+        {isUploadSectionShowing && (
           <>
+            {uploadSectionInfoContent}
             <div className="sidebarUploadPhoto__uploadedPhotoRow">
               {photoToUpload.map((file, index) => (
                 <div
                   key={file.name}
                   className="sidebarUploadPhoto__uploadedPhoto"
-                  style={{ backgroundImage: `url(${URL.createObjectURL(file)})` }}
+                  style={{
+                    backgroundImage: `url(${URL.createObjectURL(file)})`,
+                  }}
                 >
-                  <div className="uploadedPhoto__remove" onClick={() => removePhotoToUpload(index)}>
-                    <HighlightOffIcon
-                      style={{ fontSize: 23 }}
-                    />
+                  <div
+                    className="uploadedPhoto__remove"
+                    onClick={() => removePhotoToUpload(index)}
+                  >
+                    <HighlightOffIcon style={{ fontSize: 23 }} />
                   </div>
                 </div>
               ))}

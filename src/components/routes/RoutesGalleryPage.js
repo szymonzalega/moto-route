@@ -8,6 +8,8 @@ import Sidebar from "../sidebar/Sidebar";
 import useSidebarState from "../sidebar/useSidebarState";
 import GallerySidebar from "../gallery/GallerySidebar";
 import { fetchPhotos, uploadPhotos } from "../../redux/actions/routeGalleryActions";
+import CircularProgress from "@material-ui/core/CircularProgress";
+
 
 export default function RoutesGalleryPage(props) {
   const dispatch = useDispatch();
@@ -50,11 +52,11 @@ export default function RoutesGalleryPage(props) {
   let content;
 
   if (fetchStatus === 'pending') {
-    content = <div>Loading...</div>
+    content = <div className="routeGalleryPage__infoSection"><CircularProgress /></div>
   } else if (fetchStatus === 'succeeded') {
     content = <GallerySidebar onSubmit={handleSubmit} />
   } else if (fetchStatus === 'failed') {
-    content = <div>Error</div>
+    content = <div className="routeGalleryPage__infoSection routeGalleryPage__infoSection--error">Error while showing photos</div>
   }
 
   async function handleSubmit(e, photoToUpload) {

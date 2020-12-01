@@ -5,6 +5,7 @@ export default {
     routeGallery: {
         photos: [],
         status: 'idle',
+        uploadStatus: 'idle',
         error: null,
         selectedPhoto: {}
     }

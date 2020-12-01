@@ -30,6 +30,21 @@ input[type="file"] {
   margin-bottom: 1rem;
 }
 
+.sidebarUploadPhoto__uploadedInfoSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sidebarUploadPhoto__uploadedInfoSection--error {
+  margin: 1em 0;
+  color: red;
+}
+
+.sidebarUploadPhoto__uploadedInfoSection > .MuiCircularProgress-colorPrimary {
+  color: #2e81f4;
+}
+
 .sidebarUploadPhoto__uploadedPhoto {
   height: 110px;
   background-repeat: no-repeat;

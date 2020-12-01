@@ -87,6 +87,8 @@ export function savePhotos(routeId, photosToSave) {
             .add({ routeId, photoUrl, createdDate: new Date() })
         );
       }
+      
+      //firebase don't return saved value, so i have to fetch again
       await Promise.all(savingPhotosPromise)
         .then((result) => {
           for (let uploadedPhoto of result) {

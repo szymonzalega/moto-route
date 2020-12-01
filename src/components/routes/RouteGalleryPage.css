@@ -1,8 +1,22 @@
 .routeGalleryPage {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
+}
+
+.routeGalleryPage__infoSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.routeGalleryPage__infoSection--error {
+  color: red;
+}
+
+.routeGalleryPage__infoSection > .MuiCircularProgress-colorPrimary {
+  color: #2e81f4;
 }
 
 .routeGalleryPage .sidebar {
-    margin: 0;
+  margin: 0;
 }

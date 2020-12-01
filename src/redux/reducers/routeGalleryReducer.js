@@ -14,8 +14,16 @@ export default function routeGalleryReducer(
       return { ...state, status: "failed", error: action.error };
     case types.ROUTE_GALLERY__SELECT_PHOTO:
       return { ...state, selectedPhoto: action.photo };
-    case types.ROUTE_GALLERY_UPLOAD_NEW_PHOTOS:
-      return { ...state, photos: [...action.photos, ...state.photos] };
+    case types.ROUTE_GALLERY__UPLOAD_NEW_PHOTOS_STARTED:
+      return { ...state, uploadStatus: "pending" };
+    case types.ROUTE_GALLERY__UPLOAD_NEW_PHOTOS_SUCCEEDED:
+      return {
+        ...state,
+        uploadStatus: "succeeded",
+        photos: [...action.photos, ...state.photos],
+      };
+    case types.ROUTE_GALLERY__UPLOAD_NEW_PHOTOS_FAILED:
+      return { ...state, uploadStatus: "failed", error: action.error };
     default:
       return state;
   }
