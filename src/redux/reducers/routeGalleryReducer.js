@@ -9,7 +9,7 @@ export default function routeGalleryReducer(
     case types.ROUTE_GALLERY__FETCH_STARTED:
       return { ...state, status: "pending" };
     case types.ROUTE_GALLERY__FETCH_SUCCEEDED:
-      return { ...state, status: "succeeded", photos: action.photos };
+      return { ...state, status: "succeeded", photos: action.result.photos, lastVisible: action.result.lastVisible };
     case types.ROUTE_GALLERY__FETCH_FAILED:
       return { ...state, status: "failed", error: action.error };
     case types.ROUTE_GALLERY__SELECT_PHOTO:

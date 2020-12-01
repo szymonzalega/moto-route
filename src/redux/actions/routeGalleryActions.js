@@ -6,10 +6,10 @@ export const getPhotosStarted = () => {
   };
 };
 
-export const getPhotosSucceeded = (photos) => {
+export const getPhotosSucceeded = (result) => {
   return {
     type: types.ROUTE_GALLERY__FETCH_SUCCEEDED,
-    photos,
+    result,
   };
 };
 
@@ -50,8 +50,8 @@ export const uploadNewPhotosFailed = (error) => {
 export const fetchPhotos = (funcToFetchPhotos, ...args) => async (dispatch) => {
   dispatch(getPhotosStarted());
   try {
-    const photos = await funcToFetchPhotos(...args);
-    dispatch(getPhotosSucceeded(photos));
+    const {photos, lastVisible} = await funcToFetchPhotos(...args);
+    dispatch(getPhotosSucceeded({photos, lastVisible}));
   } catch (err) {
     console.error(err);
     dispatch(getPhotosFailed(err.toString()));

@@ -87,7 +87,7 @@ export function savePhotos(routeId, photosToSave) {
             .add({ routeId, photoUrl, createdDate: new Date() })
         );
       }
-      
+
       //firebase don't return saved value, so i have to fetch again
       await Promise.all(savingPhotosPromise)
         .then((result) => {
@@ -132,10 +132,15 @@ export async function getPhotosByRouteId(routeId, limit) {
       .orderBy("createdDate", "asc")
       .limit(limit)
       .get();
+
+    const lastVisible = photosRef.docs[photosRef.docs.length - 1];
+    // const lastVisible = {a:"a"}
+
     photosRef.forEach((doc) => {
       photos.push({ ...doc.data(), id: doc.id });
     });
-    return photos;
+
+    return { photos, lastVisible };
   } catch (e) {
     console.error(e);
     throw new Error(e);
