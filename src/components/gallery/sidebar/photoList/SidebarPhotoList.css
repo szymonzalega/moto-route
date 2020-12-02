@@ -7,6 +7,21 @@
   gap: 1rem;
 }
 
+.sidebarPhotoList__infoSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2em;
+}
+
+.sidebarPhotoList__infoSection > .MuiCircularProgress-colorPrimary {
+  color: #2e81f4;
+}
+
+.sidebarPhotoList__infoSection--error {
+  color: red;
+}
+
 .sidebarPhotoList__photo {
   border: 3px solid rgba(46,129,244,0);
   margin-top: 10px;
@@ -22,4 +37,8 @@
 .sidebarPhotoList__photo--selected {
   transform: scale(1.04);
   border-color: rgba(46,129,244,1);
+}
+
+.sidebarPhotoList__loadMoreButton {
+  margin: 2em 0;
 }

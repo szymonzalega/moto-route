@@ -1,16 +1,13 @@
 import { combineReducers } from 'redux';
 import routes from './routeReducer';
 import sidebar from './sidebarReducer';
-import gallery from './galleryReducer';
-import routeGallery from './routeGalleryReducer';
+import routeGallery from './galleryReducer';
 import * as types from "../actions/actionTypes";
 
 const appReducer = combineReducers({
     routes,
     sidebar,
-    gallery,
     routeGallery
-    // apiCallsInProgress
 })
 
 const rootReducer = (state, action) => {

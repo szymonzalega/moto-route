@@ -2,13 +2,11 @@ import React, { useState, useEffect } from "react";
 import "./RouteGalleryPage.css";
 import { useSelector, useDispatch } from "react-redux";
 import { savePhotos, getPhotosByRouteId, getMorePhotosByRouteId } from "../../redux/actions/routeActions";
-import { resetGalleryState } from "../../redux/actions/galleryActions";
 import PhotoPreview from "../gallery/PhotoPreview";
 import Sidebar from "../sidebar/Sidebar";
 import useSidebarState from "../sidebar/useSidebarState";
-import GallerySidebar from "../gallery/GallerySidebar";
-import { fetchPhotos, uploadPhotos } from "../../redux/actions/routeGalleryActions";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import GallerySidebar from "../gallery/sidebar/GallerySidebar";
+import { fetchPhotos, uploadPhotos, resetGalleryState } from "../../redux/actions/galleryActions";
 
 
 export default function RoutesGalleryPage(props) {
@@ -22,15 +20,14 @@ export default function RoutesGalleryPage(props) {
   const [openSidebar, closeSidebar] = useSidebarState();
 
   useEffect(() => {
-    const xx = async () => {
+    (async () => {
       const currentRouteId = props.match.params.id;
       setRouteId(currentRouteId);
   
       if(fetchStatus === 'idle') {
         setLastVisible(await dispatch(fetchPhotos(getPhotosByRouteId, currentRouteId, 5)));
       }
-    }
-    xx();
+    })();
     
   }, [dispatch, routeId, props.match.params.id]);
 
@@ -55,8 +52,7 @@ export default function RoutesGalleryPage(props) {
   }, [routeId]);
 
   const getMorePhotos = async () => {
-    const x = await dispatch(fetchPhotos(getMorePhotosByRouteId, routeId, 5, lastVisible));
-    setLastVisible(x);
+    setLastVisible(await dispatch(fetchPhotos(getMorePhotosByRouteId, routeId, 5, lastVisible)));
   }
 
   const handleSubmit = async (e, photoToUpload) => {
@@ -75,20 +71,10 @@ export default function RoutesGalleryPage(props) {
     }
   }
 
-  let content;
-
-  if (fetchStatus === 'pending') {
-    content = <div className="routeGalleryPage__infoSection"><CircularProgress /></div>
-  } else if (fetchStatus === 'succeeded') {
-    content = <GallerySidebar onSubmit={handleSubmit} getMorePhotos={getMorePhotos}/>
-  } else if (fetchStatus === 'failed') {
-    content = <div className="routeGalleryPage__infoSection routeGalleryPage__infoSection--error">Error while showing photos</div>
-  }
-
   return (
     <div className="routeGalleryPage">
       <Sidebar>
-        {content}
+        <GallerySidebar onSubmit={handleSubmit} getMorePhotos={getMorePhotos} isMorePhotosAvailable={lastVisible}/>
       </Sidebar>
       {photos && <PhotoPreview />}
     </div>

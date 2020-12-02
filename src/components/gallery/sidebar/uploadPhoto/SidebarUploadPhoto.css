@@ -2,6 +2,22 @@ input[type="file"] {
   display: none;
 }
 
+.sidebarUploadPhoto {
+  position: relative;
+  margin-bottom: 30px;
+  padding-bottom: 30px;
+}
+
+.sidebarUploadPhoto:after {
+  content: "";
+  position: absolute;
+  left: -20px;
+  bottom: 0;
+  height: 1px;
+  width: calc(100% + 40px);
+  border-bottom: 1px solid #e7e7e7;
+}
+
 .sidebarUploadPhoto__uploadButton {
   display: flex;
   flex-direction: row;

@@ -139,23 +139,23 @@ export async function getPhotosByRouteId(routeId, limit) {
       photos.push({ ...doc.data(), id: doc.id });
     });
 
-    const lastVisible = photosRef.docs[photosRef.docs.length - 1];
+    const newLastVisible = photosRef.docs[photosRef.docs.length - 1];
 
-    return { photos, lastVisible };
+    return { photos, newLastVisible };
   } catch (e) {
     console.error(e);
     throw new Error(e);
   }
 }
 
-export async function getMorePhotosByRouteId(routeId, limit, lastVisible2) {
+export async function getMorePhotosByRouteId(routeId, limit, lastPhoto) {
   try {
     const photos = [];
     const photosRef = await db
       .collection("routesGallery")
       .where("routeId", "==", routeId)
       .orderBy("createdDate", "asc")
-      .startAfter(lastVisible2)
+      .startAfter(lastPhoto)
       .limit(limit)
       .get();
 
@@ -163,9 +163,10 @@ export async function getMorePhotosByRouteId(routeId, limit, lastVisible2) {
       photos.push({ ...doc.data(), id: doc.id });
     });
 
-    const lastVisible = photosRef.docs[photosRef.docs.length - 1];
+    const lastPhotoRef = photosRef.docs[photosRef.docs.length - 1];
+    const newLastVisible = photos.length < limit ? false : lastPhotoRef
 
-    return { photos, lastVisible };
+    return { photos, newLastVisible };
   } catch (e) {
     console.error(e);
     throw new Error(e);

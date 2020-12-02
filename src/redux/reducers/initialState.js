@@ -4,7 +4,6 @@ export default {
     gallery: {},
     routeGallery: {
         photos: [],
-        lastVisible: {},
         status: 'idle',
         uploadStatus: 'idle',
         error: null,

@@ -51,7 +51,7 @@ export default function SidebarUploadPhoto({ onSubmit }) {
   }
 
   return (
-    <>
+    <div className="sidebarUploadPhoto">
       <Form noValidate onSubmit={(e) => onSubmitHandler(e)}>
         <Form.Group id="photos">
           <label
@@ -101,6 +101,6 @@ export default function SidebarUploadPhoto({ onSubmit }) {
           </>
         )}
       </Form>
-    </>
+    </div>
   );
 }
