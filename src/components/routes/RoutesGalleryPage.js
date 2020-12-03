@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./RouteGalleryPage.css";
+import "./RoutesGalleryPage.css";
 import { useSelector, useDispatch } from "react-redux";
 import { savePhotos, getPhotosByRouteId, getMorePhotosByRouteId } from "../../redux/actions/routeActions";
 import PhotoPreview from "../gallery/PhotoPreview";
@@ -25,7 +25,7 @@ export default function RoutesGalleryPage(props) {
       setRouteId(currentRouteId);
   
       if(fetchStatus === 'idle') {
-        setLastVisible(await dispatch(fetchPhotos(getPhotosByRouteId, currentRouteId, 5)));
+        setLastVisible(await dispatch(fetchPhotos(getPhotosByRouteId, currentRouteId, 6)));
       }
     })();
     
@@ -52,7 +52,7 @@ export default function RoutesGalleryPage(props) {
   }, [routeId]);
 
   const getMorePhotos = async () => {
-    setLastVisible(await dispatch(fetchPhotos(getMorePhotosByRouteId, routeId, 5, lastVisible)));
+    setLastVisible(await dispatch(fetchPhotos(getMorePhotosByRouteId, routeId, 6, lastVisible)));
   }
 
   const handleSubmit = async (e, photoToUpload) => {
