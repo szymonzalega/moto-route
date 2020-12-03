@@ -1,12 +1,12 @@
 import React from "react";
 import "./RouteElement.css";
-import RouteElementNav from "./RouteElementNav";
-import RouteElementInfo from "./RouteElementInfo";
-import RouteElementMap from "./RouteElementMap";
-import useSidebarState from "../sidebar/useSidebarState";
+import RouteElementNav from "./nav/RouteElementNav";
+import RouteElementInfo from "./info/RouteElementInfo";
+import RouteElementMap from "./map/RouteElementMap";
+import useSidebarState from "../../../sidebar/useSidebarState";
 
 export default function RouteElement({ route }) {
-  const [openSidebar] = useSidebarState();
+  const { openSidebar } = useSidebarState();
 
   const showRouteDetails = (routeId) => {
     const sidebar = {

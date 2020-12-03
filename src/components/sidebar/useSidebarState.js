@@ -12,5 +12,5 @@ export default function useSidebarState() {
     dispatch(sidebar.closeSidebar(state));
   }
 
-  return [openSidebar, closeSidebar];
+  return { openSidebar, closeSidebar };
 }

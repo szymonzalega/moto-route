@@ -4,7 +4,7 @@ import "./RoutePage.css";
 import { useSelector, useDispatch } from "react-redux";
 import * as routeActions from "../../redux/actions/routeActions";
 import { useAuth } from "../../contexts/AuthContext";
-import RouteList from "./RouteList";
+import RouteList from "./list/RouteList";
 import { Redirect } from "react-router-dom";
 import { routeService } from "../../service/routeService";
 import { useHistory } from "react-router-dom";
@@ -13,15 +13,13 @@ import { openSidebar } from "../../redux/actions/sidebarActions";
 import useSidebarState from "../sidebar/useSidebarState";
 import RouteSidebar from "./sidebar/RouteSidebar";
 
-
-
 export default function RoutePage() {
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
   const { currentUser } = useAuth();
   const [redirectToAddNewRoute, setRedirectToAddNewRoute] = useState(false);
   const history = useHistory();
-  const [openSidebar] = useSidebarState();
+  const { openSidebar } = useSidebarState();
 
   useEffect(() => {
     (async () => {
@@ -33,16 +31,16 @@ export default function RoutePage() {
         console.error(`Loading routes failed ${e}`);
       }
     })();
-  }, [currentUser, dispatch, state])
+  }, [currentUser, dispatch, state]);
 
   const createNewRoute = () => {
     const sidebar = {
       isOpen: true,
       mode: "create",
-      routeId: null
-    }
+      routeId: null,
+    };
     openSidebar(sidebar);
-  }
+  };
 
   function handleDeleteRoute(route) {
     console.log(`ROUTE id: ${route.id} deleted`);
@@ -66,11 +64,8 @@ export default function RoutePage() {
             >
               Add new route
             </button> */}
-            
-            <button
-              className="btn btn-primary"
-              onClick={createNewRoute}
-            >
+
+            <button className="btn btn-primary" onClick={createNewRoute}>
               Add new route
             </button>
           </div>

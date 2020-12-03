@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import SidebarNav from "../sidebar/nav/SidebarNav";
 import SidebarDetailsRow from "../sidebar/detailsRow/SidebarDetailsRow";
 import SidebarPhotoSection from "../sidebar/photoSection/SidebarPhotoSection";
-import RouteElementMap from "../RouteElementMap";
+import RouteElementMap from "../list/routeElement/map/RouteElementMap";
 import SidebarAddEditMode from "../sidebar/addEditMode/SidebarAddEditMode";
 
 export default function RouteSidebar() {

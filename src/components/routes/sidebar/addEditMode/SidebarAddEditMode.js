@@ -12,7 +12,7 @@ export default function SidebarAddEditMode({ routeId }) {
   const [loading, setLoading] = useState(false);
   const [route, setRoute] = useState({});
   const { currentUser } = useAuth();
-  const [openSidebar] = useSidebarState();
+  const { openSidebar } = useSidebarState();
   const routes = useSelector((state) => state.routes);
   const dispatch = useDispatch();
 
@@ -30,7 +30,6 @@ export default function SidebarAddEditMode({ routeId }) {
       setRoute(getRouteDetails(routeId));
     } else {
       setRoute({});
-
     }
   }, [routes, routeId]);
 
@@ -164,7 +163,7 @@ export default function SidebarAddEditMode({ routeId }) {
           </Form.Group>
 
           <Button className="w-100" type="submit">
-            {route.id ? 'Save route' : 'Create new route'}
+            {route.id ? "Save route" : "Create new route"}
           </Button>
         </Form>
       )}

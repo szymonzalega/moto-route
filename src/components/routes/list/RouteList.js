@@ -1,6 +1,6 @@
 import React from "react";
 import "./RouteList.css";
-import RouteElement from "./RouteElement";
+import RouteElement from "./routeElement/RouteElement";
 
 export default function RouteList({ routes, onDeleteClick }) {
   return (
