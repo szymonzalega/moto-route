@@ -6,10 +6,8 @@ import * as routeActions from "../../redux/actions/routeActions";
 import { useAuth } from "../../contexts/AuthContext";
 import RouteList from "./list/RouteList";
 import { Redirect } from "react-router-dom";
-import { routeService } from "../../service/routeService";
 import { useHistory } from "react-router-dom";
 import Sidebar from "../sidebar/Sidebar";
-import { openSidebar } from "../../redux/actions/sidebarActions";
 import useSidebarState from "../sidebar/useSidebarState";
 import RouteSidebar from "./sidebar/RouteSidebar";
 

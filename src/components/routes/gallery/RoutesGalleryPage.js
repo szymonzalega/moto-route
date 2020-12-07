@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   savePhotos,
   getPhotosByRouteId,
-  getMorePhotosByRouteId,
 } from "../../../redux/actions/routeActions";
 import PhotoPreview from "../../gallery/PhotoPreview";
 import Sidebar from "../../sidebar/Sidebar";
@@ -61,9 +60,7 @@ export default function RoutesGalleryPage(props) {
 
   const getMorePhotos = async () => {
     setLastVisible(
-      await dispatch(
-        fetchPhotos(getMorePhotosByRouteId, routeId, 6, lastVisible)
-      )
+      await dispatch(fetchPhotos(getPhotosByRouteId, routeId, 6, lastVisible))
     );
   };
 
