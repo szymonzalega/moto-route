@@ -1,5 +1,9 @@
 export default {
-    routes: [],
+    routes: {
+        routes: [],
+        status: 'idle',
+        error: null
+    },
     sidebar: {},
     gallery: {},
     routeGallery: {

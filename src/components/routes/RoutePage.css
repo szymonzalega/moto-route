@@ -6,11 +6,22 @@
 }
 .routePage__buttonRow {
     margin: 20px 0;
+    justify-content: flex-start;
+    width: 100%;
 }
 .routePage__list {
     display: flex;
     flex-direction: column;
+    align-items: center;
     width: 700px;
+}
+
+.routePage__list > .MuiCircularProgress-colorPrimary {
+    color: #2e81f4;
+  }
+
+.routePage__message--error {
+    color: red;
 }
 
 .routePage__sidebar {

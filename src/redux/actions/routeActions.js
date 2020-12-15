@@ -7,12 +7,26 @@ import {
   savePhotosInRoute,
 } from "../../services/routeAPI";
 
-export function loadUserRoutesSuccess(routes) {
+export const getRoutesStarted = () => {
   return {
-    type: types.LOAD_ROUTES_SUCCESS,
+    type: types.ROUTE__FETCH_STARTED,
+  };
+};
+
+export const getRoutesSucceeded = (routes) => {
+  return {
+    type: types.ROUTE__FETCH_SUCCEEDED,
     routes,
   };
-}
+};
+
+export const getRoutesFailed = (error) => {
+  return {
+    type: types.ROUTE__FETCH_FAILED,
+    error,
+  };
+};
+
 
 export function createRouteSuccess(route) {
   return {
@@ -35,17 +49,16 @@ export function deleteRouteSuccess(route) {
   };
 }
 
-export function loadUserRoutes(userId) {
-  return async function (dispatch) {
-    try {
-      const routes = await getRoutesByUserId(userId);
-      dispatch(loadUserRoutesSuccess(routes));
-    } catch (e) {
-      console.error(e);
-      throw e;
-    }
-  };
-}
+export const fetchRoutes = (userId) => async (dispatch) => {
+  dispatch(getRoutesStarted());
+  try {
+    const routes = await getRoutesByUserId(userId);
+    dispatch(getRoutesSucceeded(routes));
+  } catch (err) {
+    console.error(err);
+    dispatch(getRoutesFailed(err));
+  }
+};
 
 export async function savePhotos(routeId, photosToSave) {
   try {
