@@ -8,7 +8,7 @@ import SidebarAddEditMode from "../sidebar/addEditMode/SidebarAddEditMode";
 
 export default function RouteSidebar() {
   const [route, setRoute] = useState({});
-  const routes = useSelector((state) => state.routes);
+  const routes = useSelector((state) => state.routes.routes);
   const sidebar = useSelector((state) => state.sidebar);
 
   useEffect(() => {

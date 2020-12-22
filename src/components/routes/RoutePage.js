@@ -15,7 +15,7 @@ export default function RoutePage() {
   const { currentUser } = useAuth();
   const { openSidebar } = useSidebarState();
 
-  const fetchStatus = useSelector((state) => state.routes.status);
+  const fetchStatus = useSelector((state) => state.routes.fetchStatus);
 
   useEffect(() => {
     if (fetchStatus === "idle") {

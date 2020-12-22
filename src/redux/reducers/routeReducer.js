@@ -4,23 +4,48 @@ import initialState from "./initialState";
 export default function routeReducers(state = initialState.routes, action) {
   switch (action.type) {
     case types.ROUTE__FETCH_STARTED:
-      return { ...state, status: "pending" };
+      return { ...state, fetchStatus: "pending" };
     case types.ROUTE__FETCH_SUCCEEDED:
       return {
         ...state,
         routes: [...state.routes, ...action.routes],
-        status: "succeeded",
+        fetchStatus: "succeeded",
       };
     case types.ROUTE__FETCH_FAILED:
-      return { ...state, error: action.error, status: "failed" };
-    case types.CREATE_ROUTE_SUCCESS:
-      return [...state, { ...action.route }];
-    case types.UPDATE_ROUTE_SUCCESS:
-      return state.map((route) =>
-        route.id === action.route.id ? action.route : route
-      );
-    case types.DELETE_ROUTE_SUCCESS:
-      return state.filter((route) => route.id !== action.route.id);
+      return { ...state, error: action.error, fetchStatus: "failed" };
+    case types.ROUTE__SAVE_STARTED:
+      return { ...state, saveStatus: "pending" };
+    case types.ROUTE__SAVE_CREATE_SUCCEEDED:
+      return {
+        ...state,
+        routes: [...state.routes, action.route],
+        saveStatus: "succeeded",
+      };
+    case types.ROUTE__SAVE_UPDATE_SUCCEEDED:
+      return {
+        ...state,
+        routes: state.routes.map((route) =>
+          route.id === action.route.id ? action.route : route
+        ),
+        saveStatus: "succeeded",
+      };
+    case types.ROUTE__SAVE_FAILED:
+      return { ...state, error: action.error, saveStatus: "failed" };
+    case types.ROUTE__SAVE_ENDED:
+      return { ...state, saveStatus: "idle" };
+    case types.ROUTE__REMOVE_STARTED:
+      return { ...state, removeStatus: "pending" };
+    case types.ROUTE__REMOVE_SUCCEEDED:
+      let x = {
+        ...state,
+        routes: state.routes.filter((route) => route.id !== action.route.id),
+        removeStatus: "succeeded",
+      };
+      return x;
+    case types.ROUTE__REMOVE_FAILED:
+      return { ...state, error: action.error, removeStatus: "failed" };
+    case types.ROUTE__REMOVE_ENDED:
+      return { ...state, removeStatus: "idle" };
     default:
       return state;
   }

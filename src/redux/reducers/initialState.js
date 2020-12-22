@@ -1,17 +1,19 @@
 export default {
-    routes: {
-        routes: [],
-        status: 'idle',
-        error: null
-    },
-    sidebar: {},
-    gallery: {},
-    routeGallery: {
-        photos: [],
-        status: 'idle',
-        uploadStatus: 'idle',
-        error: null,
-        selectedPhoto: {}
-    }
-    // apiCallsInProgress: 0
-}
+  routes: {
+    routes: [],
+    fetchStatus: "idle",
+    saveStatus: "idle",
+    removeStatus: "idle",
+    error: null,
+  },
+  sidebar: {},
+  gallery: {},
+  routeGallery: {
+    photos: [],
+    status: "idle",
+    uploadStatus: "idle",
+    error: null,
+    selectedPhoto: {},
+  },
+  // apiCallsInProgress: 0
+};

@@ -5,6 +5,9 @@ import {
   getRoutePhotosByRouteId,
   removeRouteById,
   savePhotosInRoute,
+  createRoute,
+  updateRoute,
+  saveRouteByUser,
 } from "../../services/routeAPI";
 
 export const getRoutesStarted = () => {
@@ -27,6 +30,38 @@ export const getRoutesFailed = (error) => {
   };
 };
 
+export const saveRouteStarted = () => {
+  return {
+    type: types.ROUTE__SAVE_STARTED,
+  };
+};
+
+export const createRouteSucceeded = (route) => {
+  return {
+    type: types.ROUTE__SAVE_CREATE_SUCCEEDED,
+    route,
+  };
+};
+
+export const updateRouteSucceeded = (route) => {
+  return {
+    type: types.ROUTE__SAVE_UPDATE_SUCCEEDED,
+    route,
+  };
+};
+
+export const saveRouteFailed = (error) => {
+  return {
+    type: types.ROUTE__SAVE_FAILED,
+    error,
+  };
+};
+
+export const saveRouteEnded = () => {
+  return {
+    type: types.ROUTE__SAVE_ENDED,
+  };
+};
 
 export function createRouteSuccess(route) {
   return {
@@ -35,17 +70,29 @@ export function createRouteSuccess(route) {
   };
 }
 
-export function updateRouteSuccess(route) {
+export function deleteRouteStarted() {
   return {
-    type: types.UPDATE_ROUTE_SUCCESS,
+    type: types.ROUTE__REMOVE_STARTED,
+  };
+}
+
+export function deleteRouteSucceeded(route) {
+  return {
+    type: types.ROUTE__REMOVE_SUCCEEDED,
     route,
   };
 }
 
-export function deleteRouteSuccess(route) {
+export function deleteRouteFailed(error) {
   return {
-    type: types.DELETE_ROUTE_SUCCESS,
-    route,
+    type: types.ROUTE__REMOVE_FAILED,
+    error,
+  };
+}
+
+export function deleteRouteEnded() {
+  return {
+    type: types.ROUTE__REMOVE_ENDED,
   };
 }
 
@@ -57,6 +104,38 @@ export const fetchRoutes = (userId) => async (dispatch) => {
   } catch (err) {
     console.error(err);
     dispatch(getRoutesFailed(err));
+  }
+};
+
+export const saveRoute = (user, route) => async (dispatch) => {
+  dispatch(saveRouteStarted());
+  try {
+    if (route.id !== undefined) {
+      await updateRoute(route);
+      dispatch(updateRouteSucceeded(route));
+    } else {
+      const savedRoute = await createRoute(user, route);
+      console.log(savedRoute);
+      dispatch(createRouteSucceeded(savedRoute));
+    }
+  } catch (err) {
+    console.error(err);
+    dispatch(saveRouteFailed(err));
+  } finally {
+    dispatch(saveRouteEnded());
+  }
+};
+
+export const deleteRoute = (route) => async (dispatch) => {
+  dispatch(deleteRouteStarted());
+  try {
+    await removeRouteById(route.id);
+    dispatch(deleteRouteSucceeded(route));
+  } catch (err) {
+    console.error(err);
+    dispatch(deleteRouteFailed(err));
+  } finally {
+    dispatch(deleteRouteEnded());
   }
 };
 
@@ -83,40 +162,4 @@ export async function getPhotosByRouteId(routeId, limit, lastPhoto) {
     console.error(e);
     throw new Error(e);
   }
-}
-
-export function saveRoute(route, user) {
-  return async function (dispatch) {
-    try {
-      if (route.id !== undefined) {
-        await db.collection("routes").doc(route.id).set(route);
-        dispatch(updateRouteSuccess(route));
-        return route.id;
-      } else {
-        route = { ...route, userId: user.uid, userEmail: user.email };
-
-        // if (route.photos.length > 0)
-        //   route.photos = await savePhotos(route.photos);
-
-        const routesRef = await db.collection("routes").add(route);
-        dispatch(createRouteSuccess({ ...route, id: routesRef.id }));
-        return routesRef.id;
-      }
-    } catch (e) {
-      console.error(e);
-      throw e;
-    }
-  };
-}
-
-export function deleteRoute(route) {
-  return async function (dispatch) {
-    try {
-      removeRouteById(route.id);
-      dispatch(deleteRouteSuccess(route));
-    } catch (e) {
-      console.error(e);
-      throw new Error(e);
-    }
-  };
 }

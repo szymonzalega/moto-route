@@ -39,6 +39,16 @@ export const getRoutePhotosByRouteId = async (routeId, limit, lastPhoto) => {
   return { photos, newLastVisible };
 };
 
+export const createRoute = async (user, route) => {
+  const routeToSave = { ...route, userId: user.uid, userEmail: user.email };
+  const savedRouteRef = await db.collection("routes").add(routeToSave);
+  return { ...routeToSave, id: savedRouteRef.id };
+};
+
+export const updateRoute = async (route) => {
+  return await db.collection("routes").doc(route.id).set(route);
+};
+
 export const removeRouteById = async (routeId) => {
   return await db.collection("routes").doc(routeId).delete();
 };
