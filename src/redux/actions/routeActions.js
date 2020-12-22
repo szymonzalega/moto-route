@@ -1,5 +1,4 @@
 import * as types from "./actionTypes";
-import { db } from "../../firebase";
 import {
   getRoutesByUserId,
   getRoutePhotosByRouteId,
@@ -7,7 +6,6 @@ import {
   savePhotosInRoute,
   createRoute,
   updateRoute,
-  saveRouteByUser,
 } from "../../services/routeAPI";
 
 export const getRoutesStarted = () => {
@@ -141,8 +139,7 @@ export const deleteRoute = (route) => async (dispatch) => {
 
 export async function savePhotos(routeId, photosToSave) {
   try {
-    const result = await savePhotosInRoute(routeId, photosToSave);
-    return result;
+    return await savePhotosInRoute(routeId, photosToSave);
   } catch (e) {
     console.error(e);
     throw new Error(e);
