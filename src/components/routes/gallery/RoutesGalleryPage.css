@@ -1,22 +1,22 @@
-.routeGalleryPage {
+.galleryPage {
   display: flex;
   flex-direction: row;
 }
 
-.routeGalleryPage__infoSection {
+.galleryPage__infoSection {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.routeGalleryPage__infoSection--error {
+.galleryPage__infoSection--error {
   color: red;
 }
 
-.routeGalleryPage__infoSection > .MuiCircularProgress-colorPrimary {
+.galleryPage__infoSection > .MuiCircularProgress-colorPrimary {
   color: #2e81f4;
 }
 
-.routeGalleryPage .sidebar {
+.galleryPage .sidebar {
   margin: 0;
 }

@@ -8,8 +8,7 @@ export default {
     error: null,
   },
   sidebar: {},
-  gallery: {},
-  routeGallery: {
+  gallery: {
     photos: [],
     status: "idle",
     uploadStatus: "idle",

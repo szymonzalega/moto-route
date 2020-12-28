@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectPhoto } from "../../redux/actions/galleryActions";
 
 export default function PhotoPreview() {
-  const selectedPhoto = useSelector(state => state.routeGallery.selectedPhoto);
+  const selectedPhoto = useSelector((state) => state.gallery.selectedPhoto);
   const dispatch = useDispatch();
 
   const photoNavigation = {
@@ -16,7 +16,7 @@ export default function PhotoPreview() {
   };
 
   function selectOtherPhoto(direction) {
-    dispatch(selectPhoto(null, direction))
+    dispatch(selectPhoto(null, direction));
   }
 
   const isFirstPhoto = selectedPhoto.isFirst;

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./RoutesGalleryPage.css";
 import { useSelector, useDispatch } from "react-redux";
+import { getPhotosByRouteId } from "../../../redux/actions/routeActions";
 import {
-  getPhotosByRouteId,
-} from "../../../redux/actions/routeActions";
-import {savePhotosInRoute, getRoutePhotosByRouteId} from "../../../services/routeAPI"
+  savePhotosInRoute,
+  getRoutePhotosByRouteId,
+} from "../../../services/routeAPI";
 import PhotoPreview from "../../gallery/PhotoPreview";
 import Sidebar from "../../sidebar/Sidebar";
 import useSidebarState from "../../sidebar/useSidebarState";
@@ -19,9 +20,9 @@ export default function RoutesGalleryPage(props) {
   const dispatch = useDispatch();
   const [routeId, setRouteId] = useState("");
   const [lastVisible, setLastVisible] = useState("");
-  const photos = useSelector((state) => state.routeGallery.photos);
-  const fetchStatus = useSelector((state) => state.routeGallery.status);
-  const error = useSelector((state) => state.routeGallery.error);
+  const photos = useSelector((state) => state.gallery.photos);
+  const fetchStatus = useSelector((state) => state.gallery.status);
+  const error = useSelector((state) => state.gallery.error);
 
   const { openSidebar } = useSidebarState();
 
@@ -32,7 +33,9 @@ export default function RoutesGalleryPage(props) {
 
       if (fetchStatus === "idle") {
         setLastVisible(
-          await dispatch(fetchPhotos(getRoutePhotosByRouteId, currentRouteId, 6))
+          await dispatch(
+            fetchPhotos(getRoutePhotosByRouteId, currentRouteId, 6)
+          )
         );
       }
     })();
@@ -60,7 +63,9 @@ export default function RoutesGalleryPage(props) {
 
   const getMorePhotos = async () => {
     setLastVisible(
-      await dispatch(fetchPhotos(getRoutePhotosByRouteId, routeId, 6, lastVisible))
+      await dispatch(
+        fetchPhotos(getRoutePhotosByRouteId, routeId, 6, lastVisible)
+      )
     );
   };
 
@@ -81,7 +86,7 @@ export default function RoutesGalleryPage(props) {
   };
 
   return (
-    <div className="routeGalleryPage">
+    <div className="galleryPage">
       <Sidebar>
         <GallerySidebar
           onSubmit={handleSubmit}

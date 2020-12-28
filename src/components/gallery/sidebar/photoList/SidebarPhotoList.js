@@ -5,13 +5,14 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import { useDispatch, useSelector } from "react-redux";
 import { selectPhoto } from "../../../../redux/actions/galleryActions";
 
-export default function SidebarPhotoList({ getMorePhotos, isMorePhotosAvailable }) {
+export default function SidebarPhotoList({
+  getMorePhotos,
+  isMorePhotosAvailable,
+}) {
   const dispatch = useDispatch();
-  const fetchStatus = useSelector((state) => state.routeGallery.status);
-  const photos = useSelector((state) => state.routeGallery.photos);
-  const selectedPhoto = useSelector(
-    (state) => state.routeGallery.selectedPhoto
-  );
+  const fetchStatus = useSelector((state) => state.gallery.status);
+  const photos = useSelector((state) => state.gallery.photos);
+  const selectedPhoto = useSelector((state) => state.gallery.selectedPhoto);
 
   useEffect(() => {
     const hasPhotos = photos && photos.length > 0;
@@ -72,9 +73,11 @@ export default function SidebarPhotoList({ getMorePhotos, isMorePhotosAvailable 
       </div>
       {additionalContent}
       <div className="sidebarPhotoList__loadMoreButton">
-        {isMorePhotosAvailable && <Button onClick={getMoreData} className="w-100" type="submit">
-          Get more photos
-        </Button>}
+        {isMorePhotosAvailable && (
+          <Button onClick={getMoreData} className="w-100" type="submit">
+            Get more photos
+          </Button>
+        )}
       </div>
     </>
   );

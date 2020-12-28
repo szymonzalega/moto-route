@@ -2,61 +2,61 @@ import * as types from "./actionTypes";
 
 export const getPhotosStarted = () => {
   return {
-    type: types.ROUTE_GALLERY__FETCH_STARTED,
+    type: types.GALLERY__FETCH_STARTED,
   };
 };
 
 export const getPhotosSucceeded = (photos) => {
   return {
-    type: types.ROUTE_GALLERY__FETCH_SUCCEEDED,
+    type: types.GALLERY__FETCH_SUCCEEDED,
     photos,
   };
 };
 
 export const getPhotosFailed = (error) => {
   return {
-    type: types.ROUTE_GALLERY__FETCH_FAILED,
+    type: types.GALLERY__FETCH_FAILED,
     error,
   };
 };
 
 export const setSelectedPhoto = (photo) => {
   return {
-    type: types.ROUTE_GALLERY__SELECT_PHOTO,
+    type: types.GALLERY__SELECT_PHOTO,
     photo,
   };
 };
 
 export const uploadNewPhotosStarted = () => {
   return {
-    type: types.ROUTE_GALLERY__UPLOAD_NEW_PHOTOS_STARTED
+    type: types.GALLERY__UPLOAD_NEW_PHOTOS_STARTED,
   };
 };
 
 export const uploadNewPhotosSucceeded = (photos) => {
   return {
-    type: types.ROUTE_GALLERY__UPLOAD_NEW_PHOTOS_SUCCEEDED,
+    type: types.GALLERY__UPLOAD_NEW_PHOTOS_SUCCEEDED,
     photos,
   };
 };
 
 export const uploadNewPhotosFailed = (error) => {
   return {
-    type: types.ROUTE_GALLERY__UPLOAD_NEW_PHOTOS_FAILED,
+    type: types.GALLERY__UPLOAD_NEW_PHOTOS_FAILED,
     error,
   };
 };
 
 export const resetGalleryState = () => {
   return {
-    type: types.ROUTE_GALLERY__RESET_STATE
+    type: types.GALLERY__RESET_STATE,
   };
-}
+};
 
 export const fetchPhotos = (funcToFetchPhotos, ...args) => async (dispatch) => {
   dispatch(getPhotosStarted());
   try {
-    const {photos, newLastVisible} = await funcToFetchPhotos(...args);
+    const { photos, newLastVisible } = await funcToFetchPhotos(...args);
     dispatch(getPhotosSucceeded(photos));
     return newLastVisible;
   } catch (err) {
@@ -69,14 +69,14 @@ export const selectPhoto = (selectedPhoto, direction) => (
   dispatch,
   getState
 ) => {
-  const { routeGallery } = getState();
+  const { gallery } = getState();
 
   const isFirstPhoto = (selectedIndex) => selectedIndex === 0;
   const isLastPhoto = (selectedIndex) =>
-    selectedIndex === routeGallery.photos.length - 1;
+    selectedIndex === gallery.photos.length - 1;
 
   const selectByClick = () => {
-    const selectedIndex = routeGallery.photos.findIndex(
+    const selectedIndex = gallery.photos.findIndex(
       (photo) => photo.id === selectedPhoto.id
     );
     dispatch(
@@ -89,13 +89,13 @@ export const selectPhoto = (selectedPhoto, direction) => (
   };
 
   const selectByNav = () => {
-    const selectedIndex = routeGallery.photos.findIndex(
-      (photo) => photo.id === routeGallery.selectedPhoto.id
+    const selectedIndex = gallery.photos.findIndex(
+      (photo) => photo.id === gallery.selectedPhoto.id
     );
     const newSelectedIndex = selectedIndex + direction;
     dispatch(
       setSelectedPhoto({
-        ...routeGallery.photos[newSelectedIndex],
+        ...gallery.photos[newSelectedIndex],
         isFirst: isFirstPhoto(newSelectedIndex),
         isLast: isLastPhoto(newSelectedIndex),
       })
@@ -112,7 +112,7 @@ export const selectPhoto = (selectedPhoto, direction) => (
 export const uploadPhotos = (funcToUploadPhotos, ...args) => async (
   dispatch
 ) => {
-    dispatch(uploadNewPhotosStarted())
+  dispatch(uploadNewPhotosStarted());
   try {
     const result = await funcToUploadPhotos(...args);
     dispatch(uploadNewPhotosSucceeded(result));
