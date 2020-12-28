@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import "./RoutesGalleryPage.css";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  savePhotos,
   getPhotosByRouteId,
 } from "../../../redux/actions/routeActions";
+import {savePhotosInRoute, getRoutePhotosByRouteId} from "../../../services/routeAPI"
 import PhotoPreview from "../../gallery/PhotoPreview";
 import Sidebar from "../../sidebar/Sidebar";
 import useSidebarState from "../../sidebar/useSidebarState";
@@ -32,7 +32,7 @@ export default function RoutesGalleryPage(props) {
 
       if (fetchStatus === "idle") {
         setLastVisible(
-          await dispatch(fetchPhotos(getPhotosByRouteId, currentRouteId, 6))
+          await dispatch(fetchPhotos(getRoutePhotosByRouteId, currentRouteId, 6))
         );
       }
     })();
@@ -60,7 +60,7 @@ export default function RoutesGalleryPage(props) {
 
   const getMorePhotos = async () => {
     setLastVisible(
-      await dispatch(fetchPhotos(getPhotosByRouteId, routeId, 6, lastVisible))
+      await dispatch(fetchPhotos(getRoutePhotosByRouteId, routeId, 6, lastVisible))
     );
   };
 
@@ -74,7 +74,7 @@ export default function RoutesGalleryPage(props) {
 
     try {
       //todo obsluga bledow i obsluga ladowania
-      await dispatch(uploadPhotos(savePhotos, routeId, photoToUpload));
+      await dispatch(uploadPhotos(savePhotosInRoute, routeId, photoToUpload));
     } catch (e) {
       console.error(`Failed to add new photos, ${e} `);
     }

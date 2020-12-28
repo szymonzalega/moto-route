@@ -94,6 +94,26 @@ export function deleteRouteEnded() {
   };
 }
 
+export function getPhotosStarted() {
+  return {
+    type: types.ROUTE__FETCH_PHOTOS_STARTED,
+  };
+}
+
+export function getPhotosSucceeded(result) {
+  return {
+    type: types.ROUTE__FETCH_PHOTOS_SUCCEEDED,
+    result,
+  };
+}
+
+export function getPhotosFailed(error) {
+  return {
+    type: types.ROUTE__FETCH_PHOTOS_FAILED,
+    error,
+  };
+}
+
 export const fetchRoutes = (userId) => async (dispatch) => {
   dispatch(getRoutesStarted());
   try {
@@ -137,26 +157,19 @@ export const deleteRoute = (route) => async (dispatch) => {
   }
 };
 
-export async function savePhotos(routeId, photosToSave) {
+export const getPhotosByRouteId = (routeId, limit = 4, lastPhoto) => async (
+  dispatch
+) => {
+  dispatch(getPhotosStarted());
   try {
-    return await savePhotosInRoute(routeId, photosToSave);
-  } catch (e) {
-    console.error(e);
-    throw new Error(e);
-  }
-}
-
-export async function getPhotosByRouteId(routeId, limit, lastPhoto) {
-  try {
-    const { photos, newLastVisible } = await getRoutePhotosByRouteId(
+    const { photos } = await getRoutePhotosByRouteId(routeId, limit, lastPhoto);
+    const result = {
       routeId,
-      limit,
-      lastPhoto
-    );
-    //dispatch in future
-    return { photos, newLastVisible };
-  } catch (e) {
-    console.error(e);
-    throw new Error(e);
+      photos,
+    };
+    dispatch(getPhotosSucceeded(result));
+  } catch (err) {
+    console.error(err);
+    dispatch(getPhotosFailed(err));
   }
-}
+};

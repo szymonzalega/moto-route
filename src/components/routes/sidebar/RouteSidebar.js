@@ -38,7 +38,7 @@ export default function RouteSidebar() {
           <SidebarDetailsRow label="Type" value={route.routeType} />
 
           <RouteElementMap url={route.url} />
-          <SidebarPhotoSection routeId={route.id} />
+          <SidebarPhotoSection />
         </>
       )}
     </>

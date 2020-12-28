@@ -46,6 +46,20 @@ export default function routeReducers(state = initialState.routes, action) {
       return { ...state, error: action.error, removeStatus: "failed" };
     case types.ROUTE__REMOVE_ENDED:
       return { ...state, removeStatus: "idle" };
+    case types.ROUTE__FETCH_PHOTOS_STARTED:
+      return { ...state, fetchPhotosStatus: "pending" };
+    case types.ROUTE__FETCH_PHOTOS_SUCCEEDED:
+      return {
+        ...state,
+        routes: state.routes.map((route) =>
+          route.id === action.result.routeId
+            ? { ...route, photos: action.result.photos }
+            : route
+        ),
+        fetchPhotosStatus: "succeeded",
+      };
+    case types.ROUTE__FETCH_PHOTOS_FAILED:
+      return { ...state, error: action.error, fetchPhotosStatus: "failed" };
     default:
       return state;
   }

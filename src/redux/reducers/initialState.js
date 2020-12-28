@@ -4,6 +4,7 @@ export default {
     fetchStatus: "idle",
     saveStatus: "idle",
     removeStatus: "idle",
+    fetchPhotosStatus: "idle",
     error: null,
   },
   sidebar: {},
