@@ -35,7 +35,7 @@ export default function SidebarPhotoSection() {
   }, [routeId, routes]);
 
   const openGallery = () => {
-    history.push(`/index/gallery/${routeId}`);
+    history.push(`/index/routes/gallery/${routeId}`);
   };
 
   let routeListContent;

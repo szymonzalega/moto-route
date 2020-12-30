@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./RoutesGalleryPage.css";
 import { useSelector, useDispatch } from "react-redux";
-import { getPhotosByRouteId } from "../../../redux/actions/routeActions";
 import {
   savePhotosInRoute,
   getRoutePhotosByRouteId,
@@ -15,7 +14,7 @@ import {
   uploadPhotos,
   resetGalleryState,
 } from "../../../redux/actions/galleryActions";
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 export default function RoutesGalleryPage(props) {
   const dispatch = useDispatch();
@@ -24,13 +23,12 @@ export default function RoutesGalleryPage(props) {
   const photos = useSelector((state) => state.gallery.photos);
   const fetchStatus = useSelector((state) => state.gallery.status);
   const error = useSelector((state) => state.gallery.error);
-  let {id} = useParams();
+  let { id } = useParams();
 
   const { openSidebar } = useSidebarState();
 
   useEffect(() => {
     (async () => {
-      // const currentRouteId = props.match.params.id;
       const currentRouteId = id;
       setRouteId(currentRouteId);
 

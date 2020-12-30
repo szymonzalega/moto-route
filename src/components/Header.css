@@ -66,6 +66,7 @@
   border-radius: 5px;
   align-items: center;
   padding: 0 35px;
+  text-decoration: none;
 }
 
 .header__element--active:hover {

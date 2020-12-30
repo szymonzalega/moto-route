@@ -9,11 +9,14 @@ import Sidebar from "../sidebar/Sidebar";
 import useSidebarState from "../sidebar/useSidebarState";
 import RouteSidebar from "./sidebar/RouteSidebar";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import { Route, Switch, useRouteMatch } from "react-router-dom";
+import RoutesGalleryPage from "./gallery/RoutesGalleryPage";
 
 export default function RoutePage() {
   const dispatch = useDispatch();
   const { currentUser } = useAuth();
   const { openSidebar } = useSidebarState();
+  let { path } = useRouteMatch();
 
   const fetchStatus = useSelector((state) => state.routes.fetchStatus);
 
@@ -49,20 +52,27 @@ export default function RoutePage() {
 
   return (
     <>
-      <div className="routePage">
-        <Sidebar>
-          <RouteSidebar />
-        </Sidebar>
+      <Switch>
+        <Route exact path={path}>
+          <div className="routePage">
+            <Sidebar>
+              <RouteSidebar />
+            </Sidebar>
 
-        <div className="routePage__list">
-          <div className="routePage__buttonRow">
-            <button className="btn btn-primary" onClick={createNewRoute}>
-              Add new route
-            </button>
+            <div className="routePage__list">
+              <div className="routePage__buttonRow">
+                <button className="btn btn-primary" onClick={createNewRoute}>
+                  Add new route
+                </button>
+              </div>
+              {routeListContent}
+            </div>
           </div>
-          {routeListContent}
-        </div>
-      </div>
+        </Route>
+        <Route path={`${path}/gallery/:id`}>
+          <RoutesGalleryPage />
+        </Route>
+      </Switch>
     </>
   );
 }
