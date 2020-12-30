@@ -16,8 +16,12 @@ function App() {
         <AuthProvider>
           <Switch>
             {/* exact is important */}
-            <Route exact path="/" component={HomePage} />
-            <PrivateRoute path="/index" component={Dashboard} />
+            <Route exact path="/">
+              <HomePage />
+            </Route>
+            <PrivateRoute path="/index">
+              <Dashboard />
+            </PrivateRoute>
 
             <Container
               className="d-flex align-items-center justify-content-center"

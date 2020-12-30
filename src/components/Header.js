@@ -7,7 +7,8 @@ import HomeIcon from "@material-ui/icons/Home";
 import TerrainIcon from "@material-ui/icons/Terrain";
 import PersonIcon from "@material-ui/icons/Person";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory, useLocation, useRouteMatch } from "react-router-dom";
+import { BrowserRouter as Router, NavLink, Link } from "react-router-dom";
 
 export default function Header() {
   const history = useHistory();
@@ -18,6 +19,10 @@ export default function Header() {
   const [activeView, setActiveView] = useState(() =>
     getCurrentPath(location.pathname)
   );
+
+  let { path, url } = useRouteMatch();
+
+  console.log("url" + url + "   path" + path + " header");
 
   function getCurrentPath(path) {
     const currentPath = path.split("/")[2];
@@ -64,7 +69,7 @@ export default function Header() {
   return (
     <div className="header">
       <div className="header__left">
-        {items.map((item) => {
+        {/* {items.map((item) => {
           return (
             <div
               key={item.id}
@@ -77,7 +82,36 @@ export default function Header() {
               <span className="header__text">{item.text}</span>
             </div>
           );
-        })}
+        })} */}
+
+        {/* <Link to="/index/dashboard">Dashboard</Link>
+          <Link to="/index/routes">Routes</Link> */}
+
+        <NavLink
+          exact
+          to="/index"
+          className="header__element"
+          activeClassName="header__element--active"
+        >
+          <HomeIcon fontSize="large" />
+          <span className="header__text">Dashboard</span>
+        </NavLink>
+        <NavLink
+          to="/index/routes"
+          className="header__element"
+          activeClassName="header__element--active"
+        >
+          <TerrainIcon fontSize="large" />
+          <span className="header__text">Routes</span>
+        </NavLink>
+        <NavLink
+          to="/index/user-profile"
+          className="header__element"
+          activeClassName="header__element--active"
+        >
+          <PersonIcon fontSize="large" />
+          <span className="header__text">Profile</span>
+        </NavLink>
       </div>
       <div className="header__right">
         <div

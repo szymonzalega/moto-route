@@ -11,7 +11,7 @@ export default function RouteList() {
   return (
     <>
       {routes.map((route) => {
-        return <RouteElement route={route} key={route.id} />;
+        return <RouteElement key={route.id} route={route} />;
       })}
     </>
   );
