@@ -1,5 +1,5 @@
 import React from "react";
-import "./SidebarNav.css";
+import "./SidebarNav.scss";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import EditIcon from "@material-ui/icons/Edit";

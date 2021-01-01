@@ -1,5 +1,5 @@
 import React from "react";
-import "./RouteElementInfo.css";
+import "./RouteElementInfo.scss";
 import TimelineIcon from "@material-ui/icons/Timeline";
 import EqualizerIcon from "@material-ui/icons/Equalizer";
 import PanoramaIcon from "@material-ui/icons/Panorama";

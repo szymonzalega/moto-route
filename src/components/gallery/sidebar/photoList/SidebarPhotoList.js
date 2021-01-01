@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import "./SidebarPhotoList.css";
+import "./SidebarPhotoList.scss";
 import { Button } from "react-bootstrap";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useDispatch, useSelector } from "react-redux";

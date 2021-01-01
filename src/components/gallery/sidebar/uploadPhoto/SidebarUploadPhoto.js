@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import "./SidebarUploadPhoto.css";
+import "./SidebarUploadPhoto.scss";
 import { Form, Button } from "react-bootstrap";
 import InsertDriveFileIcon from "@material-ui/icons/InsertDriveFile";
 import CircularProgress from "@material-ui/core/CircularProgress";

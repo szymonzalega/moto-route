@@ -1,5 +1,5 @@
 import React from "react";
-import "./SidebarDetailsRow.css"
+import "./SidebarDetailsRow.scss";
 
 export default function SidebarDetailsRow({ label, value }) {
   return (

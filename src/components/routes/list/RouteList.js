@@ -1,12 +1,10 @@
 import React from "react";
-import "./RouteList.css";
+import "./RouteList.scss";
 import RouteElement from "./routeElement/RouteElement";
 import { useSelector } from "react-redux";
 
-
 export default function RouteList() {
-
-  const routes = useSelector((state) => state.routes.routes)
+  const routes = useSelector((state) => state.routes.routes);
 
   return (
     <>

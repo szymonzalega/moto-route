@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import "./SidebarAddEditMode.css";
+import "./SidebarAddEditMode.scss";
 import { Form, Button } from "react-bootstrap";
 import { saveRoute } from "../../../../redux/actions/routeActions";
 import { useAuth } from "../../../../contexts/AuthContext";

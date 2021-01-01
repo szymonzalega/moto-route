@@ -1,5 +1,5 @@
 import React from "react";
-import "./RouteElement.css";
+import "./RouteElement.scss";
 import RouteElementNav from "./nav/RouteElementNav";
 import RouteElementInfo from "./info/RouteElementInfo";
 import RouteElementMap from "./map/RouteElementMap";

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./RouteElementMap.css";
+import "./RouteElementMap.scss";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 export default function RouteElementMap({ url }) {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./PhotoPreview.css";
+import "./PhotoPreview.scss";
 import IconButton from "@material-ui/core/IconButton";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";

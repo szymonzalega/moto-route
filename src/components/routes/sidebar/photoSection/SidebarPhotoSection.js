@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import "./SidebarPhotoSection.css";
+import "./SidebarPhotoSection.scss";
 import IconButton from "@material-ui/core/IconButton";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import { useHistory } from "react-router-dom";

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./RoutesGalleryPage.css";
+import "./RoutesGalleryPage.scss";
 import { useSelector, useDispatch } from "react-redux";
 import {
   savePhotosInRoute,

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./RouteElementNav.css";
+import "./RouteElementNav.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteRoute } from "../../../../../redux/actions/routeActions";
 import ExploreIcon from "@material-ui/icons/Explore";

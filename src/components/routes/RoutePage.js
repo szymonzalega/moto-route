@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import "./RoutePage.css";
+import "./RoutePage.scss";
 
 import { useSelector, useDispatch } from "react-redux";
 import { fetchRoutes } from "../../redux/actions/routeActions";
