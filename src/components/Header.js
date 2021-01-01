@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Header.css";
+import "./Header.scss";
 import { useDispatch } from "react-redux";
 import { useAuth } from "../contexts/AuthContext";
 import * as userActions from "../redux/actions/userActions";
