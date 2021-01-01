@@ -1,104 +1,105 @@
 @import "styles/variables";
+@import "styles/mixins";
 
 .header {
   min-height: 80px;
   background-color: $white-color;
-  display: flex;
-  flex-direction: row;
+  @include flexbox;
+  @include flex-direction(row);
   justify-content: space-between;
   flex-wrap: wrap;
   border-bottom: 1px solid #c2c2c2;
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0px 5px 8px -9px rgba(0, 0, 0, 0.75);
-}
+  @include box-shadow(0px, 5px, 8px, -9px, rgba(0, 0, 0, 0.75));
 
-.header__left {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-
-.header__right {
-  display: flex;
-  flex-direction: row;
-}
-
-.header__element {
-  display: flex;
-  align-items: center;
-  padding: 0 35px;
-  cursor: pointer;
-  margin: 0 5px;
-  border-bottom: 4px solid transparent;
-}
-
-@media only screen and (max-width: 600px) {
-  .header__element {
-    width: 100vw;
-    padding: 15px 35px;
+  &__left {
+    @include flexbox;
+    @include flex-direction(row);
+    flex-wrap: wrap;
   }
-}
 
-.header__element > .MuiSvgIcon-root {
-  color: $grey-color;
-}
+  &__right {
+    @include flexbox;
+    @include flex-direction(row);
+  }
 
-.header__element--active > .MuiSvgIcon-root {
-  color: $primary-color;
-}
+  &__text {
+    font-weight: 600;
+    margin-left: 15px;
+    color: $grey-color;
+  }
 
-.header__element--active {
-  border-bottom: 4px solid $primary-color;
-}
+  &__logout-error {
+    @include flexbox;
+    position: absolute;
+    color: $error-color;
+    font-size: 0.7rem;
+    left: 0;
+    width: 100%;
+    bottom: 0;
+    justify-content: center;
+  }
 
-.header__element:hover > .MuiSvgIcon-root {
-  color: $primary-color;
-}
+  &__element {
+    @include flexbox;
+    align-items: center;
+    padding: 0 35px;
+    cursor: pointer;
+    margin: 0 5px;
+    border-bottom: 4px solid transparent;
 
-.header__element:hover .header__text {
-  color: $primary-color;
-}
+    &:hover {
+      background-color: $light-grey-color;
+      border-radius: 5px;
+      align-items: center;
+      padding: 0 35px;
+      text-decoration: none;
 
-.header__element:hover {
-  background-color: $light-grey-color;
-  border-radius: 5px;
-  align-items: center;
-  padding: 0 35px;
-  text-decoration: none;
-}
+      > .MuiSvgIcon-root {
+        color: $primary-color;
+      }
 
-.header__element--active:hover {
-  background-color: transparent;
-  border-radius: 0;
-}
+      .header__text {
+        color: $primary-color;
+      }
+    }
 
-.header__element--logout {
-  position: relative;
-}
+    > .MuiSvgIcon-root {
+      color: $grey-color;
+    }
 
-.header__logout-error {
-  position: absolute;
-  color: red;
-  font-size: 0.7rem;
-  left: 0;
-  width: 100%;
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-}
+    &--active {
+      border-bottom: 4px solid $primary-color;
 
-.header__element--logout:hover {
-  background-color: transparent;
-}
+      &:hover {
+        background-color: transparent;
+        border-radius: 0;
+      }
 
-.header__text {
-  font-weight: 600;
-  margin-left: 15px;
-  color: $grey-color;
-}
+      > .MuiSvgIcon-root {
+        color: $primary-color;
+      }
 
-.header__element--active .header__text {
-  color: $primary-color;
+      .header__text {
+        color: $primary-color;
+      }
+    }
+
+    &--logout {
+      position: relative;
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 685px) {
+    &__element {
+      width: 100vw;
+      padding: 15px 35px;
+    }
+  }
 }

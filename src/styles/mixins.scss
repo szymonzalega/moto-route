@@ -1,0 +1,29 @@
+@mixin flexbox {
+  display: -webkit-box; // old
+  display: -moz-box; // old
+  display: -ms-flexbox; // ie
+  display: -webkit-flex; // new
+  display: flex; // new
+}
+
+@mixin flex-direction($direction) {
+  @if $direction == column {
+    -webkit-flex-direction: vertical;
+    -moz-flex-direction: vertical;
+    -ms-flex-direction: column;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+  } @else {
+    -webkit-flex-direction: horizontal;
+    -moz-flex-direction: horizontal;
+    -ms-flex-direction: row;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+  }
+}
+
+@mixin box-shadow($h: 10px, $v: 10px, $b: 0px, $s: 0px, $c: #000000) {
+  -webkit-box-shadow: $h $v $b $s $c;
+  -moz-box-shadow: $h $v $b $s $c;
+  box-shadow: $h $v $b $s $c;
+}
