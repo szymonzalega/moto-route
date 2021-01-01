@@ -1,37 +1,39 @@
+@import "styles/variables";
+
 .route {
   display: flex;
   flex-direction: column;
   width: 100%;
-  background-color: #ffffff;
+  background-color: $white-color;
   border-radius: 10px;
   margin: 20px 0;
-  box-shadow: 0px 5px 8px -9px rgba(0,0,0,0.75);
+  box-shadow: 0px 5px 8px -9px rgba(0, 0, 0, 0.75);
 }
 
 .route__details {
 }
 
 .route__details-row {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 11px 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 11px 5px;
 }
 
 .details-row__item {
-    margin: 0 20px;
-    font-size: 1em;
+  margin: 0 20px;
+  font-size: 1em;
 }
 
 .details-row__item:first-child {
-    margin: 0 20px 0 10px;
-    font-size: 1em;
+  margin: 0 20px 0 10px;
+  font-size: 1em;
 }
 
 .item__value {
-    font-weight: 500;
+  font-weight: 500;
 }
 
 .item__label {
-    margin: 0 7px;
+  margin: 0 7px;
 }

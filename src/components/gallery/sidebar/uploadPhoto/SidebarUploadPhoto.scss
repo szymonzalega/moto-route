@@ -24,8 +24,8 @@ input[type="file"] {
   display: flex;
   flex-direction: row;
   width: 100%;
-  border: 2px solid #a0a0a0;
-  color: #a0a0a0;
+  border: 2px solid $grey-color;
+  color: $grey-color;
   border-radius: 0.25rem;
   background-color: transparent;
   padding: 16px;
@@ -68,7 +68,7 @@ input[type="file"] {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: initial;
-  background-color: #a0a0a0;
+  background-color: $grey-color;
   height: 5rem;
   position: relative;
 }
@@ -102,7 +102,7 @@ input[type="file"] {
 }
 
 .uploadedPhoto__remove > .MuiSvgIcon-root {
-  background-color: #ffffff;
+  background-color: $white-color;
   border-radius: 100%;
 }
 

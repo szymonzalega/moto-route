@@ -1,3 +1,5 @@
+@import "styles/variables";
+
 .gallery {
   display: flex;
   flex: 1;
@@ -5,7 +7,7 @@
   justify-content: space-between;
   align-items: center;
   height: calc(100vh - 80px);
-  background-color: #292929;
+  background-color: $background-black-color;
 }
 
 .gallery__bigPhoto {
@@ -41,9 +43,9 @@
 }
 
 .gallery__bigPhoto .MuiSvgIcon-root {
-  color: #a0a0a0;
+  color: $grey-color;
 }
 
 .gallery__emptyInfo {
-  color: #ffffff
+  color: $white-color;
 }
