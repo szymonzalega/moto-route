@@ -1,3 +1,5 @@
+@import "styles/variables";
+
 .header {
   min-height: 80px;
   background-color: white;
@@ -9,7 +11,7 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0px 5px 8px -9px rgba(0,0,0,0.75);
+  box-shadow: 0px 5px 8px -9px rgba(0, 0, 0, 0.75);
 }
 
 .header__left {
@@ -44,22 +46,20 @@
 }
 
 .header__element--active > .MuiSvgIcon-root {
-  color: #2e81f4;
+  color: $primary-color;
 }
 
 .header__element--active {
-  border-bottom: 4px solid #2e81f4;
+  border-bottom: 4px solid $primary-color;
 }
 
 .header__element:hover > .MuiSvgIcon-root {
-  color: #2e81f4;
+  color: $primary-color;
 }
 
 .header__element:hover .header__text {
-  color: #2e81f4;
+  color: $primary-color;
 }
-
-
 
 .header__element:hover {
   background-color: #ececec;
@@ -79,14 +79,14 @@
 }
 
 .header__logout-error {
-    position: absolute;
-    color: red;
-    font-size: 0.7rem;
-    left: 0;
-    width: 100%;
-    bottom: 0;
-    display: flex;
-    justify-content: center;
+  position: absolute;
+  color: red;
+  font-size: 0.7rem;
+  left: 0;
+  width: 100%;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
 }
 
 .header__element--logout:hover {
@@ -100,5 +100,5 @@
 }
 
 .header__element--active .header__text {
-  color: #2e81f4;
+  color: $primary-color;
 }

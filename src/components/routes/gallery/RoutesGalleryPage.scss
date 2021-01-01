@@ -1,3 +1,5 @@
+@import "styles/variables";
+
 .galleryPage {
   display: flex;
   flex-direction: row;
@@ -14,7 +16,7 @@
 }
 
 .galleryPage__infoSection > .MuiCircularProgress-colorPrimary {
-  color: #2e81f4;
+  color: $primary-color;
 }
 
 .galleryPage .sidebar {

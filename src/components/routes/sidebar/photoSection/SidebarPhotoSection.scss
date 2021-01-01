@@ -1,3 +1,5 @@
+@import "styles/variables";
+
 .sidebar__photoSection {
   position: relative;
   display: flex;
@@ -15,7 +17,7 @@
 }
 
 .photoSection__load > .MuiCircularProgress-colorPrimary {
-  color: #2e81f4;
+  color: $primary-color;
 }
 
 .photoSection__emptyGallery {

@@ -1,3 +1,5 @@
+@import "styles/variables";
+
 .sidebarPhotoList {
   display: grid;
   flex-direction: row;
@@ -15,7 +17,7 @@
 }
 
 .sidebarPhotoList__infoSection > .MuiCircularProgress-colorPrimary {
-  color: #2e81f4;
+  color: $primary-color;
 }
 
 .sidebarPhotoList__infoSection--error {
@@ -23,7 +25,7 @@
 }
 
 .sidebarPhotoList__photo {
-  border: 3px solid rgba(46,129,244,0);
+  border: 3px solid rgba(46, 129, 244, 0);
   margin-top: 10px;
   box-sizing: border-box;
   min-height: 110px;
@@ -36,7 +38,7 @@
 
 .sidebarPhotoList__photo--selected {
   transform: scale(1.04);
-  border-color: rgba(46,129,244,1);
+  border-color: rgba(46, 129, 244, 1);
 }
 
 .sidebarPhotoList__loadMoreButton {
