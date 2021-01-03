@@ -1,5 +1,4 @@
 import React from "react";
-import "./RouteList.scss";
 import RouteElement from "./routeElement/RouteElement";
 import { useSelector } from "react-redux";
 

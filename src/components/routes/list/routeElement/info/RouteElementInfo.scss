@@ -1,26 +1,32 @@
 @use "styles/mixins";
 
-.route__detailsRow {
-  @include mixins.flexbox;
-  @include mixins.flex-direction(row);
-  align-items: center;
-  padding: 11px 5px;
+.route {
+  &__detailsRow {
+    @include mixins.flexbox;
+    @include mixins.flex-direction(row);
+    align-items: center;
+    padding: 11px 5px;
+  }
 }
 
-.detailsRow__item {
-  margin: 0 20px;
-  font-size: 1em;
+.detailsRow {
+  &__item {
+    margin: 0 20px;
+    font-size: 1em;
+  }
+
+  &:first-child {
+    margin: 0 20px 0 10px;
+    font-size: 1em;
+  }
 }
 
-.detailsRow__item:first-child {
-  margin: 0 20px 0 10px;
-  font-size: 1em;
-}
+.item {
+  &__value {
+    font-weight: 500;
+  }
 
-.item__value {
-  font-weight: 500;
-}
-
-.item__label {
-  margin: 0 7px;
+  &__label {
+    margin: 0 7px;
+  }
 }
