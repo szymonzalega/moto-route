@@ -1,5 +1,7 @@
+@use "styles/mixins";
+
 .sidebarNav {
-  display: flex;
+  @include mixins.flexbox;
   width: 100%;
   flex-direction: column;
   position: relative;
@@ -17,7 +19,7 @@
 }
 
 .sidebarNav__header {
-  display: flex;
+  @include mixins.flexbox;
   width: 100%;
   flex-direction: row;
   justify-content: space-between;
@@ -31,12 +33,12 @@
 }
 
 .header__buttonRow {
-  display: flex;
+  @include mixins.flexbox;
   flex-direction: row;
   margin-right: -10px;
 }
 
 .sidebarNav__description {
-  display: flex;
+  @include mixins.flexbox;
   margin-bottom: 30px;
 }

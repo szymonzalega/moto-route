@@ -1,7 +1,8 @@
 @use "styles/colors";
+@use "styles/mixins";
 
 .gallery {
-  display: flex;
+  @include mixins.flexbox;
   flex: 1;
   flex-direction: column;
   justify-content: space-between;
@@ -12,7 +13,7 @@
 
 .gallery__bigPhoto {
   flex: 1 1;
-  display: flex;
+  @include mixins.flexbox;
   width: 100%;
   justify-content: center;
   padding: 50px;
@@ -21,7 +22,7 @@
 
 .gallery__photoList {
   position: relative;
-  display: flex;
+  @include mixins.flexbox;
   height: auto;
   width: 100%;
 }

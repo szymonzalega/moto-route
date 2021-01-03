@@ -1,14 +1,16 @@
+@use "styles/mixins";
+
 .gallerySidebar {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-wrap: wrap;
+  @include mixins.flexbox;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .gallerySidebar__photo {
-    height: auto;
-    width: 100%;
-    border: 3px solid transparent;
-    margin-top: 10px;
-    box-sizing: border-box;
+  height: auto;
+  width: 100%;
+  border: 3px solid transparent;
+  margin-top: 10px;
+  box-sizing: border-box;
 }

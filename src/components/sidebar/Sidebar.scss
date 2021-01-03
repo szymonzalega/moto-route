@@ -3,7 +3,7 @@
 
 .sidebar {
   width: 400px;
-  display: flex;
+  @include mixins.flexbox;
   flex-direction: column;
   width: 400px;
   height: calc(100vh - 80px);

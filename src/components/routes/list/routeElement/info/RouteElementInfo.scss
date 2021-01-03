@@ -1,25 +1,26 @@
-  .route__detailsRow {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      padding: 11px 5px;
-  }
-  
-  .detailsRow__item {
-      margin: 0 20px;
-      font-size: 1em;
-  }
-  
-  .detailsRow__item:first-child {
-      margin: 0 20px 0 10px;
-      font-size: 1em;
-  }
-  
-  .item__value {
-      font-weight: 500;
-  }
-  
-  .item__label {
-      margin: 0 7px;
-  }
-  
+@use "styles/mixins";
+
+.route__detailsRow {
+  @include mixins.flexbox;
+  flex-direction: row;
+  align-items: center;
+  padding: 11px 5px;
+}
+
+.detailsRow__item {
+  margin: 0 20px;
+  font-size: 1em;
+}
+
+.detailsRow__item:first-child {
+  margin: 0 20px 0 10px;
+  font-size: 1em;
+}
+
+.item__value {
+  font-weight: 500;
+}
+
+.item__label {
+  margin: 0 7px;
+}

@@ -1,12 +1,13 @@
 @use "styles/colors";
+@use "styles/mixins";
 
 .galleryPage {
-  display: flex;
+  @include mixins.flexbox;
   flex-direction: row;
 }
 
 .galleryPage__infoSection {
-  display: flex;
+  @include mixins.flexbox;
   justify-content: center;
   align-items: center;
 }

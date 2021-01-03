@@ -1,5 +1,7 @@
+@use "styles/mixins";
+
 .route {
-  display: flex;
+  @include mixins.flexbox;
   flex-direction: column;
   width: 700px;
   background-color: #e5e5e5;
@@ -7,7 +9,7 @@
 }
 
 .route__nav {
-  display: flex;
+  @include mixins.flexbox;
   flex-direction: row;
   margin: 10px;
   justify-content: space-between;
@@ -17,17 +19,17 @@
   margin-right: 10px;
 }
 .nav__title {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+  @include mixins.flexbox;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 .title__name {
-    font-size: 1.1em;
-    font-weight: 500;
+  font-size: 1.1em;
+  font-weight: 500;
 }
 .title__author {
-    font-size: 0.9em;
-    font-weight: 400;
+  font-size: 0.9em;
+  font-weight: 400;
 }
 .nav__options {
 }

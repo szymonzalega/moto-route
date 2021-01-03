@@ -1,10 +1,11 @@
 @use "styles/colors";
+@use "styles/mixins";
 
 .route__map {
   width: 100%;
   height: 400px;
   background-color: #e5e5e5;
-  display: flex;
+  @include mixins.flexbox;
   justify-content: center;
   align-items: center;
 }

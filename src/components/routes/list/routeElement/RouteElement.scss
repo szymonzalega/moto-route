@@ -2,7 +2,7 @@
 @use "styles/mixins";
 
 .route {
-  display: flex;
+  @include mixins.flexbox;
   flex-direction: column;
   width: 100%;
   background-color: colors.$white-color;
@@ -13,7 +13,7 @@
 }
 
 .route__details-row {
-  display: flex;
+  @include mixins.flexbox;
   flex-direction: row;
   align-items: center;
   padding: 11px 5px;
