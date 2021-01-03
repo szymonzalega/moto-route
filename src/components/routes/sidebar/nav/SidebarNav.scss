@@ -6,39 +6,41 @@
   width: 100%;
   position: relative;
   margin-bottom: 30px;
+
+  &:after {
+    content: "";
+    position: absolute;
+    left: -20px;
+    bottom: 0;
+    height: 1px;
+    width: calc(100% + 40px);
+    border-bottom: 1px solid #e7e7e7;
+  }
+
+  &__header {
+    @include mixins.flexbox;
+    @include mixins.flex-direction(row);
+    width: 100%;
+    @include mixins.justify-content(space-between);
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  &__description {
+    @include mixins.flexbox;
+    margin-bottom: 30px;
+  }
 }
 
-.sidebarNav:after {
-  content: "";
-  position: absolute;
-  left: -20px;
-  bottom: 0;
-  height: 1px;
-  width: calc(100% + 40px);
-  border-bottom: 1px solid #e7e7e7;
-}
+.header {
+  &__title {
+    font-size: 1.1em;
+    font-weight: 500;
+  }
 
-.sidebarNav__header {
-  @include mixins.flexbox;
-  @include mixins.flex-direction(row);
-  width: 100%;
-  @include mixins.justify-content(space-between);
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.header__title {
-  font-size: 1.1em;
-  font-weight: 500;
-}
-
-.header__buttonRow {
-  @include mixins.flexbox;
-  @include mixins.flex-direction(row);
-  margin-right: -10px;
-}
-
-.sidebarNav__description {
-  @include mixins.flexbox;
-  margin-bottom: 30px;
+  &__buttonRow {
+    @include mixins.flexbox;
+    @include mixins.flex-direction(row);
+    margin-right: -10px;
+  }
 }

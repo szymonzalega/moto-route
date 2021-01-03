@@ -3,9 +3,9 @@ import "./SidebarDetailsRow.scss";
 
 export default function SidebarDetailsRow({ label, value }) {
   return (
-    <div className="sidebar__detailsRow">
-      <span className="detailsRow__label">{label}:&nbsp;</span>
-      <span className="detailsRow__value">{value}</span>
+    <div className="sidebarDetailsRow">
+      <span>{label}:&nbsp;</span>
+      <span className="sidebarDetailsRow__value">{value}</span>
     </div>
   );
 }

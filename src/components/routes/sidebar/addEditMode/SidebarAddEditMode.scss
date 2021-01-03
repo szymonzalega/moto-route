@@ -1,11 +1,13 @@
 @use "styles/colors";
 @use "styles/mixins";
 
-.sidebarAddEditMode__preloader {
-  @include mixins.flexbox;
-  @include mixins.justify-content(center);
-}
+.sidebarAddEditMode {
+  &__preloader {
+    @include mixins.flexbox;
+    @include mixins.justify-content(center);
 
-.sidebarAddEditMode__preloader > .MuiCircularProgress-colorPrimary {
-  color: colors.$primary-color;
+    > .MuiCircularProgress-colorPrimary {
+      color: colors.$primary-color;
+    }
+  }
 }

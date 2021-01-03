@@ -1,11 +1,11 @@
 @use "styles/mixins";
 
-.sidebar__detailsRow {
+.sidebarDetailsRow {
   @include mixins.flexbox;
   @include mixins.flex-direction(row);
   margin-bottom: 10px;
-}
 
-.detailsRow__value {
-  font-weight: 500;
+  &__value {
+    font-weight: 500;
+  }
 }
