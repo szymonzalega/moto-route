@@ -1,4 +1,4 @@
-@import "styles/variables";
+@use "styles/colors";
 
 .sidebarPhotoList {
   display: grid;
@@ -7,7 +7,7 @@
   flex-wrap: wrap;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
-  background-color: $white-color;
+  background-color: colors.$white-color;
 }
 
 .sidebarPhotoList__infoSection {
@@ -18,15 +18,15 @@
 }
 
 .sidebarPhotoList__infoSection > .MuiCircularProgress-colorPrimary {
-  color: $primary-color;
+  color: colors.$primary-color;
 }
 
 .sidebarPhotoList__infoSection--error {
-  color: $error-color;
+  color: colors.$error-color;
 }
 
 .sidebarPhotoList__photo {
-  border: 3px solid $white-color;
+  border: 3px solid colors.$white-color;
   margin-top: 10px;
   box-sizing: border-box;
   min-height: 110px;
@@ -39,7 +39,7 @@
 
 .sidebarPhotoList__photo--selected {
   transform: scale(1.04);
-  border-color: $primary-color;
+  border-color: colors.$primary-color;
 }
 
 .sidebarPhotoList__loadMoreButton {

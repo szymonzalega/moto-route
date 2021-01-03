@@ -1,41 +1,41 @@
-@import "styles/variables";
-@import "styles/mixins";
+@use "styles/colors";
+@use "styles/mixins";
 
 .header {
   min-height: 80px;
-  background-color: $white-color;
-  @include flexbox;
-  @include flex-direction(row);
+  background-color: colors.$white-color;
+  @include mixins.flexbox;
+  @include mixins.flex-direction(row);
   justify-content: space-between;
   flex-wrap: wrap;
   border-bottom: 1px solid #c2c2c2;
   position: sticky;
   top: 0;
   z-index: 100;
-  @include box-shadow(0px, 5px, 8px, -9px, $black-color);
-  @include box-shadow(0px, 5px, 8px, -9px, rgba(0, 0, 0, 0.75));
+  @include mixins.box-shadow(0px, 5px, 8px, -9px, colors.$black-color);
+  @include mixins.box-shadow(0px, 5px, 8px, -9px, rgba(0, 0, 0, 0.75));
 
   &__left {
-    @include flexbox;
-    @include flex-direction(row);
+    @include mixins.flexbox;
+    @include mixins.flex-direction(row);
     flex-wrap: wrap;
   }
 
   &__right {
-    @include flexbox;
-    @include flex-direction(row);
+    @include mixins.flexbox;
+    @include mixins.flex-direction(row);
   }
 
   &__text {
     font-weight: 600;
     margin-left: 15px;
-    color: $grey-color;
+    color: colors.$grey-color;
   }
 
   &__logout-error {
-    @include flexbox;
+    @include mixins.flexbox;
     position: absolute;
-    color: $error-color;
+    color: colors.$error-color;
     font-size: 0.7rem;
     left: 0;
     width: 100%;
@@ -44,7 +44,7 @@
   }
 
   &__element {
-    @include flexbox;
+    @include mixins.flexbox;
     align-items: center;
     padding: 0 35px;
     cursor: pointer;
@@ -52,27 +52,27 @@
     border-bottom: 4px solid transparent;
 
     &:hover {
-      background-color: $light-grey-color;
+      background-color: colors.$light-grey-color;
       border-radius: 5px;
       align-items: center;
       padding: 0 35px;
       text-decoration: none;
 
       > .MuiSvgIcon-root {
-        color: $primary-color;
+        color: colors.$primary-color;
       }
 
       .header__text {
-        color: $primary-color;
+        color: colors.$primary-color;
       }
     }
 
     > .MuiSvgIcon-root {
-      color: $grey-color;
+      color: colors.$grey-color;
     }
 
     &--active {
-      border-bottom: 4px solid $primary-color;
+      border-bottom: 4px solid colors.$primary-color;
 
       &:hover {
         background-color: transparent;
@@ -80,11 +80,11 @@
       }
 
       > .MuiSvgIcon-root {
-        color: $primary-color;
+        color: colors.$primary-color;
       }
 
       .header__text {
-        color: $primary-color;
+        color: colors.$primary-color;
       }
     }
 

@@ -1,4 +1,4 @@
-@import "styles/variables";
+@use "styles/colors";
 
 .galleryPage {
   display: flex;
@@ -12,11 +12,11 @@
 }
 
 .galleryPage__infoSection--error {
-  color: $error-color;
+  color: colors.$error-color;
 }
 
 .galleryPage__infoSection > .MuiCircularProgress-colorPrimary {
-  color: $primary-color;
+  color: colors.$primary-color;
 }
 
 .galleryPage .sidebar {

@@ -1,5 +1,5 @@
-@import "styles/variables";
-@import "styles/mixins";
+@use "styles/colors";
+@use "styles/mixins";
 
 .sidebar {
   width: 400px;
@@ -7,12 +7,12 @@
   flex-direction: column;
   width: 400px;
   height: calc(100vh - 80px);
-  background-color: $white-color;
+  background-color: colors.$white-color;
   position: sticky;
   padding: 20px 20px 10px 20px;
   top: 80px;
-  @include box-shadow(5px, 0px, 8px, -9px, $black-color);
-  @include box-shadow(5px, 0px, 8px, -9px, rgba(0, 0, 0, 0.75));
+  @include mixins.box-shadow(5px, 0px, 8px, -9px, colors.$black-color);
+  @include mixins.box-shadow(5px, 0px, 8px, -9px, rgba(0, 0, 0, 0.75));
   border-right: 1px solid #c2c2c2;
   margin-right: 50px;
   transform: translateX(-400px);
@@ -38,15 +38,15 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: $background-color;
+  background: colors.$background-color;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: $grey-color;
+  background: colors.$grey-color;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: $grey-color;
+  background: colors.$grey-color;
 }

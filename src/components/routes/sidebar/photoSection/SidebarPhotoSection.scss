@@ -1,4 +1,4 @@
-@import "styles/variables";
+@use "styles/colors";
 
 .sidebar__photoSection {
   position: relative;
@@ -17,7 +17,7 @@
 }
 
 .photoSection__load > .MuiCircularProgress-colorPrimary {
-  color: $primary-color;
+  color: colors.$primary-color;
 }
 
 .photoSection__emptyGallery {
@@ -58,7 +58,7 @@
   position: absolute;
   height: 100%;
   width: 70px;
-  background: $white-color;
+  background: colors.$white-color;
   background: linear-gradient(
     90deg,
     rgba(255, 255, 255, 0) 0%,

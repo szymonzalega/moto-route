@@ -1,4 +1,4 @@
-@import "styles/variables";
+@use "styles/colors";
 
 .route__map {
   width: 100%;
@@ -10,7 +10,7 @@
 }
 
 .route__map > .MuiCircularProgress-colorPrimary {
-  color: $primary-color;
+  color: colors.$primary-color;
 }
 
 .route__iframe {

@@ -1,10 +1,10 @@
-@import "styles/variables";
+@use "styles/colors";
 
 .routePage {
   display: flex;
   flex-direction: row;
   /* align-items: center; */
-  background-color: $background-color;
+  background-color: colors.$background-color;
 }
 .routePage__buttonRow {
   margin: 20px 0;
@@ -19,11 +19,11 @@
 }
 
 .routePage__list > .MuiCircularProgress-colorPrimary {
-  color: $primary-color;
+  color: colors.$primary-color;
 }
 
 .routePage__message--error {
-  color: $error-color;
+  color: colors.$error-color;
 }
 
 .routePage__sidebar {
