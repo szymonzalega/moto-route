@@ -5,12 +5,12 @@
   @include mixins.flex-direction(row);
   @include mixins.justify-content(space-between);
   flex-wrap: wrap;
-}
 
-.gallerySidebar__photo {
-  height: auto;
-  width: 100%;
-  border: 3px solid transparent;
-  margin-top: 10px;
-  box-sizing: border-box;
+  &__photo {
+    height: auto;
+    width: 100%;
+    border: 3px solid transparent;
+    margin-top: 10px;
+    box-sizing: border-box;
+  }
 }
