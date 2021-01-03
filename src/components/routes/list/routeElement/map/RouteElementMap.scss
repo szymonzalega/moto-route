@@ -1,24 +1,27 @@
 @use "styles/colors";
 @use "styles/mixins";
 
-.route__map {
-  width: 100%;
-  height: 400px;
-  background-color: #e5e5e5;
-  @include mixins.flexbox;
-  @include mixins.justify-content(center);
-  align-items: center;
-}
+.route {
+  &__map {
+    width: 100%;
+    height: 400px;
+    background-color: #e5e5e5;
+    @include mixins.flexbox;
+    @include mixins.justify-content(center);
+    align-items: center;
 
-.route__map > .MuiCircularProgress-colorPrimary {
-  color: colors.$primary-color;
-}
+    > .MuiCircularProgress-colorPrimary {
+      color: colors.$primary-color;
+    }
 
-.route__iframe {
-  border: 0;
-  width: 100%;
-  height: 100%;
-}
-.route__iframe--hidden {
-  display: none;
+    &__iframe {
+      border: 0;
+      width: 100%;
+      height: 100%;
+
+      &--hidden {
+        display: none;
+      }
+    }
+  }
 }
