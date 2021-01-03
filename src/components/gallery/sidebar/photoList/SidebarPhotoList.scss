@@ -3,7 +3,7 @@
 
 .sidebarPhotoList {
   display: grid;
-  flex-direction: row;
+  @include mixins.flex-direction(row);
   justify-content: space-between;
   flex-wrap: wrap;
   grid-template-columns: repeat(2, 1fr);

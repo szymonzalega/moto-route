@@ -23,7 +23,7 @@ input[type="file"] {
 
 .sidebarUploadPhoto__uploadButton {
   @include mixins.flexbox;
-  flex-direction: row;
+  @include mixins.flex-direction(row);
   width: 100%;
   border: 2px solid colors.$grey-color;
   color: colors.$grey-color;

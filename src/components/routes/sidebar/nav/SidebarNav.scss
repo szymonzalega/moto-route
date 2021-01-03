@@ -2,8 +2,8 @@
 
 .sidebarNav {
   @include mixins.flexbox;
+  @include mixins.flex-direction(column);
   width: 100%;
-  flex-direction: column;
   position: relative;
   margin-bottom: 30px;
 }
@@ -20,8 +20,8 @@
 
 .sidebarNav__header {
   @include mixins.flexbox;
+  @include mixins.flex-direction(row);
   width: 100%;
-  flex-direction: row;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
@@ -34,7 +34,7 @@
 
 .header__buttonRow {
   @include mixins.flexbox;
-  flex-direction: row;
+  @include mixins.flex-direction(row);
   margin-right: -10px;
 }
 

@@ -4,7 +4,7 @@
 .sidebar {
   width: 400px;
   @include mixins.flexbox;
-  flex-direction: column;
+  @include mixins.flex-direction(column);
   width: 400px;
   height: calc(100vh - 80px);
   background-color: colors.$white-color;

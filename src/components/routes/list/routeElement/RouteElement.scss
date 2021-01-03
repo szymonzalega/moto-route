@@ -3,7 +3,7 @@
 
 .route {
   @include mixins.flexbox;
-  flex-direction: column;
+  @include mixins.flex-direction(column);
   width: 100%;
   background-color: colors.$white-color;
   border-radius: 10px;
@@ -14,7 +14,7 @@
 
 .route__details-row {
   @include mixins.flexbox;
-  flex-direction: row;
+  @include mixins.flex-direction(row);
   align-items: center;
   padding: 11px 5px;
 }

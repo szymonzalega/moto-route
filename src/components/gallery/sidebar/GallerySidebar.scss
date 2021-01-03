@@ -2,7 +2,7 @@
 
 .gallerySidebar {
   @include mixins.flexbox;
-  flex-direction: row;
+  @include mixins.flex-direction(row);
   justify-content: space-between;
   flex-wrap: wrap;
 }

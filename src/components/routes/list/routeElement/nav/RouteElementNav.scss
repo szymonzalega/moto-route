@@ -2,14 +2,14 @@
 
 .routeNav {
   @include mixins.flexbox;
-  flex-direction: row;
+  @include mixins.flex-direction(row);
   padding: 10px;
   justify-content: space-between;
 }
 
 .routeNav__left {
   @include mixins.flexbox;
-  flex-direction: row;
+  @include mixins.flex-direction(row);
 }
 
 .left__icon {
@@ -17,7 +17,7 @@
 }
 .left__title {
   @include mixins.flexbox;
-  flex-direction: column;
+  @include mixins.flex-direction(column);
   justify-content: flex-start;
 }
 .title__name {

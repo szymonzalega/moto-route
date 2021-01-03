@@ -2,7 +2,7 @@
 
 .route {
   @include mixins.flexbox;
-  flex-direction: column;
+  @include mixins.flex-direction(column);
   width: 700px;
   background-color: #e5e5e5;
   border-radius: 10px;
@@ -10,7 +10,7 @@
 
 .route__nav {
   @include mixins.flexbox;
-  flex-direction: row;
+  @include mixins.flex-direction(row);
   margin: 10px;
   justify-content: space-between;
 }
@@ -20,7 +20,7 @@
 }
 .nav__title {
   @include mixins.flexbox;
-  flex-direction: column;
+  @include mixins.flex-direction(column);
   justify-content: flex-start;
 }
 .title__name {

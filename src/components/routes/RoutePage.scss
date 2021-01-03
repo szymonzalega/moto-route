@@ -3,7 +3,7 @@
 
 .routePage {
   @include mixins.flexbox;
-  flex-direction: row;
+  @include mixins.flex-direction(row);
   /* align-items: center; */
   background-color: colors.$background-color;
 }
@@ -14,7 +14,7 @@
 }
 .routePage__list {
   @include mixins.flexbox;
-  flex-direction: column;
+  @include mixins.flex-direction(column);
   align-items: center;
   width: 700px;
 }

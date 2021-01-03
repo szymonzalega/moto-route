@@ -2,7 +2,7 @@
 
 .sidebar__detailsRow {
   @include mixins.flexbox;
-  flex-direction: row;
+  @include mixins.flex-direction(row);
   margin-bottom: 10px;
 }
 

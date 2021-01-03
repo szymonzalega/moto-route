@@ -3,7 +3,7 @@
 
 .galleryPage {
   @include mixins.flexbox;
-  flex-direction: row;
+  @include mixins.flex-direction(row);
 }
 
 .galleryPage__infoSection {
