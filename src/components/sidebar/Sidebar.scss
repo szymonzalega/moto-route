@@ -20,33 +20,14 @@
   transition-duration: 0.2s;
   transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
   overflow-y: overlay;
-}
 
-.sidebar--visible {
-  transform: translateX(0);
-}
+  &--visible {
+    transform: translateX(0);
+  }
 
-.sidebar .route__map {
-  height: 200px;
-  margin-top: 30px;
-}
-
-/* width */
-::-webkit-scrollbar {
-  width: 5px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: colors.$background-color;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: colors.$grey-color;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: colors.$grey-color;
+  .route__map {
+    height: 200px;
+    margin-top: 30px;
+  }
+  
 }

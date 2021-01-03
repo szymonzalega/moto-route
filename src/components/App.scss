@@ -1,0 +1,21 @@
+@use "styles/colors";
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: colors.$background-color;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: colors.$grey-color;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: colors.$grey-color;
+}

@@ -1,4 +1,5 @@
 import React from "react";
+import "./App.scss"
 import Signup from "./auth/Signup";
 import { Container } from "react-bootstrap";
 import AuthProvider from "../contexts/AuthContext";
