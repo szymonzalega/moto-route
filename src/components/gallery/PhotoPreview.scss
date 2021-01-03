@@ -5,7 +5,7 @@
   @include mixins.flexbox;
   flex: 1;
   @include mixins.flex-direction(column);
-  justify-content: space-between;
+  @include mixins.justify-content(space-between);
   align-items: center;
   height: calc(100vh - 80px);
   background-color: colors.$background-black-color;
@@ -15,7 +15,7 @@
   flex: 1 1;
   @include mixins.flexbox;
   width: 100%;
-  justify-content: center;
+  @include mixins.justify-content(center);
   padding: 50px;
   align-items: center;
 }

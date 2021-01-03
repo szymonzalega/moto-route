@@ -30,7 +30,7 @@ input[type="file"] {
   border-radius: 0.25rem;
   background-color: transparent;
   padding: 16px;
-  justify-content: center;
+  @include mixins.justify-content(center);
   align-items: center;
   font-weight: 600;
   cursor: pointer;
@@ -51,7 +51,7 @@ input[type="file"] {
 
 .sidebarUploadPhoto__uploadedInfoSection {
   @include mixins.flexbox;
-  justify-content: center;
+  @include mixins.justify-content(center);
   align-items: center;
 }
 

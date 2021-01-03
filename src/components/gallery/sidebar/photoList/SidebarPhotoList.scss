@@ -4,7 +4,7 @@
 .sidebarPhotoList {
   display: grid;
   @include mixins.flex-direction(row);
-  justify-content: space-between;
+  @include mixins.justify-content(space-between);
   flex-wrap: wrap;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
@@ -13,7 +13,7 @@
 
 .sidebarPhotoList__infoSection {
   @include mixins.flexbox;
-  justify-content: center;
+  @include mixins.justify-content(center);
   align-items: center;
   margin: 2em;
 }

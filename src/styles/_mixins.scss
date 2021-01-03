@@ -22,6 +22,14 @@
   }
 }
 
+@mixin justify-content($justify) {
+  -webkit-justify-content: $justify;
+     -moz-justify-content: $justify;
+      -ms-justify-content: $justify;
+          justify-content: $justify;
+            -ms-flex-pack: $justify;
+}
+
 @mixin box-shadow($h: 10px, $v: 10px, $b: 0px, $s: 0px, $c: #000000) {
   -webkit-box-shadow: $h $v $b $s $c;
   -moz-box-shadow: $h $v $b $s $c;

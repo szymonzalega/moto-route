@@ -5,8 +5,7 @@
   min-height: 80px;
   background-color: colors.$white-color;
   @include mixins.flexbox;
-  @include mixins.flex-direction(row);
-  justify-content: space-between;
+  @include mixins.justify-content(space-between);
   flex-wrap: wrap;
   border-bottom: 1px solid #c2c2c2;
   position: sticky;
@@ -40,7 +39,7 @@
     left: 0;
     width: 100%;
     bottom: 0;
-    justify-content: center;
+    @include mixins.justify-content(center);
   }
 
   &__element {

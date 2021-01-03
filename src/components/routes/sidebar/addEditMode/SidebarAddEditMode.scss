@@ -3,7 +3,7 @@
 
 .sidebarAddEditMode__preloader {
   @include mixins.flexbox;
-  justify-content: center;
+  @include mixins.justify-content(center);
 }
 
 .sidebarAddEditMode__preloader > .MuiCircularProgress-colorPrimary {

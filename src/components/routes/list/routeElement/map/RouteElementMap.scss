@@ -6,7 +6,7 @@
   height: 400px;
   background-color: #e5e5e5;
   @include mixins.flexbox;
-  justify-content: center;
+  @include mixins.justify-content(center);
   align-items: center;
 }
 

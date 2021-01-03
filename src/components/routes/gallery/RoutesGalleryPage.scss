@@ -8,7 +8,7 @@
 
 .galleryPage__infoSection {
   @include mixins.flexbox;
-  justify-content: center;
+  @include mixins.justify-content(center);
   align-items: center;
 }
 

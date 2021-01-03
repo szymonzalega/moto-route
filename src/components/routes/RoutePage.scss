@@ -9,7 +9,7 @@
 }
 .routePage__buttonRow {
   margin: 20px 0;
-  justify-content: flex-start;
+  @include mixins.justify-content(flex-start);
   width: 100%;
 }
 .routePage__list {

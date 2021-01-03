@@ -4,7 +4,7 @@
   @include mixins.flexbox;
   @include mixins.flex-direction(row);
   padding: 10px;
-  justify-content: space-between;
+  @include mixins.justify-content(space-between);
 }
 
 .routeNav__left {
@@ -18,7 +18,7 @@
 .left__title {
   @include mixins.flexbox;
   @include mixins.flex-direction(column);
-  justify-content: flex-start;
+  @include mixins.justify-content(flex-start);
 }
 .title__name {
   font-size: 1.1em;

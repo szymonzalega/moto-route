@@ -13,7 +13,7 @@
 .photoSection__load {
   @include mixins.flexbox;
   width: 100%;
-  justify-content: center;
+  @include mixins.justify-content(center);
   align-items: center;
 }
 
@@ -24,7 +24,7 @@
 .photoSection__emptyGallery {
   @include mixins.flexbox;
   width: 100%;
-  justify-content: center;
+  @include mixins.justify-content(center);
   align-items: center;
 }
 
@@ -67,5 +67,5 @@
   );
   right: 0;
   top: 0;
-  justify-content: flex-end;
+  @include mixins.justify-content(flex-end);
 }
