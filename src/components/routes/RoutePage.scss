@@ -17,6 +17,7 @@
     @include mixins.flex-direction(column);
     align-items: center;
     width: 700px;
+    padding: 0 10px;
 
     > .MuiCircularProgress-colorPrimary {
       color: colors.$primary-color;

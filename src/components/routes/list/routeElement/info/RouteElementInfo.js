@@ -11,18 +11,21 @@ export default function RouteElementInfo({ route }) {
     <div className="route__detailsRow">
       <div className="detailsRow__item">
         <EqualizerIcon />
-        <span className="item__label">Level:</span>
-        <span className="item__value">{level}</span>
+        <span className="item__label">
+          Level:&nbsp;<strong>{level}</strong>
+        </span>
       </div>
       <div className="detailsRow__item">
         <TimelineIcon />
-        <span className="item__label">Length:</span>
-        <span className="item__value">{length}km</span>
+        <span className="item__label">
+          Length:&nbsp;<strong>{length}</strong>
+        </span>
       </div>
       <div className="detailsRow__item">
         <PanoramaIcon />
-        <span className="item__label">Type:</span>
-        <span className="item__value">{routeType}</span>
+        <span className="item__label">
+          Type:&nbsp;<strong>{routeType}</strong>
+        </span>
       </div>
     </div>
   );
