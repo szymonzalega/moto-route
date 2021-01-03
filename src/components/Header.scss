@@ -21,7 +21,7 @@
 
   &__left {
     @extend %flex-row;
-    flex-wrap: wrap;
+    // flex-wrap: wrap;
   }
 
   &__right {
@@ -101,8 +101,23 @@
 
   @media only screen and (max-width: 685px) {
     &__element {
+      width: 33vw;
+      padding: 0;
+      @include mixins.flex-direction(column);
+      @include mixins.justify-content(center);
+    }
+
+    &__text {
+      margin-left: 0;
+    }
+
+    &__left {
       width: 100vw;
-      padding: 15px 35px;
+      @include mixins.justify-content(space-between);
+    }
+
+    &__right {
+      display: none;
     }
   }
 }
