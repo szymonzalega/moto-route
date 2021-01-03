@@ -9,105 +9,110 @@ input[type="file"] {
   position: relative;
   margin-bottom: 30px;
   padding-bottom: 30px;
+
+  &:after {
+    content: "";
+    position: absolute;
+    left: -20px;
+    bottom: 0;
+    height: 1px;
+    width: calc(100% + 40px);
+    border-bottom: 1px solid #e7e7e7;
+  }
+
+  &__uploadButton {
+    @include mixins.flexbox;
+    @include mixins.flex-direction(row);
+    width: 100%;
+    border: 2px solid colors.$grey-color;
+    color: colors.$grey-color;
+    border-radius: 0.25rem;
+    background-color: transparent;
+    padding: 16px;
+    @include mixins.justify-content(center);
+    align-items: center;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 100ms;
+  }
+
+  &:hover {
+    border-color: colors.$primary-color;
+    color: colors.$primary-color;
+  }
+
+  &__uploadedPhotoRow {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  &__uploadedInfoSection {
+    @include mixins.flexbox;
+    @include mixins.justify-content(center);
+    align-items: center;
+
+    > .MuiCircularProgress-colorPrimary {
+      color: colors.$primary-color;
+    }
+
+    &--error {
+      margin: 1em 0;
+      color: colors.$error-color;
+    }
+  }
+
+  &__uploadedPhoto {
+    height: 110px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: initial;
+    background-color: colors.$grey-color;
+    height: 5rem;
+    position: relative;
+
+    &::before {
+      opacity: 0;
+      content: "";
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      bottom: 0px;
+      left: 0px;
+      background-color: colors.$white-color;
+      background-color: rgba(256, 256, 256, 0.3);
+    }
+
+    &:hover .uploadedPhoto__remove {
+      opacity: 1;
+    }
+
+    &:hover::before {
+      opacity: 1;
+    }
+  }
 }
 
-.sidebarUploadPhoto:after {
-  content: "";
-  position: absolute;
-  left: -20px;
-  bottom: 0;
-  height: 1px;
-  width: calc(100% + 40px);
-  border-bottom: 1px solid #e7e7e7;
-}
+.uploadedPhoto {
+  &__remove {
+    opacity: 0;
+    position: absolute;
+    top: -8px;
+    right: -6px;
+    border-radius: 100%;
+    transition: opacity 100ms ease-in-out !important;
+    cursor: pointer;
 
-.sidebarUploadPhoto__uploadButton {
-  @include mixins.flexbox;
-  @include mixins.flex-direction(row);
-  width: 100%;
-  border: 2px solid colors.$grey-color;
-  color: colors.$grey-color;
-  border-radius: 0.25rem;
-  background-color: transparent;
-  padding: 16px;
-  @include mixins.justify-content(center);
-  align-items: center;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 100ms;
-}
+    &:hover {
+      > .MuiSvgIcon-root {
+        color: colors.$primary-color;
+      }
+    }
 
-.sidebarUploadPhoto__uploadButton:hover {
-  border-color: colors.$primary-color;
-  color: colors.$primary-color;
-}
-
-.sidebarUploadPhoto__uploadedPhotoRow {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-.sidebarUploadPhoto__uploadedInfoSection {
-  @include mixins.flexbox;
-  @include mixins.justify-content(center);
-  align-items: center;
-}
-
-.sidebarUploadPhoto__uploadedInfoSection--error {
-  margin: 1em 0;
-  color: colors.$error-color;
-}
-
-.sidebarUploadPhoto__uploadedInfoSection > .MuiCircularProgress-colorPrimary {
-  color: colors.$primary-color;
-}
-
-.sidebarUploadPhoto__uploadedPhoto {
-  height: 110px;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: initial;
-  background-color: colors.$grey-color;
-  height: 5rem;
-  position: relative;
-}
-
-.sidebarUploadPhoto__uploadedPhoto::before {
-  opacity: 0;
-  content: "";
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  left: 0px;
-  background-color: colors.$white-color;
-  background-color: rgba(256, 256, 256, 0.3);
-}
-
-.sidebarUploadPhoto__uploadedPhoto:hover .uploadedPhoto__remove {
-  opacity: 1;
-}
-.sidebarUploadPhoto__uploadedPhoto:hover::before {
-  opacity: 1;
-}
-
-.uploadedPhoto__remove {
-  opacity: 0;
-  position: absolute;
-  top: -8px;
-  right: -6px;
-  border-radius: 100%;
-  transition: opacity 100ms ease-in-out !important;
-  cursor: pointer;
-}
-
-.uploadedPhoto__remove > .MuiSvgIcon-root {
-  background-color: colors.$white-color;
-  border-radius: 100%;
-}
-
-.uploadedPhoto__remove:hover > .MuiSvgIcon-root {
-  color: colors.$primary-color;
+    > .MuiSvgIcon-root {
+      background-color: colors.$white-color;
+      border-radius: 100%;
+    }
+  }
 }
