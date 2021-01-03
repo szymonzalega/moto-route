@@ -4,22 +4,22 @@
 .galleryPage {
   @include mixins.flexbox;
   @include mixins.flex-direction(row);
-}
 
-.galleryPage__infoSection {
-  @include mixins.flexbox;
-  @include mixins.justify-content(center);
-  align-items: center;
-}
+  &__infoSection {
+    @include mixins.flexbox;
+    @include mixins.justify-content(center);
+    align-items: center;
 
-.galleryPage__infoSection--error {
-  color: colors.$error-color;
-}
+    &--error {
+      color: colors.$error-color;
+    }
 
-.galleryPage__infoSection > .MuiCircularProgress-colorPrimary {
-  color: colors.$primary-color;
-}
+    > .MuiCircularProgress-colorPrimary {
+      color: colors.$primary-color;
+    }
+  }
 
-.galleryPage .sidebar {
-  margin: 0;
+  .sidebar {
+    margin: 0;
+  }
 }
