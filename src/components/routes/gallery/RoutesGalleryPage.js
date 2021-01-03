@@ -5,7 +5,7 @@ import {
   savePhotosInRoute,
   getRoutePhotosByRouteId,
 } from "../../../services/routeAPI";
-import PhotoPreview from "../../gallery/PhotoPreview";
+import PhotoPreview from "../../gallery/preview/PhotoPreview";
 import Sidebar from "../../sidebar/Sidebar";
 import useSidebarState from "../../sidebar/useSidebarState";
 import GallerySidebar from "../../gallery/sidebar/GallerySidebar";

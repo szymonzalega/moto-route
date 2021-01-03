@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./PhotoPreview.scss";
 import IconButton from "@material-ui/core/IconButton";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import { useDispatch, useSelector } from "react-redux";
-import { selectPhoto } from "../../redux/actions/galleryActions";
+import { selectPhoto } from "../../../redux/actions/galleryActions";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 export default function PhotoPreview() {
   const selectedPhoto = useSelector((state) => state.gallery.selectedPhoto);
+  const fetchStatus = useSelector((state) => state.gallery.status);
   const dispatch = useDispatch();
 
   const photoNavigation = {
@@ -22,10 +24,20 @@ export default function PhotoPreview() {
   const isFirstPhoto = selectedPhoto.isFirst;
   const isLastPhoto = selectedPhoto.isLast;
 
-  return (
-    <div className="gallery">
-      <div className="gallery__bigPhoto">
-        {selectedPhoto ? (
+  let previewContent;
+
+  if (fetchStatus === "pending") {
+    previewContent = (
+        <CircularProgress />
+    );
+  } else if (fetchStatus === "failed") {
+    previewContent = (
+      <div className="gallery__error">Error while showing photo</div>
+    );
+  } else if (fetchStatus === "succeeded") {
+    previewContent = (
+      <>
+        {selectedPhoto.id ? (
           <>
             <IconButton
               style={{ visibility: `${isFirstPhoto ? "hidden" : "visible"}` }}
@@ -57,7 +69,13 @@ export default function PhotoPreview() {
             Gallery is empty. Upload new photos :)
           </span>
         )}
-      </div>
+      </>
+    );
+  }
+
+  return (
+    <div className="gallery">
+      <div className="gallery__bigPhoto">{previewContent}</div>
     </div>
   );
 }

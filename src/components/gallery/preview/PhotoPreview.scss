@@ -1,0 +1,58 @@
+@use "styles/colors";
+@use "styles/mixins";
+
+.gallery {
+  @include mixins.flex(1);
+  @include mixins.flexbox;
+  @include mixins.flex-direction(column);
+  @include mixins.justify-content(space-between);
+  align-items: center;
+  height: calc(100vh - 80px);
+  background-color: colors.$background-black-color;
+
+  &__bigPhoto {
+    @include mixins.flex(1, 1);
+    @include mixins.flexbox;
+    @include mixins.justify-content(center);
+    width: 100%;
+    padding: 50px;
+    align-items: center;
+
+    .MuiSvgIcon-root {
+      color: colors.$grey-color;
+    }
+  }
+
+  &__photoList {
+    @include mixins.flexbox;
+    position: relative;
+    height: auto;
+    width: 100%;
+
+    &__photo {
+      margin-right: 10px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  &__emptyInfo {
+    color: colors.$white-color;
+  }
+  
+  &__error {
+    color: colors.$error-color;
+  }
+}
+
+.bigPhoto {
+  &__photo {
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+  }
+}
