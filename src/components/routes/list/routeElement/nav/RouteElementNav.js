@@ -22,7 +22,8 @@ export default function RouteElementNav({ route }) {
     setAnchorEl(e.currentTarget);
   };
 
-  const handleClose = () => {
+  const handleClose = (e) => {
+    e.stopPropagation();
     setAnchorEl(null);
   };
 
@@ -47,29 +48,27 @@ export default function RouteElementNav({ route }) {
         </div>
       </div>
 
-      <div className="routeNav__options">
-        <div>
-          <IconButton
-            aria-label="more"
-            aria-controls="simple-menu"
-            aria-haspopup="true"
-            onClick={handleClick}
-          >
-            <MoreVertIcon />
-          </IconButton>
-          <Menu
-            id="simple-menu"
-            anchorEl={anchorEl}
-            keepMounted
-            open={Boolean(anchorEl)}
-            onClose={handleClose}
-            getContentAnchorEl={null}
-            anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-            transformOrigin={{ vertical: "top", horizontal: "right" }}
-          >
-            <MenuItem onClick={handleDeleteRoute}>Delete</MenuItem>
-          </Menu>
-        </div>
+      <div>
+        <IconButton
+          aria-label="more"
+          aria-controls="simple-menu"
+          aria-haspopup="true"
+          onClick={handleClick}
+        >
+          <MoreVertIcon />
+        </IconButton>
+        <Menu
+          id="simple-menu"
+          anchorEl={anchorEl}
+          keepMounted
+          open={Boolean(anchorEl)}
+          onClose={handleClose}
+          getContentAnchorEl={null}
+          anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+          transformOrigin={{ vertical: "top", horizontal: "right" }}
+        >
+          <MenuItem onClick={handleDeleteRoute}>Delete</MenuItem>
+        </Menu>
       </div>
     </div>
   );

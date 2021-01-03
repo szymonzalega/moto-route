@@ -1,3 +1,4 @@
+@use "styles/colors";
 @use "styles/mixins";
 
 .routeNav {
@@ -5,34 +6,38 @@
   @include mixins.flex-direction(row);
   padding: 10px;
   @include mixins.justify-content(space-between);
+
+  &__left {
+    @include mixins.flexbox;
+    @include mixins.flex-direction(row);
+  }
 }
 
-.routeNav__left {
-  @include mixins.flexbox;
-  @include mixins.flex-direction(row);
+.left {
+  &__icon {
+    margin-right: 10px;
+  }
+
+  &__title {
+    @include mixins.flexbox;
+    @include mixins.flex-direction(column);
+    @include mixins.justify-content(flex-start);
+  }
 }
 
-.left__icon {
-  margin-right: 10px;
-}
-.left__title {
-  @include mixins.flexbox;
-  @include mixins.flex-direction(column);
-  @include mixins.justify-content(flex-start);
-}
-.title__name {
-  font-size: 1.1em;
-  font-weight: 500;
-}
-.title__author {
-  font-size: 0.9em;
-  font-weight: 400;
-  margin-top: -5px;
+.title {
+  &__name {
+    font-size: 1.1em;
+    font-weight: 500;
+  }
+
+  &__author {
+    font-size: 0.9em;
+    font-weight: 400;
+    margin-top: -5px;
+  }
 }
 
 .MuiPaper-root {
-  background-color: #e5e5e5 !important;
-}
-
-.routeNav__options {
+  background-color: colors.$light-grey-color !important;
 }

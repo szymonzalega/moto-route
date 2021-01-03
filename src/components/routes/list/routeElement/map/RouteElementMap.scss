@@ -5,7 +5,7 @@
   &__map {
     width: 100%;
     height: 400px;
-    background-color: #e5e5e5;
+    background-color: colors.$light-grey-color;
     @include mixins.flexbox;
     @include mixins.justify-content(center);
     align-items: center;
@@ -13,15 +13,15 @@
     > .MuiCircularProgress-colorPrimary {
       color: colors.$primary-color;
     }
+  }
 
-    &__iframe {
-      border: 0;
-      width: 100%;
-      height: 100%;
+  &__iframe {
+    border: 0;
+    width: 100%;
+    height: 100%;
 
-      &--hidden {
-        display: none;
-      }
+    &--hidden {
+      display: none;
     }
   }
 }
