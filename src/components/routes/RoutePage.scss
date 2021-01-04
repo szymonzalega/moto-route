@@ -30,12 +30,24 @@
     }
   }
 
-  &__sidebar {
-    width: 400px;
-    width: 400px;
-    height: calc(100vh - 80px);
-    position: sticky;
-    top: 80px;
-    margin-right: 50px;
+  @media only screen and (max-width: 600px) {
+    .sidebar {
+      width: 100vw;
+      border-right: none;
+    }
+  }
+
+  @media only screen and (max-width: 1000px) {
+    .main {
+      justify-content: flex-end;
+      padding-left: 0;
+    }
+  }
+  
+  @media only screen and (max-width: 600px) {
+    .main {
+      justify-content: center;
+      padding-left: 0;
+    }
   }
 }

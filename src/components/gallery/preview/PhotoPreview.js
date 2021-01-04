@@ -40,7 +40,7 @@ export default function PhotoPreview() {
         {selectedPhoto.id ? (
           <>
             <IconButton
-              style={{ visibility: `${isFirstPhoto ? "hidden" : "visible"}` }}
+              style={{ visibility: `${isFirstPhoto ? "hidden" : "visible"}`, left: 0 }}
               aria-label="more"
               aria-controls="simple-menu"
               aria-haspopup="true"
@@ -55,7 +55,7 @@ export default function PhotoPreview() {
             ></div>
 
             <IconButton
-              style={{ visibility: `${isLastPhoto ? "hidden" : "visible"}` }}
+              style={{ visibility: `${isLastPhoto ? "hidden" : "visible"}`, right: 0 }}
               aria-label="more"
               aria-controls="simple-menu"
               aria-haspopup="true"

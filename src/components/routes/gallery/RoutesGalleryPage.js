@@ -5,6 +5,7 @@ import {
   savePhotosInRoute,
   getRoutePhotosByRouteId,
 } from "../../../services/routeAPI";
+import Content from "../../content/Content";
 import PhotoPreview from "../../gallery/preview/PhotoPreview";
 import Sidebar from "../../sidebar/Sidebar";
 import useSidebarState from "../../sidebar/useSidebarState";
@@ -95,7 +96,7 @@ export default function RoutesGalleryPage(props) {
           isMorePhotosAvailable={lastVisible}
         />
       </Sidebar>
-      {photos && <PhotoPreview />}
+      <Content>{photos && <PhotoPreview />}</Content>
     </div>
   );
 }

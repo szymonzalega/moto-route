@@ -17,7 +17,6 @@ export default function SidebarUploadPhoto({ onSubmit }) {
     setPhotoToUpload([...photoToUpload, ...uploadedFiles]);
   };
 
-  const isUploadedPhoto = photoToUpload.length > 0;
   const isUploadSectionShowing =
     photoToUpload.length > 0 ||
     uploadStatus === "pending" ||

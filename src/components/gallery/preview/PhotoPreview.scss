@@ -15,8 +15,12 @@
     @include mixins.flexbox;
     @include mixins.justify-content(center);
     width: 100%;
-    padding: 50px;
     align-items: center;
+
+    .MuiIconButton-root {
+      position: absolute;
+      top: calc(50% - 37px);
+    }
 
     .MuiSvgIcon-root {
       color: colors.$grey-color;
@@ -41,7 +45,7 @@
   &__emptyInfo {
     color: colors.$white-color;
   }
-  
+
   &__error {
     color: colors.$error-color;
   }

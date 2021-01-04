@@ -5,7 +5,7 @@
   display: none;
   @include mixins.flex-direction(column);
   z-index: 2;
-  width: 400px;
+  min-width: 400px;
   height: calc(100vh - 80px);
   background-color: colors.$white-color;
   position: fixed;
@@ -27,9 +27,9 @@
   }
 }
 
-@media only screen and (max-width: 600px) {
-  .sidebar {
-    width: 100vw;
-    border-right: none;
-  }
-}
+// @media only screen and (max-width: 600px) {
+//   .sidebar {
+//     width: 100vw;
+//     border-right: none;
+//   }
+// }
