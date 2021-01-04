@@ -1,13 +1,15 @@
 @use "styles/colors";
 @use "styles/mixins";
 
+$header-height: 80px;
+
 %flex-row {
   @include mixins.flexbox;
   @include mixins.flex-direction(row);
 }
 
 .header {
-  min-height: 80px;
+  min-height: $header-height;
   background-color: colors.$white-color;
   @include mixins.flexbox;
   @include mixins.justify-content(space-between);

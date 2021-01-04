@@ -1,16 +1,17 @@
 @use "styles/colors";
 @use "styles/mixins";
+@use "../Header.scss";
 
 .sidebar {
   display: none;
   @include mixins.flex-direction(column);
   z-index: 2;
   min-width: 400px;
-  height: calc(100vh - 80px);
+  height: calc(100vh - #{Header.$header-height});
   background-color: colors.$white-color;
   position: fixed;
   padding: 20px 20px 10px 20px;
-  top: 80px;
+  top: Header.$header-height;
   @include mixins.box-shadow(5px, 0px, 8px, -9px, colors.$black-color);
   @include mixins.box-shadow(5px, 0px, 8px, -9px, rgba(0, 0, 0, 0.75));
   border-right: 1px solid #c2c2c2;
@@ -26,10 +27,3 @@
     @include mixins.flexbox;
   }
 }
-
-// @media only screen and (max-width: 600px) {
-//   .sidebar {
-//     width: 100vw;
-//     border-right: none;
-//   }
-// }
