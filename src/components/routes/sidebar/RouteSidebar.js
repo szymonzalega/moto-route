@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "./RouteSidebar.scss";
 import { useSelector } from "react-redux";
 import SidebarNav from "../sidebar/nav/SidebarNav";
 import SidebarDetailsRow from "../sidebar/detailsRow/SidebarDetailsRow";
@@ -55,9 +56,9 @@ export default function RouteSidebar() {
   );
 
   return (
-    <>
+    <div className="routeSidebar">
       {sidebar.mode === "details" && detailsView}
       {(sidebar.mode === "create" || sidebar.mode === "edit") && addEditMode}
-    </>
+    </div>
   );
 }

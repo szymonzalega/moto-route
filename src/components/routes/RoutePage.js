@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchRoutes } from "../../redux/actions/routeActions";
 import { useAuth } from "../../contexts/AuthContext";
 import RouteList from "./list/RouteList";
+import Content from "../content/Content";
 import Sidebar from "../sidebar/Sidebar";
 import useSidebarState from "../sidebar/useSidebarState";
 import RouteSidebar from "./sidebar/RouteSidebar";
@@ -58,15 +59,16 @@ export default function RoutePage() {
             <Sidebar>
               <RouteSidebar />
             </Sidebar>
-
-            <div className="routePage__list">
-              <div className="routePage__buttonRow">
-                <button className="btn btn-primary" onClick={createNewRoute}>
-                  Add new route
-                </button>
+            <Content>
+              <div className="routePage__list">
+                <div className="routePage__buttonRow">
+                  <button className="btn btn-primary" onClick={createNewRoute}>
+                    Add new route
+                  </button>
+                </div>
+                {routeListContent}
               </div>
-              {routeListContent}
-            </div>
+            </Content>
           </div>
         </Route>
         <Route path={`${path}/gallery/:id`}>

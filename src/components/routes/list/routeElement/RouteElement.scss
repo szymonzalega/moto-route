@@ -4,6 +4,7 @@
 .route {
   @include mixins.flexbox;
   @include mixins.flex-direction(column);
+  z-index: 0;
   width: 100%;
   background-color: colors.$white-color;
   border-radius: 10px;

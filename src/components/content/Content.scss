@@ -1,0 +1,25 @@
+@use "styles/colors";
+@use "styles/mixins";
+
+.main {
+  @include mixins.flexbox;
+  @include mixins.flex-direction(row);
+  position: relative;
+  justify-content: flex-start;
+  padding-left: 450px;
+  width: 100%;
+}
+
+@media only screen and (max-width: 1000px) {
+  .main {
+    justify-content: flex-end;
+    padding-left: 0;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .main {
+    justify-content: center;
+    padding-left: 0;
+  }
+}
