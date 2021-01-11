@@ -63,8 +63,22 @@ export default function SidebarAddEditMode({ routeId }) {
     if (form.checkValidity() === false) {
       e.preventDefault();
       e.stopPropagation();
+      setValidated(true);
+      return;
     }
-    setValidated(true);
+
+    const parseMapUrl = (code) => {
+      try {
+        const wrapper = document.createElement("div");
+        wrapper.innerHTML = code;
+        const iframe = wrapper.firstChild;
+        return iframe.getAttribute("src");
+      } catch (e) {
+        return null;
+      }
+    };
+
+    let mapUrl = parseMapUrl(url.current.value);
 
     let routeToSave = {
       ...route,
@@ -73,14 +87,19 @@ export default function SidebarAddEditMode({ routeId }) {
       length: length.current.value,
       level: level.current.value,
       routeType: routeType.current.value,
-      url: url.current.value,
+      url: mapUrl,
     };
 
     if (route.id) {
       routeToSave.id = route.id;
     }
 
-    dispatch(saveRoute(currentUser, routeToSave));
+    if (routeToSave.url) {
+      dispatch(saveRoute(currentUser, routeToSave));
+    } else {
+      url.current.setCustomValidity("Url incorrect");
+      setValidated(true);
+    }
   };
 
   let sidebarContent;
@@ -104,8 +123,6 @@ export default function SidebarAddEditMode({ routeId }) {
           <Form.Label>Description</Form.Label>
           <Form.Control
             ref={description}
-            // as="textarea"
-            // rows={3}
             defaultValue={route.description}
             required
           ></Form.Control>
@@ -123,7 +140,7 @@ export default function SidebarAddEditMode({ routeId }) {
             required
           ></Form.Control>
           <Form.Control.Feedback type="invalid">
-            To pole jest wymagane
+          This field is required
           </Form.Control.Feedback>
         </Form.Group>
 
@@ -162,7 +179,7 @@ export default function SidebarAddEditMode({ routeId }) {
             required
           ></Form.Control>
           <Form.Control.Feedback type="invalid">
-            This field is required
+            This field is incorrect
           </Form.Control.Feedback>
         </Form.Group>
 

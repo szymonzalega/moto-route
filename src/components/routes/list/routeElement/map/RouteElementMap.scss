@@ -5,13 +5,26 @@
   &__map {
     width: 100%;
     height: 400px;
+    position: relative;
     background-color: colors.$light-grey-color;
     @include mixins.flexbox;
     @include mixins.justify-content(center);
     align-items: center;
+    transition: all 100ms ease-in;
 
     > .MuiCircularProgress-colorPrimary {
       color: colors.$primary-color;
+    }
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: none;
+      width: 100%;
+      height: 100%;
+      background-color: rgb(228 228 228 / 50%);
     }
   }
 

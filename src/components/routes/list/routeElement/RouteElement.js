@@ -4,6 +4,7 @@ import RouteElementNav from "./nav/RouteElementNav";
 import RouteElementInfo from "./info/RouteElementInfo";
 import RouteElementMap from "./map/RouteElementMap";
 import useSidebarState from "../../../sidebar/useSidebarState";
+import Tooltip from "@material-ui/core/Tooltip";
 
 export default function RouteElement({ route }) {
   const { openSidebar } = useSidebarState();
@@ -19,11 +20,13 @@ export default function RouteElement({ route }) {
 
   return (
     <>
-      <div className="route" onClick={() => showRouteDetails(route.id)}>
-        <RouteElementNav route={route} />
-        <RouteElementMap url={route.url} />
-        <RouteElementInfo route={route} />
-      </div>
+      <Tooltip title="Click for mode details" placement="top" arrow>
+        <div className="route" onClick={() => showRouteDetails(route.id)}>
+          <RouteElementNav route={route} />
+          <RouteElementMap url={route.url} />
+          <RouteElementInfo route={route} />
+        </div>
+      </Tooltip>
     </>
   );
 }
