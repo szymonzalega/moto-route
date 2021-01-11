@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Header.scss";
 import { useDispatch } from "react-redux";
 import { useAuth } from "../contexts/AuthContext";
-import * as userActions from "../redux/actions/userActions";
+import {userLogout} from "../redux/actions/userActions";
 import HomeIcon from "@material-ui/icons/Home";
 import TerrainIcon from "@material-ui/icons/Terrain";
 import PersonIcon from "@material-ui/icons/Person";
@@ -18,7 +18,7 @@ export default function Header() {
   async function handleLogout() {
     setError("");
     try {
-      dispatch(userActions.userLogout());
+      dispatch(userLogout());
       await logout();
       history.push("/login");
     } catch {

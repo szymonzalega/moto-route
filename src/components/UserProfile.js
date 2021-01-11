@@ -1,10 +1,28 @@
-import React from "react";
-import { Card } from "react-bootstrap";
+import React, { useState } from "react";
+import { Card, Button } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { Link } from "react-router-dom";
 
+import { useDispatch } from "react-redux";
+import { userLogout } from "../redux/actions/userActions";
+import { useHistory } from "react-router-dom";
+
 export default function UserProfile() {
-  const { currentUser } = useAuth();
+  const { currentUser, logout } = useAuth();
+  const history = useHistory();
+  const [error, setError] = useState("");
+  const dispatch = useDispatch();
+
+  async function handleLogout() {
+    setError("");
+    try {
+      dispatch(userLogout());
+      await logout();
+      history.push("/login");
+    } catch {
+      setError("Failed to log out");
+    }
+  }
 
   return (
     <Card>
@@ -18,6 +36,9 @@ export default function UserProfile() {
         >
           Update Profile
         </Link>
+        <Button className="btn btn-primary w-100 mt-3" onClick={handleLogout}>
+          Logout
+        </Button>
       </Card.Body>
     </Card>
   );

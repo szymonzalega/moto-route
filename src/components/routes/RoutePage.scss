@@ -5,6 +5,7 @@
   @include mixins.flexbox;
   @include mixins.flex-direction(row);
   background-color: colors.$background-color;
+  height: 100vh;
 
   &__buttonRow {
     margin: 20px 0;
