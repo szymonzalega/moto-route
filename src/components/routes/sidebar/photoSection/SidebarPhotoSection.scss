@@ -7,7 +7,6 @@
     @include mixins.flexbox;
     @include mixins.flex-direction(row);
     margin-top: 30px;
-    /* height: 132px; */
     padding-top: 5px;
   }
 }
@@ -36,6 +35,12 @@
     height: 132px;
   }
 
+  @media only screen and (max-width: 600px) {
+    &__photos {
+      overflow: hidden;
+    }
+  }
+
   &__photo {
     background-position: center center;
     background-size: cover;
@@ -53,6 +58,12 @@
 
     &:hover {
       transform: scale(1.03);
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    &__photo {
+      width: auto
     }
   }
 
