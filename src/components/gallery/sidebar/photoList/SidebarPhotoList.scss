@@ -28,7 +28,7 @@
     box-sizing: border-box;
     min-height: 110px;
     background-repeat: no-repeat;
-    background-size: cover;
+    @include mixins.background-size(cover);
     background-position: center;
     background-color: #e2e2e2;
     transition: all 100ms ease-in;

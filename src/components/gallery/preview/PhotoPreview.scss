@@ -57,7 +57,7 @@
     height: 100%;
     width: 100%;
     background-repeat: no-repeat;
-    background-size: contain;
+    @include mixins.background-size(contain);
     background-position: center;
   }
 }

@@ -14,8 +14,8 @@
 .photoSection {
   &__load {
     @include mixins.flexbox;
-    width: 100%;
     @include mixins.justify-content(center);
+    width: 100%;
     align-items: center;
 
     > .MuiCircularProgress-colorPrimary {
@@ -43,7 +43,7 @@
 
   &__photo {
     background-position: center center;
-    background-size: cover;
+    @include mixins.background-size(cover);
     background-repeat: no-repeat;
     width: 86px;
     height: 100%;

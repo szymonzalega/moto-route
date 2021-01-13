@@ -66,7 +66,7 @@ input[type="file"] {
   &__uploadedPhoto {
     height: 110px;
     background-repeat: no-repeat;
-    background-size: cover;
+    @include mixins.background-size(cover);
     background-position: initial;
     background-color: colors.$grey-color;
     height: 5rem;
