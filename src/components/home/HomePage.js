@@ -18,7 +18,7 @@ export default function HomePage() {
       ) : (
         <>
           <header>
-            <h1 className="homePage__title">Ride. Collect. Repeat.</h1>
+            <h1 className="homePage__title" data-testid="title">Ride. Collect. Repeat.</h1>
             <nav className="homePage__buttonBox">
               <Link
                 to="/login"
