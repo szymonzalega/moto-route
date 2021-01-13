@@ -8,7 +8,7 @@ import Dashboard from "./Dashboard";
 import Login from "./auth/Login";
 import PrivateRoute from "./PrivateRoute";
 import ForgotPassword from "./auth/ForgotPassword";
-import HomePage from "./HomePage";
+import HomePage from "./home/HomePage";
 
 function App() {
   return (

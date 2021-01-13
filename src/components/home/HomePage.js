@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../../contexts/AuthContext";
 
 export default function HomePage() {
   const { currentUser } = useAuth();
@@ -17,8 +17,11 @@ export default function HomePage() {
       ) : (
         <div>
           Witaj!
-          <Link to="/login" className="btn btn-primary w-100 mt-3">
-            Zaloguj się
+          <Link to="/login" className="btn btn-primary w-100 mt-3" data-testid="login">
+            Login
+          </Link>
+          <Link to="/signup" className="btn btn-primary w-100 mt-3" data-testid="signup">
+            Signup
           </Link>
         </div>
       )}
