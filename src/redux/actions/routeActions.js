@@ -3,7 +3,6 @@ import {
   getRoutesByUserId,
   getRoutePhotosByRouteId,
   removeRouteById,
-  savePhotosInRoute,
   createRoute,
   updateRoute,
 } from "../../services/routeAPI";
