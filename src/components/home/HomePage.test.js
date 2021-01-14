@@ -34,7 +34,7 @@ it("should render title text, login and signup button correctly", () => {
   });
 
   const title = document.querySelector("[data-testid=title]");
-  expect(title.innerHTML).toBe("Ride. Collect. Repeat.");
+  expect(title.textContent).toBe("Ride.Collect.Repeat.");
 
   const loginButton = document.querySelector("[data-testid=login]");
   expect(loginButton.innerHTML).toBe("Login");
