@@ -4,9 +4,9 @@ import Signup from "./auth/Signup";
 import { Container } from "react-bootstrap";
 import AuthProvider from "../contexts/AuthContext";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Dashboard from "./Dashboard";
+import Dashboard from "./dashboard/Dashboard";
 import Login from "./auth/Login";
-import PrivateRoute from "./PrivateRoute";
+import PrivateRoute from "./auth/PrivateRoute";
 import ForgotPassword from "./auth/ForgotPassword";
 import HomePage from "./home/HomePage";
 
@@ -16,7 +16,6 @@ function App() {
       <Router>
         <AuthProvider>
           <Switch>
-            {/* exact is important */}
             <Route exact path="/">
               <HomePage />
             </Route>

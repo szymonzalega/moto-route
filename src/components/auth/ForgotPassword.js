@@ -33,7 +33,7 @@ export default function ForgotPassword() {
     <>
       <Card>
         <Card.Body>
-          <h2 className="text-center mb-4">Przypomnij hasło</h2>
+          <h2 className="text-center mb-4">Remind password</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           {message && <Alert variant="success">{message}</Alert>}
           <Form onSubmit={handleSubmit}>
@@ -42,16 +42,16 @@ export default function ForgotPassword() {
               <Form.Control type="email" ref={emailRef} required />
             </Form.Group>
             <Button disabled={loading} className="w-100" type="submit">
-              Resetuj hasło
+              Reset password
             </Button>
           </Form>
           <div className="w-100 text-center mt-3">
-            <Link to="/login">Zaloguj</Link>
+            <Link to="/login">Log in</Link>
           </div>
         </Card.Body>
       </Card>
       <div className="w-100 text-center mt-2">
-        Potrzebujesz konta? <Link to="/signup">Zarejestruj się</Link>
+        Do you need an account? <Link to="/signup">Sign up</Link>
       </div>
     </>
   );

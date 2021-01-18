@@ -1,9 +1,9 @@
 import React from "react";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
-import Header from "./Header";
-import RoutePage from "./routes/RoutePage";
-import UserProfile from "./UserProfile";
-import UpdateProfile from "./UpdateProfile";
+import Header from "../header/Header";
+import RoutePage from "../routes/RoutePage";
+import UserProfile from "../user/UserProfile";
+import UpdateProfile from "../user/UpdateProfile";
 
 export default function Dashboard() {
   let { path } = useRouteMatch();

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Card, Button } from "react-bootstrap";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../../contexts/AuthContext";
 import { Link } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
-import { userLogout } from "../redux/actions/userActions";
+import { userLogout } from "../../redux/actions/userActions";
 import { useHistory } from "react-router-dom";
 
 export default function UserProfile() {

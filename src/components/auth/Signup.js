@@ -23,7 +23,7 @@ export default function Signup() {
       setError("");
       setLoading(true);
       await signup(emailRef.current.value, passwordRef.current.value);
-      history.push("/")
+      history.push("/");
     } catch {
       setError("Failed to create an account");
     }
@@ -34,7 +34,7 @@ export default function Signup() {
     <>
       <Card>
         <Card.Body>
-          <h2 className="text-center mb-4">Zarejestruj się</h2>
+          <h2 className="text-center mb-4">Sign up</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
             <Form.Group id="email">
@@ -42,21 +42,21 @@ export default function Signup() {
               <Form.Control type="email" ref={emailRef} required />
             </Form.Group>
             <Form.Group id="password">
-              <Form.Label>Hasło</Form.Label>
+              <Form.Label>Password</Form.Label>
               <Form.Control type="password" ref={passwordRef} required />
             </Form.Group>
             <Form.Group id="password-confirm">
-              <Form.Label>Powtórz hasło</Form.Label>
+              <Form.Label>Repeat password</Form.Label>
               <Form.Control type="password" ref={passwordConfirmRef} required />
             </Form.Group>
             <Button disabled={loading} className="w-100" type="submit">
-              Zarejestruj się
+              Sign up
             </Button>
           </Form>
         </Card.Body>
       </Card>
       <div className="w-100 text-center mt-2">
-        Masz już konto? <Link to="/login">Zaloguj się</Link>
+        Do you have an account? <Link to="/login">Log in</Link>
       </div>
     </>
   );
