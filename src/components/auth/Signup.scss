@@ -1,0 +1,30 @@
+@use "styles/colors";
+@use "styles/mixins";
+
+.signup {
+  @include mixins.flexbox;
+  @include mixins.flex-direction(column);
+  @include mixins.justify-content(center);
+  align-items: center;
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  z-index: 1;
+
+  &__content {
+    width: 400px;
+
+    .card {
+      border: none;
+      border-radius: unset;
+    }
+  }
+
+  @media only screen and (max-width: 400px) {
+    &__content {
+      width: 100%;
+    }
+  }
+}

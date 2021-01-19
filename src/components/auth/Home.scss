@@ -1,7 +1,7 @@
 @use "styles/colors";
 @use "styles/mixins";
 
-header {
+.auth {
   @include mixins.flexbox;
   @include mixins.flex-direction(column);
   position: absolute;
@@ -52,7 +52,7 @@ header {
   }
 }
 
-.homePage {
+.auth {
   &__background {
     height: 100vh;
     background: url(../../assets/images/homePage_background2.jpg) no-repeat

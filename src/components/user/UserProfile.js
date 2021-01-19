@@ -18,7 +18,7 @@ export default function UserProfile() {
     try {
       dispatch(userLogout());
       await logout();
-      history.push("/login");
+      history.push("/auth/login");
     } catch {
       setError("Failed to log out");
     }

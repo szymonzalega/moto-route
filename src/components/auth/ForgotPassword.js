@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import "./ForgotPassword.scss";
 import { Card, Form, Button, Alert } from "react-bootstrap";
 import { useAuth } from "../../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
@@ -21,7 +22,7 @@ export default function ForgotPassword() {
       await resetPassword(emailRef.current.value);
       setMessage("Check your inbox for further instructions");
       setTimeout(() => {
-        history.push("/login");
+        history.push("/auth/login");
       }, 2000);
     } catch {
       setError("Failed to reset password");
@@ -30,29 +31,31 @@ export default function ForgotPassword() {
   }
 
   return (
-    <>
-      <Card>
-        <Card.Body>
-          <h2 className="text-center mb-4">Remind password</h2>
-          {error && <Alert variant="danger">{error}</Alert>}
-          {message && <Alert variant="success">{message}</Alert>}
-          <Form onSubmit={handleSubmit}>
-            <Form.Group id="email">
-              <Form.Label>Email</Form.Label>
-              <Form.Control type="email" ref={emailRef} required />
-            </Form.Group>
-            <Button disabled={loading} className="w-100" type="submit">
-              Reset password
-            </Button>
-          </Form>
-          <div className="w-100 text-center mt-3">
-            <Link to="/login">Log in</Link>
-          </div>
-        </Card.Body>
-      </Card>
-      <div className="w-100 text-center mt-2">
-        Do you need an account? <Link to="/signup">Sign up</Link>
+    <div className="forgotPassword">
+      <div className="forgotPassword__content">
+        <Card>
+          <Card.Body>
+            <h2 className="text-center mb-4">Remind password</h2>
+            {error && <Alert variant="danger">{error}</Alert>}
+            {message && <Alert variant="success">{message}</Alert>}
+            <Form onSubmit={handleSubmit}>
+              <Form.Group id="email">
+                <Form.Label>Email</Form.Label>
+                <Form.Control type="email" ref={emailRef} required />
+              </Form.Group>
+              <Button disabled={loading} className="w-100" type="submit">
+                Reset password
+              </Button>
+            </Form>
+            <div className="w-100 text-center mt-3">
+              <Link to="/auth/login">Log in</Link>
+            </div>
+            <div className="w-100 text-center mt-4">
+              Do you need an account? <Link to="/auth/signup">Sign up</Link>
+            </div>
+          </Card.Body>
+        </Card>
       </div>
-    </>
+    </div>
   );
 }

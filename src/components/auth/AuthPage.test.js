@@ -3,7 +3,7 @@ import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
 import { MemoryRouter } from "react-router-dom";
 
-import HomePage from "./HomePage";
+import AuthPage from "./AuthPage";
 
 let container = null;
 beforeEach(() => {
@@ -27,7 +27,7 @@ it("should render title text, login and signup button correctly", () => {
   act(() => {
     render(
       <MemoryRouter>
-        <HomePage />
+        <AuthPage />
       </MemoryRouter>,
       container
     );

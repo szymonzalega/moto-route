@@ -1,0 +1,46 @@
+@use "styles/colors";
+@use "styles/mixins";
+
+.authPage {
+  &__background {
+    height: 100vh;
+    background: url(../../assets/images/homePage_background2.jpg) no-repeat
+      center center fixed;
+    @include mixins.background-size(cover);
+    @include mixins.flexbox;
+    @include mixins.flex-direction(column);
+    align-items: center;
+    position: relative;
+    filter: blur(2px);
+  }
+
+  &__content {
+    @include mixins.flexbox;
+    @include mixins.flex-direction(column);
+    @include mixins.justify-content(center);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    align-items: center;
+
+    .card {
+      border: none;
+      border-radius: unset;
+    }
+  }
+}
+
+.auth {
+  &__login {
+    width: 400px;
+    top: calc(100vh - 50%);
+    transform: translateY(-193px);
+  }
+
+  @media only screen and (max-width: 400px) {
+    &__login {
+      width: 100%;
+    }
+  }
+}

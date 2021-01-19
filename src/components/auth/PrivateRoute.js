@@ -8,7 +8,7 @@ export default function PrivateRoute({ children, ...rest }) {
     <Route
       {...rest}
       render={({ location }) =>
-        currentUser ? children : <Redirect to="/login" />
+        currentUser ? children : <Redirect to="/auth" />
       }
     ></Route>
   );
