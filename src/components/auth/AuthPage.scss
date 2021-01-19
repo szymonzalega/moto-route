@@ -4,7 +4,7 @@
 .authPage {
   &__background {
     height: 100vh;
-    background: url(../../assets/images/homePage_background2.jpg) no-repeat
+    background: url(../../assets/images/homePage_background.jpg) no-repeat
       center center fixed;
     @include mixins.background-size(cover);
     @include mixins.flexbox;
@@ -28,19 +28,54 @@
       border: none;
       border-radius: unset;
     }
+
+    .view {
+      @include mixins.flexbox;
+      @include mixins.flex-direction(column);
+      @include mixins.justify-content(center);
+      height: 100vh;
+      align-items: center;
+      position: absolute;
+      overflow: hidden;
+      top: 0;
+      width: 100vw;
+      left: 0;
+      z-index: 1;
+
+      &__content {
+        width: 400px;
+
+        .card {
+          border: none;
+          border-radius: unset;
+        }
+      }
+
+      @media only screen and (max-width: 400px) {
+        &__content {
+          width: 100%;
+        }
+      }
+    }
   }
 }
 
-.auth {
-  &__login {
-    width: 400px;
-    top: calc(100vh - 50%);
-    transform: translateY(-193px);
-  }
+.fade-appear,
+.fade-enter .animate {
+  transform: translateY(100vh);
+  z-index: 1;
+}
+.fade-appear-active,
+.fade-enter.fade-enter-active .animate {
+  transform: none;
+  transition: transform 400ms ease-out 400ms;
+}
 
-  @media only screen and (max-width: 400px) {
-    &__login {
-      width: 100%;
-    }
-  }
+.fade-exit .animate {
+  opacity: 1;
+}
+
+.fade-exit.fade-exit-active .animate {
+  transform: translateY(-100vh);
+  transition: transform 400ms ease-in;
 }

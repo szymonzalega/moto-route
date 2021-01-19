@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-import "./ForgotPassword.scss";
 import { Card, Form, Button, Alert } from "react-bootstrap";
 import { useAuth } from "../../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
@@ -31,8 +30,8 @@ export default function ForgotPassword() {
   }
 
   return (
-    <div className="forgotPassword">
-      <div className="forgotPassword__content">
+    <div className="view">
+      <div className="animate view__content">
         <Card>
           <Card.Body>
             <h2 className="text-center mb-4">Remind password</h2>
