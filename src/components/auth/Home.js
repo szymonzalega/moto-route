@@ -1,6 +1,7 @@
 import React from "react";
 import "./Home.scss";
 import { Link } from "react-router-dom";
+import { PrimaryButton, SecondaryButton } from "../buttons/Button";
 
 export default function Home() {
   return (
@@ -12,15 +13,14 @@ export default function Home() {
           <span>Repeat.</span>
         </div>
         <nav className="home__buttonBox">
-          <Link to="/auth/login" className="home__button" data-testid="login">
-            Login
+          <Link to="/auth/login" data-testid="login">
+            <SecondaryButton>Login</SecondaryButton>
           </Link>
           <Link
             to="/auth/signup"
-            className="home__button home__button--primary"
             data-testid="signup"
           >
-            Signup
+            <PrimaryButton>Signup</PrimaryButton>
           </Link>
         </nav>
       </div>

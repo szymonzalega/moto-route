@@ -12,6 +12,7 @@ import RouteSidebar from "./sidebar/RouteSidebar";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 import RoutesGalleryPage from "./gallery/RoutesGalleryPage";
+import { PrimaryButton } from "../buttons/Button";
 
 export default function RoutePage() {
   const dispatch = useDispatch();
@@ -62,9 +63,9 @@ export default function RoutePage() {
             <Content>
               <div className="routePage__list">
                 <div className="routePage__buttonRow">
-                  <button className="btn btn-primary" onClick={createNewRoute}>
-                    Add new route
-                  </button>
+                  <PrimaryButton autoWidth>
+                    <div onClick={createNewRoute}>Add new route</div>
+                  </PrimaryButton>
                 </div>
                 {routeListContent}
               </div>

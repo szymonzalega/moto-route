@@ -79,38 +79,4 @@
       }
     }
   }
-
-  &__button {
-    @include mixins.flexbox;
-    @include mixins.justify-content(center);
-    width: 155px;
-    height: 55px;
-    border: 2px solid colors.$primary-color;
-    color: colors.$primary-color;
-    margin: 10px;
-    align-items: center;
-    font-size: 1.4em;
-    font-weight: 500;
-    border-radius: 4px;
-    text-decoration: none;
-    transition: all 100ms ease-in;
-
-    &:hover {
-      background-color: colors.$light-primary-color;
-      color: colors.$primary-color;
-      text-decoration: none;
-    }
-
-    &--primary {
-      border-color: colors.$primary-color;
-      color: colors.$white-color;
-      background-color: colors.$primary-color;
-
-      &:hover {
-        background-color: colors.$dark-primary-color;
-        color: colors.$white-color;
-        text-decoration: none;
-      }
-    }
-  }
 }
