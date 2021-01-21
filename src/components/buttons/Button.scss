@@ -1,0 +1,52 @@
+@use "styles/colors";
+@use "styles/mixins";
+
+*:hover {
+  text-decoration: none !important;
+}
+
+.button {
+  @include mixins.flexbox;
+  @include mixins.justify-content(center);
+  width: 155px;
+  height: 55px;
+  margin: 10px;
+  align-items: center;
+  font-size: 1.4em;
+  font-weight: 500;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 100ms ease-in;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &--auto-width {
+    width: auto;
+    padding: 0 7px;
+  }
+
+  &__primary {
+    border: 2px solid colors.$primary-color;
+    color: colors.$white-color;
+    background-color: colors.$primary-color;
+
+    &:hover {
+      background-color: colors.$dark-primary-color;
+      color: colors.$white-color;
+    }
+  }
+
+  &__secondary {
+    border: 2px solid colors.$primary-color;
+    color: colors.$primary-color;
+    background-color: colors.$white-color;
+
+    &:hover {
+      background-color: colors.$light-primary-color;
+      color: colors.$primary-color;
+    }
+  }
+}

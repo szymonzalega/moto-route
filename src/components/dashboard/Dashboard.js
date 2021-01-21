@@ -1,6 +1,7 @@
 import React from "react";
 import "./Dashboard.scss";
 import { Link } from "react-router-dom";
+import { SecondaryButton } from "../buttons/Button";
 
 export default function Dashboard() {
   return (
@@ -11,17 +12,17 @@ export default function Dashboard() {
           <h2>Welcome to moto route app!</h2>
           <br />
           <h4>
-            The App was created by motorcyclist for motorcyclists.<br /> 
-            Add, collect and share your favourites motorcycle route with your friends.<br /><br />
+            The App was created by motorcyclist for motorcyclists.
+            <br />
+            Add, collect and share your favourites motorcycle route with your
+            friends.
+            <br />
+            <br />
             Dashboard page in progress, check other...
           </h4>
 
-          <Link
-            to="/index/routes"
-            className="dashboardPage__button"
-            data-testid="routes"
-          >
-            Routes
+          <Link to="/index/routes" data-testid="routes">
+            <SecondaryButton>Routes</SecondaryButton>
           </Link>
         </section>
       </div>
