@@ -2,6 +2,8 @@
 @use "styles/mixins";
 @use "../header/Header.scss";
 
+$sidebar-width: 400px;
+
 .sidebar {
   display: flex;
   @include mixins.flex-direction(column);
@@ -16,8 +18,8 @@
   @include mixins.box-shadow(5px, 0px, 8px, -9px, rgba(0, 0, 0, 0.75));
   border-right: 1px solid #c2c2c2;
   margin-right: 50px;
-  transform: translateX(-400px);
-  transition-property: -webkit-transform, transform, opacity;
+  transform: translateX(calc(-1 * (#{$sidebar-width} + 5px)));
+  transition-property: -webkit-transform, transform;
   transition-duration: 0.2s;
   transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
   overflow-y: overlay;

@@ -34,8 +34,13 @@
 
   @media only screen and (max-width: 600px) {
     .sidebar {
+      display: none;
       width: 100vw;
       border-right: none;
+
+      &--visible {
+        @include mixins.flexbox;
+      }
     }
   }
 

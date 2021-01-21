@@ -8,7 +8,7 @@ export default function Sidebar(props) {
   return (
     <div
       id="sidebar"
-      className={`sidebar ${sidebar.isOpen && "sidebar--visible"}`}
+      className={`sidebar${sidebar.isOpen ? " sidebar--visible" : ""}`}
     >
       {sidebar.isOpen && <div>{props.children}</div>}
     </div>
