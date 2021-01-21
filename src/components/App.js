@@ -2,7 +2,7 @@ import React from "react";
 import "./App.scss";
 import AuthProvider from "../contexts/AuthContext";
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
-import Dashboard from "./main/MainPage";
+import MainPage from "./main/MainPage";
 import PrivateRoute from "./auth/PrivateRoute";
 import AuthPage from "./auth/AuthPage";
 
@@ -19,7 +19,7 @@ function App() {
               <AuthPage />
             </Route>
             <PrivateRoute path="/index">
-              <Dashboard />
+              <MainPage />
             </PrivateRoute>
           </Switch>
         </AuthProvider>

@@ -1,20 +1,19 @@
 @mixin flex($fg: 1, $fs: null, $fb: null) {
-    
-	// Set a variable to be used by box-flex properties
-	$fg-boxflex: $fg;
+  // Set a variable to be used by box-flex properties
+  $fg-boxflex: $fg;
 
-	// Box-Flex only supports a flex-grow value so let's grab the
-	// first item in the list and just return that.
-	@if type-of($fg) == 'list' {
-		$fg-boxflex: nth($fg, 1);
-	}
+  // Box-Flex only supports a flex-grow value so let's grab the
+  // first item in the list and just return that.
+  @if type-of($fg) == "list" {
+    $fg-boxflex: nth($fg, 1);
+  }
 
-	-webkit-box-flex: $fg-boxflex;
-	-webkit-flex: $fg $fs $fb;
-	-moz-box-flex: $fg-boxflex;
-	-moz-flex: $fg $fs $fb;
-	-ms-flex: $fg $fs $fb;
-	flex: $fg $fs $fb;
+  -webkit-box-flex: $fg-boxflex;
+  -webkit-flex: $fg $fs $fb;
+  -moz-box-flex: $fg-boxflex;
+  -moz-flex: $fg $fs $fb;
+  -ms-flex: $fg $fs $fb;
+  flex: $fg $fs $fb;
 }
 
 @mixin flexbox {
@@ -43,10 +42,10 @@
 
 @mixin justify-content($justify) {
   -webkit-justify-content: $justify;
-     -moz-justify-content: $justify;
-      -ms-justify-content: $justify;
-          justify-content: $justify;
-            -ms-flex-pack: $justify;
+  -moz-justify-content: $justify;
+  -ms-justify-content: $justify;
+  justify-content: $justify;
+  -ms-flex-pack: $justify;
 }
 
 @mixin box-shadow($h: 10px, $v: 10px, $b: 0px, $s: 0px, $c: #000000) {
@@ -57,7 +56,14 @@
 
 @mixin background-size($background-size) {
   -webkit-background-size: $background-size;
-     -moz-background-size: $background-size;
-       -o-background-size: $background-size;
-          background-size: $background-size;
+  -moz-background-size: $background-size;
+  -o-background-size: $background-size;
+  background-size: $background-size;
+}
+
+@mixin animation($animation-name) {
+  -webkit-animation: $animation-name 1s linear; /* Safari 4+ */
+  -moz-animation: $animation-name 1s linear; /* Fx 5+ */
+  -o-animation: $animation-name 1s linear; /* Opera 12+ */
+  animation: $animation-name 1s linear; /* IE 10+, Fx 29+ */
 }

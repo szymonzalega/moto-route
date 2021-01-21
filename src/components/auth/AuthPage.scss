@@ -4,7 +4,7 @@
 .authPage {
   &__background {
     height: 100vh;
-    background: url(../../assets/images/homePage_background.jpg) no-repeat
+    background: url(../../assets/images/authPage_background.jpg) no-repeat
       center center fixed;
     @include mixins.background-size(cover);
     @include mixins.flexbox;

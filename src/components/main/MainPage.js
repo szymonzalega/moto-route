@@ -2,11 +2,12 @@ import React from "react";
 import "./MainPage.scss";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 import Header from "../header/Header";
+import Dashboard from "../dashboard/Dashboard";
 import RoutePage from "../routes/RoutePage";
 import UserProfile from "../user/UserProfile";
 import UpdateProfile from "../user/UpdateProfile";
 
-export default function Dashboard() {
+export default function MainPage() {
   let { path } = useRouteMatch();
 
   return (
@@ -14,7 +15,7 @@ export default function Dashboard() {
       <Header />
       <Switch>
         <Route exact path={path}>
-          <h3>Dashboard</h3>
+          <Dashboard />
         </Route>
         <Route path={`${path}/routes`}>
           <RoutePage />

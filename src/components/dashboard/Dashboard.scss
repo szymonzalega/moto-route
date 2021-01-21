@@ -1,7 +1,8 @@
 @use "styles/colors";
 @use "styles/mixins";
+@use "../header/Header.scss";
 
-@-webkit-keyframes showTextAnimation {
+@-webkit-keyframes showBackgroundImage {
   0% {
     opacity: 0;
   }
@@ -9,7 +10,7 @@
     opacity: 1;
   }
 }
-@-moz-keyframes showTextAnimation {
+@-moz-keyframes showBackgroundImage {
   0% {
     opacity: 0;
   }
@@ -17,7 +18,7 @@
     opacity: 1;
   }
 }
-@-o-keyframes showTextAnimation {
+@-o-keyframes showBackgroundImage {
   0% {
     opacity: 0;
   }
@@ -25,7 +26,7 @@
     opacity: 1;
   }
 }
-@keyframes showTextAnimation {
+@keyframes showBackgroundImage {
   0% {
     opacity: 0;
   }
@@ -34,60 +35,56 @@
   }
 }
 
-.home {
-  &__content {
+.dashboardPage {
+  overflow: hidden;
+
+  &__background {
+    height: calc(100vh - #{Header.$header-height});
+    background: url(../../assets/images/dashboard_background.jpg) no-repeat
+      center center fixed;
+    @include mixins.background-size(cover);
     @include mixins.flexbox;
     @include mixins.flex-direction(column);
-    position: absolute;
-    width: 100vw;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    background: rgb(255, 255, 255);
-    background: linear-gradient(
-      0deg,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 1) 2%
-    );
-    padding: 0 1.4em;
+    align-items: center;
+    position: relative;
+    filter: blur(2px);
+    transform: scale(1.1);
+    opacity: 0;
+    @include mixins.animation(showBackgroundImage);
+    animation-fill-mode: forwards;
   }
 
-  &__title {
+  &__content {
     @include mixins.flexbox;
     @include mixins.justify-content(center);
-    color: colors.$dark-grey-color;
-    font-size: 5em;
-    font-weight: 700;
-    margin-top: 1em;
-    text-align: center;
-    flex-wrap: wrap;
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+    align-items: center;
 
-    span {
-      opacity: 0;
-      @include mixins.animation(showTextAnimation);
-      animation-fill-mode: forwards;
+    section {
+      @include mixins.flexbox;
+      @include mixins.flex-direction(column);
+      @include mixins.justify-content(center);
+      width: 700px;
+      background-color: colors.$white-color;
+      padding: 40px;
+      align-items: center;
+      text-align: center;
 
-      &:nth-child(2) {
-        animation-delay: 0.3s;
-      }
-      &:nth-child(3) {
-        animation-delay: 0.6s;
+      h4 {
+        margin-bottom: 30px;
       }
     }
   }
 
-  &__buttonBox {
-    @include mixins.flexbox;
-    @include mixins.flex-direction(row);
-    @include mixins.justify-content(center);
-    padding: 1.5em 0 4em 0;
-  }
-
   &__button {
+    @include mixins.flexbox;
+    @include mixins.justify-content(center);
     width: 155px;
     height: 55px;
-    @include mixins.flexbox;
-    @include mixins.justify-content(center);
     border: 2px solid colors.$primary-color;
     color: colors.$primary-color;
     margin: 10px;
@@ -114,12 +111,6 @@
         color: colors.$white-color;
         text-decoration: none;
       }
-    }
-  }
-
-  @media only screen and (max-width: 685px) {
-    &__title {
-      font-size: 3em;
     }
   }
 }
