@@ -3,7 +3,7 @@
 @use "../header/Header.scss";
 
 .sidebar {
-  display: none;
+  display: flex;
   @include mixins.flex-direction(column);
   z-index: 2;
   min-width: 400px;
