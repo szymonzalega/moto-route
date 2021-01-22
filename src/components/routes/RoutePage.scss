@@ -8,6 +8,15 @@
   min-height: 100vh;
   height: 100%;
 
+  &--noScroll {
+    @media only screen and (max-width: 600px) {
+      .main {
+        height: 100vh;
+        overflow: hidden;
+      }
+    }
+  }
+
   &__buttonRow {
     @include mixins.flexbox;
     @include mixins.justify-content(flex-start);
@@ -43,18 +52,16 @@
         @include mixins.flexbox;
       }
     }
+
+    .main {
+      justify-content: center;
+      padding-left: 0;
+    }
   }
 
   @media only screen and (max-width: 1000px) {
     .main {
       justify-content: flex-end;
-      padding-left: 0;
-    }
-  }
-
-  @media only screen and (max-width: 600px) {
-    .main {
-      justify-content: center;
       padding-left: 0;
     }
   }

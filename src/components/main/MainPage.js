@@ -1,5 +1,4 @@
 import React from "react";
-import "./MainPage.scss";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 import Header from "../header/Header";
 import Dashboard from "../dashboard/Dashboard";
@@ -11,7 +10,7 @@ export default function MainPage() {
   let { path } = useRouteMatch();
 
   return (
-    <main>
+    <>
       <Header />
       <Switch>
         <Route exact path={path}>
@@ -27,6 +26,6 @@ export default function MainPage() {
           <UpdateProfile />
         </Route>
       </Switch>
-    </main>
+    </>
   );
 }

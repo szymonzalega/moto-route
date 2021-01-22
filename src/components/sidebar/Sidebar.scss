@@ -8,7 +8,6 @@ $sidebar-width: 400px;
   display: flex;
   @include mixins.flex-direction(column);
   z-index: 2;
-  min-width: 400px;
   height: calc(100vh - #{Header.$header-height});
   background-color: colors.$white-color;
   position: fixed;

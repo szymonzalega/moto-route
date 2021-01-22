@@ -21,6 +21,7 @@ export default function RoutePage() {
   let { path } = useRouteMatch();
 
   const fetchStatus = useSelector((state) => state.routes.fetchStatus);
+  const isSidebarOpen = useSelector((state) => state.sidebar.isOpen);
 
   useEffect(() => {
     if (fetchStatus === "idle") {
@@ -56,7 +57,9 @@ export default function RoutePage() {
     <>
       <Switch>
         <Route exact path={path}>
-          <div className="routePage">
+          <div
+            className={`routePage${isSidebarOpen ? " routePage--noScroll" : ""}`}
+          >
             <Sidebar>
               <RouteSidebar />
             </Sidebar>
