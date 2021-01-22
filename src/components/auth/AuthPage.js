@@ -25,7 +25,7 @@ export default function HomePage() {
       {currentUser ? (
         redirectToIndex()
       ) : (
-        <>
+        <div className="authPage">
           <div className="authPage__background"></div>
           <div className="authPage__content">
             <Route
@@ -55,7 +55,7 @@ export default function HomePage() {
               )}
             />
           </div>
-        </>
+        </div>
       )}
     </>
   );

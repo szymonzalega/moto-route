@@ -2,6 +2,8 @@
 @use "styles/mixins";
 
 .authPage {
+  overflow: hidden;
+
   &__background {
     height: 100vh;
     background: url(../../assets/images/authPage_background.jpg) no-repeat
@@ -12,6 +14,7 @@
     align-items: center;
     position: relative;
     filter: blur(2px);
+    transform: scale(1.1);
   }
 
   &__content {
