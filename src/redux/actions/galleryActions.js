@@ -1,21 +1,41 @@
 import * as types from "./actionTypes";
 
+export const getSourcesStarted = () => {
+  return {
+    type: types.GALLERY__FETCH_SOURCES_STARTED,
+  };
+};
+
+export const getSourcesSucceeded = (sources) => {
+  return {
+    type: types.GALLERY__FETCH_SOURCES_SUCCEEDED,
+    sources,
+  };
+};
+
+export const getSourcesFailed = (error) => {
+  return {
+    type: types.GALLERY__FETCH_SOURCES_FAILED,
+    error,
+  };
+};
+
 export const getPhotosStarted = () => {
   return {
-    type: types.GALLERY__FETCH_STARTED,
+    type: types.GALLERY__FETCH_PHOTOS_STARTED,
   };
 };
 
 export const getPhotosSucceeded = (photos) => {
   return {
-    type: types.GALLERY__FETCH_SUCCEEDED,
+    type: types.GALLERY__FETCH_PHOTOS_SUCCEEDED,
     photos,
   };
 };
 
 export const getPhotosFailed = (error) => {
   return {
-    type: types.GALLERY__FETCH_FAILED,
+    type: types.GALLERY__FETCH_PHOTOS_FAILED,
     error,
   };
 };
@@ -51,6 +71,17 @@ export const resetGalleryState = () => {
   return {
     type: types.GALLERY__RESET_STATE,
   };
+};
+
+export const fetchSources = (funcToFetchSources, ...args) => async (dispatch) => {
+  dispatch(getSourcesStarted());
+  try {
+    const sources = await funcToFetchSources(...args);
+    dispatch(getSourcesSucceeded(sources));
+  } catch (err) {
+    console.error(err);
+    dispatch(getSourcesFailed(err.toString()));
+  }
 };
 
 export const fetchPhotos = (funcToFetchPhotos, ...args) => async (dispatch) => {

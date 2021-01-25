@@ -3,15 +3,25 @@ import initialState from "./initialState";
 
 export default function galleryReducer(state = initialState.gallery, action) {
   switch (action.type) {
-    case types.GALLERY__FETCH_STARTED:
+    case types.GALLERY__FETCH_SOURCES_STARTED:
+      return { ...state, sourcesStatus: "pending" };
+    case types.GALLERY__FETCH_SOURCES_SUCCEEDED:
+      return {
+        ...state,
+        sourcesStatus: "succeeded",
+        sources: [...state.sources, ...action.sources],
+      };
+    case types.GALLERY__FETCH_SOURCES_FAILED:
+      return { ...state, sourcesStatus: "failed", error: action.error };
+    case types.GALLERY__FETCH_PHOTOS_STARTED:
       return { ...state, status: "pending" };
-    case types.GALLERY__FETCH_SUCCEEDED:
+    case types.GALLERY__FETCH_PHOTOS_SUCCEEDED:
       return {
         ...state,
         status: "succeeded",
         photos: [...state.photos, ...action.photos],
       };
-    case types.GALLERY__FETCH_FAILED:
+    case types.GALLERY__FETCH_PHOTOS_FAILED:
       return { ...state, status: "failed", error: action.error };
     case types.GALLERY__SELECT_PHOTO:
       return { ...state, selectedPhoto: action.photo };

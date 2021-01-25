@@ -9,11 +9,13 @@ export default {
   },
   sidebar: {},
   gallery: {
+    sources: [],
     photos: [],
     status: "idle",
+    sourcesStatus: "idle",
     uploadStatus: "idle",
     error: null,
     selectedPhoto: {},
+    selectedSource: {},
   },
-  // apiCallsInProgress: 0
 };

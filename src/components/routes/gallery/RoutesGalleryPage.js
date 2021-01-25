@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./RoutesGalleryPage.scss";
 import { useSelector, useDispatch } from "react-redux";
+import { useAuth } from "../../../contexts/AuthContext";
+import { useHistory } from "react-router-dom";
 import {
+  getRoutesByUserId,
   savePhotosInRoute,
   getRoutePhotosByRouteId,
 } from "../../../services/routeAPI";
@@ -11,6 +14,7 @@ import Sidebar from "../../sidebar/Sidebar";
 import useSidebarState from "../../sidebar/useSidebarState";
 import GallerySidebar from "../../gallery/sidebar/GallerySidebar";
 import {
+  fetchSources,
   fetchPhotos,
   uploadPhotos,
   resetGalleryState,
@@ -22,11 +26,23 @@ export default function RoutesGalleryPage(props) {
   const [routeId, setRouteId] = useState("");
   const [lastVisible, setLastVisible] = useState("");
   const photos = useSelector((state) => state.gallery.photos);
+  const sourcesStatus = useSelector((state) => state.gallery.sourcesStatus);
   const fetchStatus = useSelector((state) => state.gallery.status);
   const error = useSelector((state) => state.gallery.error);
   let { id } = useParams();
+  const { currentUser } = useAuth();
+  const history = useHistory();
 
   const { openSidebar } = useSidebarState();
+
+  useEffect(() => {
+    (async () => {
+      // if (sourcesStatus === "idle") {
+      //   await dispatch(fetchSources(getRoutesByUserId, currentUser.uid));
+      // }
+      await dispatch(fetchSources(getRoutesByUserId, currentUser.uid));
+    })();
+  }, [dispatch, currentUser, id]);
 
   useEffect(() => {
     (async () => {
@@ -41,7 +57,7 @@ export default function RoutesGalleryPage(props) {
         );
       }
     })();
-  }, [dispatch, routeId]);
+  }, [dispatch, routeId, id]);
 
   useEffect(() => {
     const sidebar = {
@@ -61,7 +77,12 @@ export default function RoutesGalleryPage(props) {
       dispatch(resetGalleryState());
       openSidebar(sidebar);
     };
-  }, [routeId]);
+  }, [routeId, id]);
+
+  const selectRoute = (route) => {
+    console.log(route.id);
+    history.push(`/index/routes/gallery/${route.id}`);
+  };
 
   const getMorePhotos = async () => {
     setLastVisible(
@@ -71,7 +92,7 @@ export default function RoutesGalleryPage(props) {
     );
   };
 
-  const handleSubmit = async (e, photoToUpload) => {
+  const handleUpload = async (e, photoToUpload) => {
     e.preventDefault();
     const form = e.currentTarget;
     if (form.checkValidity() === false) {
@@ -91,7 +112,8 @@ export default function RoutesGalleryPage(props) {
     <div className="galleryPage">
       <Sidebar>
         <GallerySidebar
-          onSubmit={handleSubmit}
+          onSourceSelect={selectRoute}
+          onUpload={handleUpload}
           getMorePhotos={getMorePhotos}
           isMorePhotosAvailable={lastVisible}
         />

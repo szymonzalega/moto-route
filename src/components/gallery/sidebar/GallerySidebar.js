@@ -1,16 +1,19 @@
 import React from "react";
 import "./GallerySidebar.scss";
+import SidebarSelectSource from "./selectSource/SidebarSelectSource";
 import SidebarUploadPhoto from "./uploadPhoto/SidebarUploadPhoto";
 import SidebarPhotoList from "./photoList/SidebarPhotoList";
 
 export default function GallerySidebar({
-  onSubmit,
+  onSourceSelect,
+  onUpload,
   getMorePhotos,
   isMorePhotosAvailable,
 }) {
   return (
     <>
-      <SidebarUploadPhoto onSubmit={onSubmit} />
+      <SidebarSelectSource onSelect={onSourceSelect}></SidebarSelectSource>
+      <SidebarUploadPhoto onSubmit={onUpload} />
       <SidebarPhotoList
         getMorePhotos={getMorePhotos}
         isMorePhotosAvailable={isMorePhotosAvailable}
