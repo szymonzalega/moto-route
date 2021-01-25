@@ -45,6 +45,7 @@
   @media only screen and (max-width: 600px) {
     .sidebar {
       display: none;
+      min-width: auto;
       width: 100vw;
       border-right: none;
 

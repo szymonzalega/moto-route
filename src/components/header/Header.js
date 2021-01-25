@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import "./Header.scss";
 import { useDispatch } from "react-redux";
 import { useAuth } from "../../contexts/AuthContext";
-import {userLogout} from "../../redux/actions/userActions";
+import { userLogout } from "../../redux/actions/userActions";
 import HomeIcon from "@material-ui/icons/Home";
 import TerrainIcon from "@material-ui/icons/Terrain";
 import PersonIcon from "@material-ui/icons/Person";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import Tooltip from "@material-ui/core/Tooltip";
 import { useHistory, NavLink } from "react-router-dom";
 
 export default function Header() {
@@ -56,17 +57,19 @@ export default function Header() {
         </NavLink>
       </div>
       <div className="header__right">
-        <div
-          className="header__element header__element--logout"
-          onClick={handleLogout}
-        >
-          <ExitToAppIcon fontSize="large" />
-          {error && (
-            <div className="header__logout-error">
-              <span>{error}</span>
-            </div>
-          )}
-        </div>
+        <Tooltip title="Logout" placement="left" arrow>
+          <div
+            className="header__element header__element--logout"
+            onClick={handleLogout}
+          >
+            <ExitToAppIcon fontSize="large" />
+            {error && (
+              <div className="header__logout-error">
+                <span>{error}</span>
+              </div>
+            )}
+          </div>
+        </Tooltip>
       </div>
     </div>
   );

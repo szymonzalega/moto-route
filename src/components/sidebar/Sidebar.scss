@@ -6,6 +6,7 @@ $sidebar-width: 400px;
 
 .sidebar {
   display: flex;
+  min-width: $sidebar-width;
   @include mixins.flex-direction(column);
   z-index: 2;
   height: calc(100vh - #{Header.$header-height});

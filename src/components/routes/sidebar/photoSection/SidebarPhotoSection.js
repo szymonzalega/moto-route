@@ -6,6 +6,7 @@ import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import { useHistory } from "react-router-dom";
 import { getPhotosByRouteId } from "../../../../redux/actions/routeActions";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import Tooltip from "@material-ui/core/Tooltip";
 
 export default function SidebarPhotoSection() {
   const dispatch = useDispatch();
@@ -70,14 +71,16 @@ export default function SidebarPhotoSection() {
                 />
               ))}
               <div className="photoSection__button">
-                <IconButton
-                  aria-label="more"
-                  aria-controls="simple-menu"
-                  aria-haspopup="true"
-                  onClick={openGallery}
-                >
-                  <NavigateNextIcon />
-                </IconButton>
+                <Tooltip title="Go to gallery" placement="top" arrow>
+                  <IconButton
+                    aria-label="more"
+                    aria-controls="simple-menu"
+                    aria-haspopup="true"
+                    onClick={openGallery}
+                  >
+                    <NavigateNextIcon />
+                  </IconButton>
+                </Tooltip>
               </div>
             </div>
           ))}

@@ -20,7 +20,7 @@ export default function RouteElement({ route }) {
 
   return (
     <>
-      <Tooltip title="Click for mode details" placement="top" arrow>
+      <Tooltip title="Click for mode details" placement="top" enterDelay={700} arrow>
         <div className="route" onClick={() => showRouteDetails(route.id)}>
           <RouteElementNav route={route} />
           <RouteElementMap url={route.url} />

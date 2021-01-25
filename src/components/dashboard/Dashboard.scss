@@ -73,6 +73,8 @@
       padding: 40px;
       align-items: center;
       text-align: center;
+      @include mixins.box-shadow(0px, 5px, 17px, -1px, colors.$black-color);
+      @include mixins.box-shadow(0px, 5px, 17px, -1px, rgba(0, 0, 0, 0.75));
 
       h4 {
         margin-bottom: 30px;

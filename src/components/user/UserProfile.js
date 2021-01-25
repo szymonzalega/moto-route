@@ -29,6 +29,7 @@ export default function UserProfile() {
       <Card.Body>
         <h2 className="text-center mb-4">Profile</h2>
         <strong>Email: </strong>
+        {console.log(currentUser)}
         {currentUser.email}
         <Link
           to="/index/user-profile/update-profile"

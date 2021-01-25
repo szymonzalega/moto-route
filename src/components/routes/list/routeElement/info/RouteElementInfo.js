@@ -18,7 +18,7 @@ export default function RouteElementInfo({ route }) {
       <div className="detailsRow__item">
         <TimelineIcon />
         <span className="item__label">
-          Length:&nbsp;<strong>{length}</strong>
+          Length:&nbsp;<strong>{length}km</strong>
         </span>
       </div>
       <div className="detailsRow__item">

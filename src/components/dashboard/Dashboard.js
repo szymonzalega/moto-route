@@ -14,7 +14,7 @@ export default function Dashboard() {
           <h4>
             The App was created by motorcyclist for motorcyclists.
             <br />
-            Add, collect and share your favourites motorcycle route with your
+            Add, collect and share your favourites motorcycle routes with your
             friends.
             <br />
             <br />
