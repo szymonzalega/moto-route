@@ -75,9 +75,6 @@ export default function RoutePage() {
             </Content>
           </div>
         </Route>
-        <Route path={`${path}/gallery/:id`}>
-          <RoutesGalleryPage />
-        </Route>
       </Switch>
     </>
   );

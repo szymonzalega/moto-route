@@ -7,6 +7,7 @@ import HomeIcon from "@material-ui/icons/Home";
 import TerrainIcon from "@material-ui/icons/Terrain";
 import PersonIcon from "@material-ui/icons/Person";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import PhotoIcon from '@material-ui/icons/Photo';
 import Tooltip from "@material-ui/core/Tooltip";
 import { useHistory, NavLink } from "react-router-dom";
 
@@ -46,6 +47,14 @@ export default function Header() {
         >
           <TerrainIcon fontSize="large" />
           <span className="header__text">Routes</span>
+        </NavLink>
+        <NavLink
+          to="/index/gallery/routes"
+          className="header__element"
+          activeClassName="header__element--active"
+        >
+          <PhotoIcon fontSize="large" />
+          <span className="header__text">Gallery</span>
         </NavLink>
         <NavLink
           to="/index/user-profile"

@@ -81,7 +81,7 @@ export default function RoutesGalleryPage(props) {
 
   const selectRoute = (route) => {
     console.log(route.id);
-    history.push(`/index/routes/gallery/${route.id}`);
+    history.push(`/index/gallery/routes/${route.id}`);
   };
 
   const getMorePhotos = async () => {

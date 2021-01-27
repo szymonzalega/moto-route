@@ -5,6 +5,7 @@ import Dashboard from "../dashboard/Dashboard";
 import RoutePage from "../routes/RoutePage";
 import UserProfile from "../user/UserProfile";
 import UpdateProfile from "../user/UpdateProfile";
+import RoutesGalleryPage from "../routes/gallery/RoutesGalleryPage";
 
 export default function MainPage() {
   let { path } = useRouteMatch();
@@ -18,6 +19,12 @@ export default function MainPage() {
         </Route>
         <Route path={`${path}/routes`}>
           <RoutePage />
+        </Route>
+        <Route exact path={`${path}/gallery/routes`}>
+          <RoutesGalleryPage />
+        </Route>
+        <Route exact path={`${path}/gallery/routes/:id`}>
+          <RoutesGalleryPage />
         </Route>
         <Route exact path={`${path}/user-profile`}>
           <UserProfile />

@@ -100,9 +100,9 @@ $header-height: 80px;
     }
   }
 
-  @media only screen and (max-width: 685px) {
+  @media only screen and (max-width: 865px) {
     &__element {
-      width: 33vw;
+      width: 25vw;
       padding: 0;
       @include mixins.flex-direction(column);
       @include mixins.justify-content(center);
