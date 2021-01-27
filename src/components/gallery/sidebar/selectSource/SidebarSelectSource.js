@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./SidebarSelectSource.scss";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -6,6 +6,12 @@ import { useParams } from "react-router-dom";
 export default function SidebarSelectSource({ onSelect }) {
   const sourceList = useSelector((state) => state.gallery.sources);
   const { id } = useParams();
+
+  useEffect(() => {
+    if (!id && sourceList.length) {
+      onSelect(sourceList[0]);
+    }
+  }, [sourceList]);
 
   const onSourceSelectHandler = (e) => {
     const selectedSource = sourceList.find(

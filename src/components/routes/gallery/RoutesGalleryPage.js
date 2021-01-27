@@ -80,7 +80,6 @@ export default function RoutesGalleryPage(props) {
   }, [routeId, id]);
 
   const selectRoute = (route) => {
-    console.log(route.id);
     history.push(`/index/gallery/routes/${route.id}`);
   };
 
