@@ -21,9 +21,14 @@ export default function Dashboard() {
             Dashboard page in progress, check other...
           </h4>
 
-          <Link to="/index/routes" data-testid="routes">
-            <SecondaryButton>Routes</SecondaryButton>
-          </Link>
+          <div className="content__buttonRow">
+            <Link to="/index/routes" data-testid="routes">
+              <SecondaryButton>Routes</SecondaryButton>
+            </Link>
+            <Link to="/index/gallery/routes" data-testid="routes">
+              <SecondaryButton>Gallery</SecondaryButton>
+            </Link>
+          </div>
         </section>
       </div>
     </div>
