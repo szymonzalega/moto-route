@@ -3,6 +3,7 @@ import "./SidebarSelectSource.scss";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { Form } from "react-bootstrap";
 
 export default function SidebarSelectSource({ onSelect }) {
   const sourceList = useSelector((state) => state.gallery.sources);
@@ -39,20 +40,16 @@ export default function SidebarSelectSource({ onSelect }) {
   } else if (status === "succeeded") {
     content = (
       <div className="sidebarSelectSource">
-        <select value={id} onChange={onSourceSelectHandler}>
+        <Form.Control as="select" placeholder="Password" onChange={onSourceSelectHandler} required>
           {sourceList.map((source, index) => (
             <option key={index} value={source.id}>
               {source.name}
             </option>
           ))}
-        </select>
+        </Form.Control>
       </div>
     );
   }
 
-  return (
-    <>
-      {content}
-    </>
-  );
+  return <>{content}</>;
 }

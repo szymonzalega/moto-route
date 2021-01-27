@@ -34,6 +34,11 @@ input[type="file"] {
     font-weight: 600;
     cursor: pointer;
     transition: 100ms;
+
+    &:hover {
+      color: colors.$primary-color;
+      border-color: colors.$primary-color;
+    }
   }
 
   &:hover {
