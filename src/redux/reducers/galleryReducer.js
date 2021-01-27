@@ -19,6 +19,12 @@ export default function galleryReducer(state = initialState.gallery, action) {
       return {
         ...state,
         status: "succeeded",
+        photos: [...action.photos],
+      };
+    case types.GALLERY__FETCH_MORE_PHOTOS_SUCCEEDED:
+      return {
+        ...state,
+        status: "succeeded",
         photos: [...state.photos, ...action.photos],
       };
     case types.GALLERY__FETCH_PHOTOS_FAILED:

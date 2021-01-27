@@ -16,9 +16,11 @@ export default function SidebarPhotoList({
 
   useEffect(() => {
     const hasPhotos = photos && photos.length > 0;
-    const isSelectedPhoto = selectedPhoto.id;
-    if (hasPhotos && !isSelectedPhoto) {
+    // const isSelectedPhoto = selectedPhoto.id;
+    if (hasPhotos) {
       selectImage(photos[0]);
+    } else {
+      selectImage(null);
     }
   }, [photos]);
 

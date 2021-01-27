@@ -23,60 +23,45 @@ import { useParams } from "react-router-dom";
 
 export default function RoutesGalleryPage(props) {
   const dispatch = useDispatch();
-  const [routeId, setRouteId] = useState("");
   const [lastVisible, setLastVisible] = useState("");
   const photos = useSelector((state) => state.gallery.photos);
-  const fetchStatus = useSelector((state) => state.gallery.status);
-  const error = useSelector((state) => state.gallery.error);
   let { id } = useParams();
   const { currentUser } = useAuth();
   const history = useHistory();
 
-  const { openSidebar } = useSidebarState();
+  const { openSidebar, closeSidebar } = useSidebarState();
 
   useEffect(() => {
     (async () => {
-      // if (sourcesStatus === "idle") {
-      //   await dispatch(fetchSources(getRoutesByUserId, currentUser.uid));
-      // }
       await dispatch(fetchSources(getRoutesByUserId, currentUser.uid));
     })();
-  }, [dispatch, currentUser, id]);
+  }, []);
 
   useEffect(() => {
     (async () => {
-      const currentRouteId = id;
-      setRouteId(currentRouteId);
-
-      if (fetchStatus === "idle") {
+      if (id) {
         setLastVisible(
-          await dispatch(
-            fetchPhotos(getRoutePhotosByRouteId, currentRouteId, 6)
-          )
+          await dispatch(fetchPhotos(getRoutePhotosByRouteId, id, 6))
         );
       }
     })();
-  }, [dispatch, routeId, id]);
+  }, [id]);
 
   useEffect(() => {
     const sidebar = {
       isOpen: true,
       mode: "gallery",
-      routeId,
     };
     openSidebar(sidebar);
+  }, []);
 
-    //onDestroy
+  //clean
+  useEffect(() => {
     return () => {
-      const sidebar = {
-        isOpen: true,
-        mode: "details",
-        routeId,
-      };
       dispatch(resetGalleryState());
-      openSidebar(sidebar);
+      closeSidebar();
     };
-  }, [routeId, id]);
+  }, []);
 
   const selectRoute = (route) => {
     history.push(`/index/gallery/routes/${route.id}`);
@@ -84,9 +69,7 @@ export default function RoutesGalleryPage(props) {
 
   const getMorePhotos = async () => {
     setLastVisible(
-      await dispatch(
-        fetchPhotos(getRoutePhotosByRouteId, routeId, 6, lastVisible)
-      )
+      await dispatch(fetchPhotos(getRoutePhotosByRouteId, id, 6, lastVisible))
     );
   };
 
@@ -99,8 +82,7 @@ export default function RoutesGalleryPage(props) {
     }
 
     try {
-      //todo obsluga bledow i obsluga ladowania
-      await dispatch(uploadPhotos(savePhotosInRoute, routeId, photoToUpload));
+      await dispatch(uploadPhotos(savePhotosInRoute, id, photoToUpload));
     } catch (e) {
       console.error(`Failed to add new photos, ${e} `);
     }

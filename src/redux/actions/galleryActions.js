@@ -33,6 +33,13 @@ export const getPhotosSucceeded = (photos) => {
   };
 };
 
+export const getMorePhotosSucceeded = (photos) => {
+  return {
+    type: types.GALLERY__FETCH_MORE_PHOTOS_SUCCEEDED,
+    photos,
+  };
+};
+
 export const getPhotosFailed = (error) => {
   return {
     type: types.GALLERY__FETCH_PHOTOS_FAILED,
@@ -73,7 +80,9 @@ export const resetGalleryState = () => {
   };
 };
 
-export const fetchSources = (funcToFetchSources, ...args) => async (dispatch) => {
+export const fetchSources = (funcToFetchSources, ...args) => async (
+  dispatch
+) => {
   dispatch(getSourcesStarted());
   try {
     const sources = await funcToFetchSources(...args);
@@ -88,7 +97,12 @@ export const fetchPhotos = (funcToFetchPhotos, ...args) => async (dispatch) => {
   dispatch(getPhotosStarted());
   try {
     const { photos, newLastVisible } = await funcToFetchPhotos(...args);
-    dispatch(getPhotosSucceeded(photos));
+    const isFirstFetch = args.length <= 2;
+
+    isFirstFetch
+      ? dispatch(getPhotosSucceeded(photos))
+      : dispatch(getMorePhotosSucceeded(photos));
+
     return newLastVisible;
   } catch (err) {
     console.error(err);
@@ -101,6 +115,11 @@ export const selectPhoto = (selectedPhoto, direction) => (
   getState
 ) => {
   const { gallery } = getState();
+
+  if (!selectedPhoto && direction === undefined) {
+    dispatch(setSelectedPhoto({}));
+    return;
+  }
 
   const isFirstPhoto = (selectedIndex) => selectedIndex === 0;
   const isLastPhoto = (selectedIndex) =>
