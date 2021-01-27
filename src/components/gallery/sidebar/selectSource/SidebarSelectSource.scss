@@ -26,5 +26,9 @@
       color: colors.$primary-color;
       border-color: colors.$primary-color;
     }
+
+    &:hover option {
+      color: colors.$black-color;
+    }
   }
 }

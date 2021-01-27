@@ -67,19 +67,6 @@ export default function SidebarAddEditMode({ routeId }) {
       return;
     }
 
-    const parseMapUrl = (code) => {
-      try {
-        const wrapper = document.createElement("div");
-        wrapper.innerHTML = code;
-        const iframe = wrapper.firstChild;
-        return iframe.getAttribute("src");
-      } catch (e) {
-        return null;
-      }
-    };
-
-    let mapUrl = parseMapUrl(url.current.value);
-
     let routeToSave = {
       ...route,
       name: name.current.value,
@@ -87,19 +74,15 @@ export default function SidebarAddEditMode({ routeId }) {
       length: length.current.value,
       level: level.current.value,
       routeType: routeType.current.value,
-      url: mapUrl,
+      url: url.current.value,
     };
 
     if (route.id) {
       routeToSave.id = route.id;
     }
 
-    if (routeToSave.url) {
-      dispatch(saveRoute(currentUser, routeToSave));
-    } else {
-      url.current.setCustomValidity("Url incorrect");
-      setValidated(true);
-    }
+    dispatch(saveRoute(currentUser, routeToSave));
+
   };
 
   let sidebarContent;
