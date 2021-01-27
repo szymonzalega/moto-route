@@ -26,7 +26,6 @@ export default function RoutesGalleryPage(props) {
   const [routeId, setRouteId] = useState("");
   const [lastVisible, setLastVisible] = useState("");
   const photos = useSelector((state) => state.gallery.photos);
-  const sourcesStatus = useSelector((state) => state.gallery.sourcesStatus);
   const fetchStatus = useSelector((state) => state.gallery.status);
   const error = useSelector((state) => state.gallery.error);
   let { id } = useParams();
