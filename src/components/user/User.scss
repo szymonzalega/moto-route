@@ -1,0 +1,32 @@
+@use "styles/colors";
+@use "styles/mixins";
+@use "../header/Header.scss";
+
+.userProfile {
+  @include mixins.flexbox;
+  @include mixins.flex-direction(row);
+  @include mixins.justify-content(center);
+  align-items: flex-start;
+  height: calc(100vh - #{Header.$header-height});
+  background-color: colors.$background-color;
+  padding: 0 10px;
+
+  .contentElement {
+    width: 700px;
+  }
+
+  &__content {
+    padding: 20px;
+
+    &--error {
+      color: colors.$error-color;
+    }
+
+    .content__buttonRow {
+      @include mixins.flexbox;
+      @include mixins.flex-direction(column);
+      @include mixins.justify-content(center);
+      margin-top: 16px;
+    }
+  }
+}

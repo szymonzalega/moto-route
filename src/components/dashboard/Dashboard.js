@@ -24,10 +24,10 @@ export default function Dashboard() {
             </h5>
 
             <div className="content__buttonRow">
-              <Link to="/index/routes" data-testid="routes">
+              <Link to="/index/routes">
                 <SecondaryButton>Routes</SecondaryButton>
               </Link>
-              <Link to="/index/gallery/routes" data-testid="routes">
+              <Link to="/index/gallery/routes">
                 <SecondaryButton>Gallery</SecondaryButton>
               </Link>
             </div>

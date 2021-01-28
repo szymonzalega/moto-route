@@ -1,7 +1,10 @@
 import React, { useState } from "react";
-import { Card, Button } from "react-bootstrap";
+import "./User.scss";
 import { useAuth } from "../../contexts/AuthContext";
 import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
+
+import ContentElement from "../content/ContentElement";
 
 import { useDispatch } from "react-redux";
 import { userLogout } from "../../redux/actions/userActions";
@@ -25,22 +28,25 @@ export default function UserProfile() {
   }
 
   return (
-    <Card>
-      <Card.Body>
-        <h2 className="text-center mb-4">Profile</h2>
-        <strong>Email: </strong>
-        {console.log(currentUser)}
-        {currentUser.email}
-        <Link
-          to="/index/user-profile/update-profile"
-          className="btn btn-primary w-100 mt-3"
-        >
-          Update Profile
-        </Link>
-        <Button className="btn btn-primary w-100 mt-3" onClick={handleLogout}>
-          Logout
-        </Button>
-      </Card.Body>
-    </Card>
+    <div className="userProfile">
+      <ContentElement>
+        <div className="userProfile__content">
+          <strong>Email: </strong>
+          {currentUser.email}
+
+          <div className="content__buttonRow">
+            <Link to="/index/user-profile/update-profile">
+              <Button className="w-100">Update profile</Button>
+            </Link>
+            <div className="w-100 text-center mt-2">
+              <Link onClick={handleLogout}>Logout</Link>
+            </div>
+            {error && (
+              <div className="userProfile__content--error">{error}</div>
+            )}
+          </div>
+        </div>
+      </ContentElement>
+    </div>
   );
 }
