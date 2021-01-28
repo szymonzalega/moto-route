@@ -1,5 +1,6 @@
 import React from "react";
 import RouteElement from "./routeElement/RouteElement";
+import ContentElement from "../../content/ContentElement";
 import { useSelector } from "react-redux";
 
 export default function RouteList() {
@@ -8,7 +9,11 @@ export default function RouteList() {
   return (
     <>
       {routes.map((route) => {
-        return <RouteElement key={route.id} route={route} />;
+        return (
+          <ContentElement key={route.id}>
+            <RouteElement route={route} />
+          </ContentElement>
+        );
       })}
     </>
   );
