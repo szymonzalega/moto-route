@@ -71,7 +71,7 @@ export const savePhotosInRoute = async (routeId, photosToSave) => {
       })
     );
 
-    //firebase don't return saved value, so i have to fetch again
+    //firebase doesn't return saved value, so i have to fetch again
     let uploadedPhotosData = await Promise.all(
       uploadedPhotosId.map(async ({ id }) => {
         return await getPhotoById(id);
