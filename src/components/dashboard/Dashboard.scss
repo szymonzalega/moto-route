@@ -32,7 +32,6 @@
       @include mixins.flexbox;
       @include mixins.flex-direction(column);
       @include mixins.justify-content(center);
-      width: 700px;
       background-color: colors.$white-color;
       padding: 40px;
       align-items: center;
@@ -48,8 +47,9 @@
 
   .content {
     &__buttonRow {
-      display: flex;
-      flex-direction: row;
+      @include mixins.flexbox;
+      @include mixins.flex-direction(row);
+      margin-top: 16px;
     }
   }
 }
