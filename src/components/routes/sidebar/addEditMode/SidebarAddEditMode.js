@@ -60,12 +60,66 @@ export default function SidebarAddEditMode({ routeId }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.currentTarget;
-    if (form.checkValidity() === false) {
-      e.preventDefault();
-      e.stopPropagation();
-      setValidated(true);
-      return;
-    }
+    // if (form.checkValidity() === false) {
+    //   e.preventDefault();
+    //   e.stopPropagation();
+    //   setValidated(true);
+    //   return;
+    // }
+
+    const validateMapValue = (value) => {
+      const isValidHttpUrl = (string) => {
+        let url;
+
+        try {
+          url = new URL(string);
+        } catch (_) {
+          return false;
+        }
+
+        return url.protocol === "http:" || url.protocol === "https:";
+      };
+
+      const parseValueToURL = (value) => {
+        try {
+          const { protocol, hostname, pathname } = new URL(value);
+          return `${protocol}//${hostname}${pathname}`;
+        } catch {
+          return false;
+        }
+      };
+
+      const isCorrectDomain = (urlToCheck, domain) => urlToCheck === domain;
+
+      const getUrlFromHTMLCode = (code) => {
+        try {
+          const wrapper = document.createElement("div");
+          wrapper.innerHTML = code;
+          const iframe = wrapper.firstChild;
+          return iframe.getAttribute("src");
+        } catch (e) {
+          return false;
+        }
+      };
+
+      const ifValueIsURL = (value) => {
+        const parsedURL = parseValueToURL(value);
+
+        return isCorrectDomain(parsedURL, "https://www.google.com/maps/embed")
+          ? parsedURL
+          : null;
+      };
+
+      const ifValueIsHTML = (value) => {
+        const urlFromHTML = getUrlFromHTMLCode(value);
+
+        return isValidHttpUrl(urlFromHTML) ? ifValueIsURL(urlFromHTML) : null;
+      };
+
+      return isValidHttpUrl(value) ? ifValueIsURL(value) : ifValueIsHTML(value);
+    };
+
+    let mapUrl = validateMapValue(url.current.value);
 
     let routeToSave = {
       ...route,
@@ -74,15 +128,28 @@ export default function SidebarAddEditMode({ routeId }) {
       length: length.current.value,
       level: level.current.value,
       routeType: routeType.current.value,
-      url: url.current.value,
+      url: mapUrl,
     };
 
     if (route.id) {
       routeToSave.id = route.id;
     }
 
-    dispatch(saveRoute(currentUser, routeToSave));
+    console.log(validated);
 
+    if (form.checkValidity() === false) {
+      e.preventDefault();
+      e.stopPropagation();
+      // setValidated(true);
+      return;
+    } else {
+      if (routeToSave.url) {
+        dispatch(saveRoute(currentUser, routeToSave));
+      } else {
+        url.current.setCustomValidity("Url incorrect");
+        // setValidated(true);
+      }
+    }
   };
 
   let sidebarContent;
@@ -123,7 +190,7 @@ export default function SidebarAddEditMode({ routeId }) {
             required
           ></Form.Control>
           <Form.Control.Feedback type="invalid">
-          This field is required
+            This field is required
           </Form.Control.Feedback>
         </Form.Group>
 
