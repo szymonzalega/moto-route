@@ -187,7 +187,7 @@ export default function SidebarAddEditMode({ routeId }) {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.name}
-                isInvalid={!!errors.name}
+                isInvalid={!!errors.name && touched.name}
               ></Form.Control>
               <Form.Control.Feedback type="invalid">
                 {errors.name}
@@ -200,7 +200,7 @@ export default function SidebarAddEditMode({ routeId }) {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.description}
-                isInvalid={!!errors.description}
+                isInvalid={!!errors.description && touched.description}
               ></Form.Control>
               <Form.Control.Feedback type="invalid">
                 {errors.description}
@@ -214,7 +214,7 @@ export default function SidebarAddEditMode({ routeId }) {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.length}
-                isInvalid={!!errors.length}
+                isInvalid={!!errors.length && touched.length}
               ></Form.Control>
               <Form.Control.Feedback type="invalid">
                 {errors.length}
@@ -229,7 +229,7 @@ export default function SidebarAddEditMode({ routeId }) {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.level}
-                isInvalid={!!errors.level}
+                isInvalid={!!errors.level && touched.level}
               >
                 <option value="">Select route level...</option>
                 <option value="easy">Easy</option>
@@ -249,7 +249,7 @@ export default function SidebarAddEditMode({ routeId }) {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.routeType}
-                isInvalid={!!errors.routeType}
+                isInvalid={!!errors.routeType && touched.routeType}
               >
                 <option value="">Select route type...</option>
                 <option value="turist">Tourist</option>
@@ -267,7 +267,7 @@ export default function SidebarAddEditMode({ routeId }) {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.url}
-                isInvalid={!!errors.url}
+                isInvalid={!!errors.url && touched.url}
               ></Form.Control>
               <Form.Control.Feedback type="invalid">
                 {errors.url}
