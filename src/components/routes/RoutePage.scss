@@ -55,6 +55,7 @@
 
       &--visible {
         @include mixins.flexbox;
+        padding-bottom: 85px;
       }
     }
 
