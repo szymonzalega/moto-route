@@ -2,6 +2,29 @@
 @use "styles/mixins";
 
 .sidebarAddEditMode {
+
+  button.MuiButton-textPrimary {
+    color: colors.$primary-color;
+  }
+
+  &__warning {
+    color: colors.$error-color;
+    margin: 1em 0;
+  }
+
+  &__urlInput {
+    position: relative;
+    .form-control {
+      width: calc(100% - 74px);
+    }
+    button {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+
+  }
+
   &__preloader {
     @include mixins.flexbox;
     @include mixins.justify-content(center);

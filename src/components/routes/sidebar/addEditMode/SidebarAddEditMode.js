@@ -6,6 +6,7 @@ import { useAuth } from "../../../../contexts/AuthContext";
 import { useDispatch, useSelector } from "react-redux";
 import useSidebarState from "../../../sidebar/useSidebarState";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import URLManualModal from "../manualModal/URLManualModal";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
@@ -57,6 +58,11 @@ export default function SidebarAddEditMode({ routeId }) {
       source[field] ? (obj[field] = source[field]) : (obj[field] = "");
     });
     return obj;
+  };
+
+  const handleClickPaste = async () => {
+    const text = await navigator.clipboard.readText();
+    setRoute({ ...route, url: text });
   };
 
   const handleSubmit = (values) => {
@@ -261,17 +267,28 @@ export default function SidebarAddEditMode({ routeId }) {
               </Form.Control.Feedback>
             </Form.Group>
 
+            <div className="sidebarAddEditMode__warning">
+              This version of app don't use Google Maps API yet, so please use
+              the Google Maps page directly to embed a map. <URLManualModal />{" "}
+              for manual.
+            </div>
             <Form.Group controlId="url">
               <Form.Label>Link to map</Form.Label>
-              <Form.Control
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.url}
-                isInvalid={!!errors.url && touched.url}
-              ></Form.Control>
-              <Form.Control.Feedback type="invalid">
-                {errors.url}
-              </Form.Control.Feedback>
+              <div className="sidebarAddEditMode__urlInput">
+                <Form.Control
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.url}
+                  isInvalid={!!errors.url && touched.url}
+                  validateOnChange={true}
+                ></Form.Control>
+                <Button color="primary" onClick={handleClickPaste}>
+                  PASTE
+                </Button>
+                <Form.Control.Feedback type="invalid">
+                  {errors.url}
+                </Form.Control.Feedback>
+              </div>
             </Form.Group>
             <Button className="w-100" type="submit">
               {route.id ? "Save route" : "Create new route"}
