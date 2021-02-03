@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./SidebarAddEditMode.scss";
 import { Form, Button } from "react-bootstrap";
 import { saveRoute } from "../../../../redux/actions/routeActions";
@@ -51,12 +51,19 @@ export default function SidebarAddEditMode({ routeId }) {
     }
   };
 
+  const getInitialValues = (fields, source) => {
+    let obj = {};
+    fields.forEach((field) => {
+      source[field] ? (obj[field] = source[field]) : (obj[field] = "");
+    });
+    return obj;
+  };
+
   const handleSubmit = (values) => {
     console.log("submit handleSubmit");
 
     const { name, description, length, level, routeType } = values;
     let url = validateMapValue(values.url);
-    console.log(url);
 
     let routeToSave = {
       ...route,
@@ -135,9 +142,13 @@ export default function SidebarAddEditMode({ routeId }) {
     length: Yup.string().required("Required"),
     level: Yup.string().required("Required"),
     routeType: Yup.string().required("Required"),
-    url: Yup.string().test("test", "zle", function (value) {
-      return validateMapValue(value);
-    }),
+    url: Yup.string().test(
+      "validateMapValue",
+      "Value isn't correct, you have to pass URL from www.google.com/maps domain or HTML code from google maps site",
+      function (value) {
+        return validateMapValue(value);
+      }
+    ),
   });
 
   let sidebarContent;
@@ -147,14 +158,11 @@ export default function SidebarAddEditMode({ routeId }) {
       <Formik
         validationSchema={schema}
         onSubmit={handleSubmit}
-        initialValues={{
-          name: "",
-          description: "",
-          length: "",
-          level: "",
-          routeType: "",
-          url: "",
-        }}
+        enableReinitialize={true}
+        initialValues={getInitialValues(
+          ["name", "description", "length", "level", "routeType", "url"],
+          route
+        )}
       >
         {({
           handleSubmit,
@@ -258,99 +266,12 @@ export default function SidebarAddEditMode({ routeId }) {
                 {errors.url}
               </Form.Control.Feedback>
             </Form.Group>
-
             <Button className="w-100" type="submit">
               {route.id ? "Save route" : "Create new route"}
             </Button>
-
-            {/* <pre style={{ margin: "0 auto" }}>
-              {JSON.stringify({ ...values, ...errors }, null, 2)}
-            </pre> */}
           </Form>
         )}
       </Formik>
-
-      // <Form noValidate validated={validated} onSubmit={handleSubmit}>
-      //   <Form.Group id="name">
-      //     <Form.Label>Name</Form.Label>
-      //     <Form.Control
-      //       ref={name}
-      //       defaultValue={route.name}
-      //       required
-      //     ></Form.Control>
-      //     <Form.Control.Feedback type="invalid">
-      //       This field is required
-      //     </Form.Control.Feedback>
-      //   </Form.Group>
-
-      //   <Form.Group id="description">
-      //     <Form.Label>Description</Form.Label>
-      //     <Form.Control
-      //       ref={description}
-      //       defaultValue={route.description}
-      //       required
-      //     ></Form.Control>
-      //     <Form.Control.Feedback type="invalid">
-      //       This field is required
-      //     </Form.Control.Feedback>
-      //   </Form.Group>
-
-      //   <Form.Group id="length">
-      //     <Form.Label>Length in kilometers</Form.Label>
-      //     <Form.Control
-      //       type="number"
-      //       ref={length}
-      //       defaultValue={route.length}
-      //       required
-      //     ></Form.Control>
-      //     <Form.Control.Feedback type="invalid">
-      //       This field is required
-      //     </Form.Control.Feedback>
-      //   </Form.Group>
-
-      //   <Form.Group id="level">
-      //     <Form.Label>An advanced level</Form.Label>
-      //     <Form.Control
-      //       as="select"
-      //       ref={level}
-      //       defaultValue={route.level}
-      //       required
-      //     >
-      //       <option value="easy">Easy</option>
-      //       <option value="medium">Medium</option>
-      //       <option value="hard">Hard</option>
-      //       <option value="very-hard">Ninja</option>
-      //     </Form.Control>
-      //     <Form.Control.Feedback type="invalid">
-      //       This field is required
-      //     </Form.Control.Feedback>
-      //   </Form.Group>
-
-      //   <Form.Group id="routeType">
-      //     <Form.Label>Type</Form.Label>
-      //     <Form.Control as="select" ref={routeType} defaultValue={route.type}>
-      //       <option value="turist">Tourist</option>
-      //       <option value="sport">Sport</option>
-      //       <option value="enduro">Enduro</option>
-      //     </Form.Control>
-      //   </Form.Group>
-
-      //   <Form.Group id="url">
-      //     <Form.Label>Link to map</Form.Label>
-      //     <Form.Control
-      //       ref={url}
-      //       defaultValue={route.url}
-      //       required
-      //     ></Form.Control>
-      //     <Form.Control.Feedback type="invalid">
-      //       This field is incorrect
-      //     </Form.Control.Feedback>
-      //   </Form.Group>
-
-      //   <Button className="w-100" type="submit">
-      //     {route.id ? "Save route" : "Create new route"}
-      //   </Button>
-      // </Form>
     );
   } else if (saveStatus === "pending") {
     sidebarContent = (
