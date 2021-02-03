@@ -130,25 +130,32 @@ export default function SidebarAddEditMode({ routeId }) {
     return isValidHttpUrl(value) ? ifValueIsURL(value) : ifValueIsHTML(value);
   };
 
+  const VALIDATION_MESSAGE = {
+    max: "The value may not be longer then 64 characters",
+    required: "Field is required",
+    incorrectUrl:
+      "Value incorrect, you have to pass URL from www.google.com/maps domain or HTML code from google maps site",
+  };
+
   const schema = Yup.object().shape({
     name: Yup.string()
-      .min(2, "Too short!")
-      .max(50, "Too long!")
-      .required("Required"),
+      .max(64, VALIDATION_MESSAGE.max)
+      .required(VALIDATION_MESSAGE.required),
     description: Yup.string()
-      .min(2, "Too short!")
-      .max(50, "Too long!")
-      .required("Required"),
-    length: Yup.string().required("Required"),
-    level: Yup.string().required("Required"),
-    routeType: Yup.string().required("Required"),
-    url: Yup.string().test(
-      "validateMapValue",
-      "Value isn't correct, you have to pass URL from www.google.com/maps domain or HTML code from google maps site",
-      function (value) {
-        return validateMapValue(value);
-      }
-    ),
+      .max(64, VALIDATION_MESSAGE.max)
+      .required(VALIDATION_MESSAGE.required),
+    length: Yup.string().required(VALIDATION_MESSAGE.required),
+    level: Yup.string().required(VALIDATION_MESSAGE.required),
+    routeType: Yup.string().required(VALIDATION_MESSAGE.required),
+    url: Yup.string()
+      .required(VALIDATION_MESSAGE.required)
+      .test(
+        "validateMapValue",
+        VALIDATION_MESSAGE.incorrectUrl,
+        function (value) {
+          return validateMapValue(value);
+        }
+      ),
   });
 
   let sidebarContent;
