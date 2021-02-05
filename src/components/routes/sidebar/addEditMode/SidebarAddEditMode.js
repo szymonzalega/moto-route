@@ -268,7 +268,7 @@ export default function SidebarAddEditMode({ routeId }) {
             </Form.Group>
 
             <div className="sidebarAddEditMode__warning">
-              This version of app don't use Google Maps API yet, so please use
+              This version of app doesn't use Google Maps API yet, so please use
               the Google Maps page directly to embed a map. <URLManualModal />{" "}
               for manual.
             </div>

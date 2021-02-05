@@ -95,7 +95,7 @@ export default function URLManualModal() {
               >
                 Google Maps
               </a>
-              &nbsp;site and choose result
+              &nbsp;site and choose of the result
             </p>
             <img src={manual_1} alt="manual_1" />
           </section>
