@@ -66,8 +66,6 @@ export default function SidebarAddEditMode({ routeId }) {
   };
 
   const handleSubmit = (values) => {
-    console.log("submit handleSubmit");
-
     const { name, description, length, level, routeType } = values;
     let url = validateMapValue(values.url);
 
