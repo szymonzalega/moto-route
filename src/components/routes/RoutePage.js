@@ -25,7 +25,7 @@ export default function RoutePage() {
     if (fetchStatus === "idle") {
       dispatch(fetchRoutes(currentUser.uid));
     }
-  }, [fetchStatus, dispatch]);
+  }, []);
 
   let routeListContent;
 
@@ -56,7 +56,9 @@ export default function RoutePage() {
       <Switch>
         <Route exact path={path}>
           <div
-            className={`routePage${isSidebarOpen ? " routePage--noScroll" : ""}`}
+            className={`routePage${
+              isSidebarOpen ? " routePage--noScroll" : ""
+            }`}
           >
             <Sidebar>
               <RouteSidebar />
@@ -64,7 +66,7 @@ export default function RoutePage() {
             <Content>
               <div className="routePage__list">
                 <div className="routePage__buttonRow">
-                <button className="btn btn-primary" onClick={createNewRoute}>
+                  <button className="btn btn-primary" onClick={createNewRoute}>
                     Add new route
                   </button>
                 </div>
