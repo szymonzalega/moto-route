@@ -9,7 +9,6 @@ import { useSelector } from "react-redux";
 export default function SidebarUploadPhoto({ onSubmit }) {
   const [photoToUpload, setPhotoToUpload] = useState([]);
   const uploadStatus = useSelector((state) => state.gallery.uploadStatus);
-  const error = useSelector((state) => state.gallery.error);
   const photosRef = useRef();
 
   const onImageChange = (e) => {
