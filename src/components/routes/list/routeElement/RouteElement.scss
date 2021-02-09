@@ -13,4 +13,12 @@
       display: block;
     }
   }
+
+  &__emptyInfo {
+    @include mixins.flexbox;
+    @include mixins.flex-direction(row);
+    @include mixins.justify-content(center);
+    padding: 1em;
+    font-weight: 500;
+  }
 }
