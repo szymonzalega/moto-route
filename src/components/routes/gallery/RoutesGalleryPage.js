@@ -25,6 +25,7 @@ export default function RoutesGalleryPage(props) {
   const dispatch = useDispatch();
   const [lastVisible, setLastVisible] = useState("");
   const photos = useSelector((state) => state.gallery.photos);
+  const sourceList = useSelector((state) => state.gallery.sources);
   let { id } = useParams();
   const { currentUser } = useAuth();
   const history = useHistory();
@@ -48,12 +49,16 @@ export default function RoutesGalleryPage(props) {
   }, [id]);
 
   useEffect(() => {
-    const sidebar = {
-      isOpen: true,
-      mode: "gallery",
-    };
-    openSidebar(sidebar);
-  }, []);
+    if (sourceList.length === 0) {
+      closeSidebar();
+    } else {
+      const sidebar = {
+        isOpen: true,
+        mode: "gallery",
+      };
+      openSidebar(sidebar);
+    }
+  }, [sourceList]);
 
   //clean
   useEffect(() => {
@@ -98,6 +103,7 @@ export default function RoutesGalleryPage(props) {
           isMorePhotosAvailable={lastVisible}
         />
       </Sidebar>
+
       <Content>{photos && <PhotoPreview />}</Content>
     </div>
   );

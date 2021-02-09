@@ -10,6 +10,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 export default function PhotoPreview() {
   const selectedPhoto = useSelector((state) => state.gallery.selectedPhoto);
   const fetchStatus = useSelector((state) => state.gallery.status);
+  const sourceList = useSelector((state) => state.gallery.sources);
   const dispatch = useDispatch();
 
   const photoNavigation = {
@@ -25,6 +26,12 @@ export default function PhotoPreview() {
   const isLastPhoto = selectedPhoto.isLast;
 
   let previewContent;
+
+  if(sourceList.length === 0) {
+    previewContent = (
+      <div className="gallery__emptyInfo">Oops! You don't have any sources for gallery yet.</div>
+    )
+  }
 
   if (fetchStatus === "pending") {
     previewContent = (
