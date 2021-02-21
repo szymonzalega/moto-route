@@ -3,7 +3,7 @@ import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
 import { MemoryRouter } from "react-router-dom";
 
-import AuthPage from "./AuthPage";
+import Home from "./Home";
 
 let container = null;
 beforeEach(() => {
@@ -17,17 +17,11 @@ afterEach(() => {
   container = null;
 });
 
-jest.mock("../../contexts/AuthContext", () => ({
-  useAuth: () => ({
-    currentUser: null,
-  }),
-}));
-
 it("should render title text, login and signup button correctly", () => {
   act(() => {
     render(
       <MemoryRouter>
-        <AuthPage />
+        <Home />
       </MemoryRouter>,
       container
     );
@@ -37,8 +31,8 @@ it("should render title text, login and signup button correctly", () => {
   expect(title.textContent).toBe("Ride.Collect.Repeat.");
 
   const loginButton = document.querySelector("[data-testid=login]");
-  expect(loginButton.innerHTML).toBe("Login");
+  expect(loginButton.textContent).toBe("Login");
 
   const signupButton = document.querySelector("[data-testid=signup]");
-  expect(signupButton.innerHTML).toBe("Signup");
+  expect(signupButton.textContent).toBe("Signup");
 });
