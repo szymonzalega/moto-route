@@ -57,7 +57,7 @@ export default function SidebarPhotoSection() {
           (!route.photos.length ? (
             <div className="photoSection__emptyGallery">
               <button className="btn btn-primary" onClick={openGallery}>
-                Add new photo
+                Add new photos
               </button>
             </div>
           ) : (
