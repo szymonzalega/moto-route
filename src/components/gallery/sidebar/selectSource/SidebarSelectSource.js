@@ -40,9 +40,15 @@ export default function SidebarSelectSource({ onSelect }) {
   } else if (status === "succeeded") {
     content = (
       <div className="sidebarSelectSource">
-        <Form.Control as="select" placeholder="Password" onChange={onSourceSelectHandler} required>
-          {sourceList.map((source, index) => (
-            <option key={index} value={source.id}>
+        <Form.Control
+          as="select"
+          placeholder="Password"
+          onChange={onSourceSelectHandler}
+          required
+          value={id}
+        >
+          {sourceList.map((source) => (
+            <option key={source.id} value={source.id}>
               {source.name}
             </option>
           ))}
