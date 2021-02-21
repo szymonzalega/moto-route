@@ -256,7 +256,7 @@ export default function SidebarAddEditMode({ routeId }) {
                 isInvalid={!!errors.routeType && touched.routeType}
               >
                 <option value="">Select route type...</option>
-                <option value="turist">Tourist</option>
+                <option value="tourist">Tourist</option>
                 <option value="sport">Sport</option>
                 <option value="enduro">Enduro</option>
               </Form.Control>
